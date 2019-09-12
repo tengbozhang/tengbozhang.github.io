@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>利用cloudflare workers免费加速wordpress博客 | 春江暮客</title>
+    <meta property="og:title" content="利用cloudflare workers免费加速wordpress博客 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-08-05T02:33:54&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-08-05T02:33:54&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="利用cloudflare workers免费加速wordpress博客">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/434.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">利用cloudflare workers免费加速wordpress博客</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年8月5日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>在提升体验上，网站总是不惜代价提升自己的网站的加载速度，为了获得这种效果，google推出了amp项目，百度推出了imp项目，但是为了获得这种效果，需要另外部署一套网站代码，实在过于繁琐，增加开发成本。但是对于使用cloudflare CDN的用户来说，却有一个十分方便快速的选择，就是cloudflare workers，完全保留原网站的效果而不用另外开发新的代码。
+不得不说，cloudflare是世界上最好的CDN服务商了，最近更是免费开通<a href="https://workers.cloudflare.com/docs">cloudflare workers</a>，免费额度达到100,000请求，使得所有静态的，不需要登录的页面都能够在cdn直接运行，达到serverless的状态，页面可以秒开，对于我这种小博客再也不需要担心服务器的问题，那么现在现实问题是如何启用cloudflare的workers使得我的wordpress博客可以使用呢，这里一步一步教学如何在wordpress网站启用cloudflare wordkers加速整个站点。20分钟就可以搞定。</p>
+
+<p>实现步骤：</p>
+
+<h1 id="1-安装cloudflare-page-cache-wordpress-插件">1.安装Cloudflare Page Cache WordPress 插件</h1>
+
+<p>登录自己的wordpress站点后台，添加新插件，搜索Cloudflare Page Cache，安装并激活。这一步只要会安装wordpress的应该都会就不详细说了。</p>
+
+<h1 id="2-进入cf控制台bobobk-com站点-cloudflare-gt-workers">2.进入cf控制台bobobk.com站点，Cloudflare &gt; Workers</h1>
+
+<p>登录cloudflare站点，进入自己的站点，看图片右下角进入launch editor
+<img src="https://www.bobobk.com/wp-content/uploads/2019/08/find_workers.webp" alt="find_workers" /></p>
+
+<h1 id="3-点击-add-script-添加脚本">3.点击‘Add Script’添加脚本</h1>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/08/add_script.webp" alt="add_script" />
+命名为bobobk</p>
+
+<h1 id="4-编辑脚本bobobk">4.编辑脚本bobobk</h1>
+
+<p>删除原有内容，需要的脚本内容从以下github获得，粘贴上去保存
+<a href="https://raw.githubusercontent.com/cloudflare/worker-examples/master/examples/edge-cache-html/edge-cache-html.js">https://raw.githubusercontent.com/cloudflare/worker-examples/master/examples/edge-cache-html/edge-cache-html.js</a>
+有3个地方需要更改为自己的CF账号详情
+- email: “”, // 这是cloudflare的账号邮箱<a href="https://dash.cloudflare.com/profile">https://dash.cloudflare.com/profile</a>可以看到
+- key: “”, // 全局api key，可在<a href="https://dash.cloudflare.com/profile">https://dash.cloudflare.com/profile</a>的api token项，需要输入密码查看。
+- zone: “” // “Zone ID” 这个是站点的zone id，每个站是唯一的，<a href="https://dash.cloudflare.com/">https://dash.cloudflare.com/</a>然后进入bobobk.com</p>
+
+<p>如下图
+<img src="https://www.bobobk.com/wp-content/uploads/2019/08/zone_id.webp" alt="zone_id" /></p>
+
+<h1 id="5-添加路由-route">5.添加路由‘Route’</h1>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/08/add_route.webp" alt="add_route" /></p>
+
+<h1 id="6-创建路由-route">6.创建路由‘Route’</h1>
+
+<p>把刚才创建的bobobk的worker添加到整个wordpress站点就好了。
+<img src="https://www.bobobk.com/wp-content/uploads/2019/08/create_worker.webp" alt="create_worker" /></p>
+
+<blockquote>
+<p>到这里就完成了整个把wordpress站点cloudflare worker的部署了，是不是很方便，如果是其他的站点可以查看<a href="https://workers.cloudflare.com/docs">cloudflare workers文档</a>，对于大陆用户来说，启用免费的cloudflare workers对于因为CF服务器远在美国来说还是可以明显的加载速度的。</p>
+</blockquote>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/434.html">https://www.bobobk.com/434.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/425.html">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a></li>
+        
+        <li><a href="/422.html">nginx反向代理tcp/udp请求实现映射远端服务器</a></li>
+        
+        <li><a href="/414.html">阿里云centos7安装VNC Server实现图形化访问</a></li>
+        
+        <li><a href="/410.html">利用谷歌浏览器测试接口技巧</a></li>
+        
+        <li><a href="/385.html">10个建议提高你的python数据分析技巧</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

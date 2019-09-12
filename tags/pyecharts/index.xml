@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pyecharts on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/pyecharts/</link>
+    <description>Recent content in pyecharts on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 01 Jun 2019 17:50:52 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/pyecharts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python 数据可视化 - 00 后高考大军</title>
+      <link>https://www.bobobk.com/320.html</link>
+      <pubDate>Sat, 01 Jun 2019 17:50:52 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/320.html</guid>
+      <description>00后大军高考结束了，网络上对这次高考的报道很多(毕竟00后小鲜肉嘛)，很多都关注了今年的考生数据，并且用炫酷的图表展示。看着是不是有点小嫉妒，为什么图表还可以做得这么漂亮？？？是不是也想自己动手做一张？？？其实这些图表都可以用python制作出来的数据可视化的产物，所以当然是可</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>turtle on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/turtle/</link>
+    <description>Recent content in turtle on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 19 Nov 2018 04:38:15 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/turtle/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>用turtle实现用正方形画圆</title>
+      <link>https://www.bobobk.com/39.html</link>
+      <pubDate>Mon, 19 Nov 2018 04:38:15 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/39.html</guid>
+      <description>最近发现一个很有意思的画图的python库，叫做turtle，这里先说下用turtle这个库来实现用正方形画圆的思路。 每次都用乌龟（turtle） 来画出一个正方形，然后通过旋转3°后，继续画一样的正方形，在通过120次循环后就实现了完整的圆，这里当然也可以用其他的角度和次数，只要</description>
+    </item>
+    
+  </channel>
+</rss>

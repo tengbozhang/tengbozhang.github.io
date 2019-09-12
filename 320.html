@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Python 数据可视化 - 00 后高考大军 | 春江暮客</title>
+    <meta property="og:title" content="Python 数据可视化 - 00 后高考大军 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-06-01T17:50:52&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-06-01T17:50:52&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="Python 数据可视化 - 00 后高考大军">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/320.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Python 数据可视化 - 00 后高考大军</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年6月1日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF">技术</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>00后大军高考结束了，网络上对这次高考的报道很多(毕竟00后小鲜肉嘛)，很多都关注了今年的考生数据，并且用炫酷的图表展示。看着是不是有点小嫉妒，为什么图表还可以做得这么漂亮？？？是不是也想自己动手做一张？？？其实这些图表都可以用python制作出来的数据可视化的产物，所以当然是可以自己动手制作的啦</p>
+
+<h4 id="准备工作">准备工作</h4>
+
+<ol>
+<li>库</li>
+</ol>
+
+<ul>
+<li><p>charts</p></li>
+
+<li><p>pyecharts</p></li>
+
+<li><p>数据</p></li>
+
+<li><p>直接从百度上收集</p></li>
+</ul>
+
+<h4 id="常见类">常见类</h4>
+
+<p>经常见到或者使用的图表是柱状图和折线图，所以先从简单的入手 。</p>
+
+<h5 id="1-柱状图">1. 柱状图</h5>
+
+<pre><code class="language-python"># 高考人数
+gaokao_num = [940,940,...,375]
+gaokao_num.reverse()
+# 录取人数
+luqu_num = [700,705,...,221]
+luqu_num.reverse()
+# 录取率
+luqu_lev= [74.46,75,...,59]
+luqu_lev.reverse()
+import charts
+options = {
+    'chart'   : {'zoomType':'xy'},
+    #标题
+    'title'   : {'text': '2000-2017年高考数据'},
+    #副标题
+    'subtitle': {'text': 'Source: edu.sina.com.cn'},
+    #x轴    
+    'xAxis'   : {'categories': ['2000',...,'2017']},
+    #y轴  
+    'yAxis'   : {'title': {'text': '万人/年'}},  
+    }
+series =  [{
+    'type': 'column',
+    'name': '高考人数',
+    'data': gaokao_num
+},{
+    'type': 'column',
+    'name': '录取人数',
+    'data': luqu_num
+}
+]
+charts.plot(series, options=options, show='inline')
+</code></pre>
+
+<p>由于我的pyecharts有点小问题，所以用了charts进行处理，使用pyecharts更加简单，这里就不重复了，有需要可以查看源码</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/06/gaokao.webp" alt="《Python 数据可视化 - 00 后高考大军》" /></p>
+
+<p>（高考人数与录取人数)<br />
+今年有 <strong>975万</strong> 考生(从表中看不出，因为我没写进去)，但是可以看出10-18年这段时间的高考人数是稳定的，毕竟人口基数大是没有办法的事。“千军万马过独木桥”这句话还真是有点应景哈。。。</p>
+
+<h5 id="2-折线图">2. 折线图</h5>
+
+<p>如果上面的柱状图没有问题的话，那折线图就非常简单了，只是将type由column修改为line就行了。</p>
+
+<pre><code class="language-python">series =  [{
+    'type': 'line',
+    'name': '录取率',
+    'data': luqu_lev,
+    'marker':{
+        'lineWidth':2,
+        'lineColor':'#90ed7d'
+    }
+}
+]
+
+</code></pre>
+
+<p>本来是将柱状图和折线图展示在一张图里面的，但是Y轴的值太大了，导致录取率的变化看起来不大，所以这里就将它们拆开了</span></p>
+
+<h4 id="地图类">地图类</h4>
+
+<p>先放上一张高考难度排行榜。想当年我也是从困难模式过来的。真的心疼江苏的考生，好像数学又是葛军出题，看来又要上热搜了大江苏 
+现在开始利用pyecharts制作地图类图表，看一下中国哪个省份的高考生最多</p>
+
+<pre><code class="language-python">from pyecharts import Map
+#处理数据
+add =[&quot;北京&quot;,...,&quot;西藏&quot;]
+num = [6.3,...,2.53]
+dict_data = dict(zip(add,num))
+data = [tuple(i) for i in zip(add,num)]
+data_pro = data
+geo = Map(&quot;各省高考人数分布&quot;,
+         &quot;data from : gaokao.eol.cn&quot;, 
+          title_color=&quot;#fff&quot;,  
+          title_pos=&quot;center&quot;, 
+          width=1000,  
+          height=600, 
+          background_color='#404a59'
+          )  
+attr, value = geo.cast(data_pro)
+geo.add(&quot;&quot;,  attr, value,
+             visual_range=[0, 80],
+             maptype='china',
+             visual_text_color=&quot;#fff&quot;,  
+             symbol_size=10,
+             is_visualmap=True)  
+geo.render(&quot;各省高考分布.html&quot;)#生成html文件  
+geo#直接在notebook中显示 
+</code></pre>
+
+<p>效果图：
+看来河南和广东的考生压力有点大呀(!_!)&lt;</p>
+
+<p>多说一点</p>
+
+<p>强烈建议使用pyecharts,简单又好用，但是我这除了地图类可以使用pyecharts之外，其他的好像都出不来图，所以只能被逼无奈使用Charts库了。<br />
+最后希望各位高考考生都能够考的理想的成绩，然后就可以尽情的去嗨啦。。。</p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/320.html">https://www.bobobk.com/320.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/318.html">一行 Python 代码实现并行</a></li>
+        
+        <li><a href="/310.html">screen session外关闭session会话</a></li>
+        
+        <li><a href="/305.html">yum update更新错误rpmdb,空间不足</a></li>
+        
+        <li><a href="/thunde_parse/">迅雷链接解析</a></li>
+        
+        <li><a href="/299.html">thunder迅雷下载地址真实地址解析</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://www.bobobk.com/tags/pyecharts">pyecharts</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

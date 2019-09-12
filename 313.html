@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>用 Numba 加速 Python 代码，变得像 C&#43;&#43; 一样快 | 春江暮客</title>
+    <meta property="og:title" content="用 Numba 加速 Python 代码，变得像 C&#43;&#43; 一样快 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-05-15T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-05-15T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="用 Numba 加速 Python 代码，变得像 C&#43;&#43; 一样快">
+        <meta name="author" content="4770a0f554a8cd2f">
+        
+    <meta property="og:url" content="https://www.bobobk.com/313.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">用 Numba 加速 Python 代码，变得像 C&#43;&#43; 一样快</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年5月15日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<h3 id="目录">目录</h3>
+
+<ol>
+<li>介绍</li>
+<li>为什么选择 Numba？</li>
+<li>Numba 是如何工作的？</li>
+<li>使用 Numba 的基本功能（只需要加上@jit)</li>
+<li>@vectorize 装饰器&gt;</li>
+<li>在 GPU 上运行函数</li>
+</ol>
+
+<h3 id="1-介绍">1. 介绍</h3>
+
+<p>Numba 是 python 的即时（Just-in-time）编译器，即当您调用 python 函数时，您的全部或部分代码就会被转换为“即时”执行的机器码，它将以您的本地机器码速度运行！它由 Anaconda 公司赞助，并得到了许多其他组织的支持。</p>
+
+<p>在 Numba 的帮助下，您可以加速所有计算负载比较大的 python 函数（例如循环）。它还支持 numpy 库！所以，您也可以在您的计算中使用 numpy，并加快整体计算，因为 python 中的循环非常慢。 您还可以使用 python 标准库中的 math 库的许多函数，如 sqrt等。</p>
+
+<h3 id="2-为什么选择-numba">2. 为什么选择 Numba？</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/05/numba.jpeg" alt="《用 Numba 加速 Python 代码，变得像 C++ 一样快》" /></p>
+
+<p>那么，当有像 cython和 Pypy之类的许多其他编译器时，为什么要选择 numba？
+原因很简单，这样您就不必离开写 python 代码的舒适区。是的，就是这样，您根本不需要为了获得一些的加速来改变您的代码，这与您从类似的具有类型定义的 cython 代码获得的加速相当。那不是很好吗？</p>
+
+<p>您只需要添加一个熟悉的 python 功能，即添加一个包装器（一个装饰器）到您的函数上。类的装饰器也在开发中了。&lt;</p>
+
+<p>所以，您只需要添加一个装饰器就可以了。例如：</p>
+
+<pre><code class="language-python">from numba import jit
+</code></pre>
+
+<p>这仍然看起来像一个原生 python 代码，不是吗？</p>
+
+<h3 id="3-如何使用-numba">3. 如何使用 Numba？</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/05/numba2.jpeg" alt="《用 Numba 加速 Python 代码，变得像 C++ 一样快》" /></p>
+
+<p>“question mark neon signage” by Emily Morter on Unsplash</p>
+
+<p>Numba 使用 LLVM 编译器基础结构 将原生 python 代码转换成优化的机器码。使用 numba 运行代码的速度可与 C/C++ 或 Fortran 中的类似代码相媲美。</p>
+
+<p>以下是代码的编译方式：</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/05/numba3.jpeg" alt="《用 Numba 加速 Python 代码，变得像 C++ 一样快》" /></p>
+
+<p>首先，Python 函数被传入，优化并转换为 numba 的中间表达，然后在类型推断（type inference）之后，就像 numpy 的类型推断（所以 python float 是一个 float64），它被转换为 LLVM 可解释代码。 然后将此代码提供给 LLVM 的即时编译器以生成机器码。</p>
+
+<p>您可以根据需要在运行时或导入时 生成 机器码，导入需要在 CPU（默认）或 GPU 上进行。</p>
+
+<h3 id="4-使用-numba-的基本功能-只需要加上-jit">4. 使用 numba 的基本功能（只需要加上 @jit ！）</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/05/numba4.jpeg" alt="《用 Numba 加速 Python 代码，变得像 C++ 一样快》" /></p>
+
+<p>Photo by Charles Etoroma on Unsplash</p>
+
+<blockquote>
+<p><em>小菜一碟！</em></p>
+</blockquote>
+
+<p>为了获得最佳性能，numba 实际上建议在您的 jit 装饰器中加上 <code>nopython=True</code> 参数，加上后就不会使用 Python 解释器了。或者您也可以使用 <code>@njit</code>。如果您加上 <code>nopython=True</code>的装饰器失败并报错，您可以用简单的 <code>@jit</code> 装饰器来编译您的部分代码，对于它能够编译的代码，将它们转换为函数，并编译成机器码。然后将其余部分代码提供给 python 解释器。</p>
+
+<p>所以，您只需要这样做：</p>
+
+<pre><code class="language-python">
+from numba import njit, jit
+</code></pre>
+
+<p>当使用 <code>@jit</code> 时，请确保您的代码有 numba 可以编译的内容，比如包含库（numpy）和它支持的函数的计算密集型循环。否则它将不会编译任何东西，并且您的代码将比没有使用 numba 时更慢，因为存在 numba 内部代码检查的额外开销。</p>
+
+<p>还有更好的一点是，numba 会对首次作为机器码使用后的函数进行缓存。 因此，在第一次使用之后它将更快，因为它不需要再次编译这些代码，如果您使用的是和之前相同的参数类型。</p>
+
+<p>如果您的代码是 可并行化 的，您也可以传递 <code>parallel=True</code> 作为参数，但它必须与 <code>nopython=True</code> 一起使用，目前这只适用于CPU。</p>
+
+<p>您还可以指定希望函数具有的函数签名，但是这样就不会对您提供的任何其他类型的参数进行编译。 例如：</p>
+
+<pre><code class="language-python">from numba import jit, int32
+
+</code></pre>
+
+<p>现在您的函数只能接收两个 int32 类型的参数并返回一个 int32 类型的值。 通过这种方式，您可以更好地控制您的函数。 如果需要，您甚至可以传递多个函数签名。</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/05/numba5.png" alt="《用 Numba 加速 Python 代码，变得像 C++ 一样快》" /></p>
+
+<p>您还可以使用 numba 提供的其他装饰器：</p>
+
+<ol>
+<li>@vectorize：允许将标量参数作为 numpy 的 ufuncs 使用，</li>
+<li>@guvectorize ：生成 NumPy 广义上的  ufunc s，</li>
+<li>@stencil ：定义一个函数使其成为 stencil 类型操作的核函数</li>
+<li>@jitclass ：用于 jit 类，</li>
+<li>@cfunc ：声明一个函数用于本地回调（被C/C++等调用）</li>
+<li>@overload ：注册您自己的函数实现，以便在 nopython 模式下使用，例如：  <code>@overload（scipy.special.j0）</code> 。</li>
+</ol>
+
+<p>Numba 还有 <strong>Ahead of time</strong>（ AOT ）编译，它生成不依赖于 Numba 的已编译扩展模块。 但：</p>
+
+<ol>
+<li>它只允许常规函数（ufuncs 就不行），</li>
+<li>您必须指定函数签名。并且您只能指定一种签名，如果需要指定多个签名，需要使用不同的名字。</li>
+</ol>
+
+<p>它还根据您的CPU架构系列生成通用代码。</p>
+
+<h3 id="5-vectorize-装饰器">5 . @vectorize 装饰器</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/05/numba6.jpeg" alt="《用 Numba 加速 Python 代码，变得像 C++ 一样快》" /></p>
+
+<p>“gray solar panel lot” by American Public Power Association on Unsplash</p>
+
+<p>通过使用 @vectorize 装饰器，您可以对仅能对标量操作的函数进行转换，例如，如果您使用的是仅适用于标量的 python 的 <code>math</code> 库，则转换后就可以用于数组。 这提供了类似于 numpy 数组运算（ufuncs）的速度。 例如：</p>
+
+<pre><code class="language-python">    @vectorize
+</code></pre>
+
+<p>您还可以将<code>target</code> 参数传递给此装饰器，该装饰器使 target 参数为<code>parallel</code>时用于并行化代码，为 <code>cuda</code>时用于在 cuda\GPU 上运行代码。</p>
+
+<pre><code>@vectorize(target=&quot;parallel&quot;)
+</code></pre>
+
+<p>使 <code>target=“parallel”</code> 或 <code>“cuda”</code> 进行矢量化通常比 numpy 实现的代码运行得更快，只要您的代码具有足够的计算密度或者数组足够大。如果不是，那么由于创建线程以及将元素分配到不同线程需要额外的开销，因此可能耗时更长。所以运算量应该足够大，才能获得明显的加速。</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/05/numba7.png" alt="《用 Numba 加速 Python 代码，变得像 C++ 一样快》" /></p>
+
+<p>这个视频讲述了一个用 Numba 加速用于计算流体动力学的Navier Stokes方程的例子：</p>
+
+<h3 id="6-在gpu上运行函数">6. 在GPU上运行函数</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/05/numba8.jpeg" alt="《用 Numba 加速 Python 代码，变得像 C++ 一样快》" /></p>
+
+<p>“time-lapsed of street lights” by Marc Sendra martorell on Unsplash</p>
+
+<p>您也可以像装饰器一样传递 @jit 来运行 cuda/GPU 上的函数。 为此您必须从 <code>numba</code> 库中导入 <code>cuda</code>。 但是要在 GPU 上运行代码并不像之前那么容易。为了在 GPU 上的数百甚至数千个线程上运行函数，需要先做一些初始计算。 实际上，您必须声明并管理网格，块和线程的层次结构。这并不那么难。</p>
+
+<p>要在GPU上执行函数，您必须定义一个叫做 <strong>核函数</strong> 或 <strong>设备函数</strong> 的函数。首先让我们来看 <strong>核函数</strong>。</p>
+
+<p>关于核函数要记住一些要点：</p>
+
+<p>a）核函数在被调用时要显式声明其线程层次结构，即块的数量和每块的线程数量。您可以编译一次核函数，然后用不同的块和网格大小多次调用它。</p>
+
+<p>b）核函数没有返回值。因此，要么必须对原始数组进行更改，要么传递另一个数组来存储结果。为了计算标量，您必须传递单元素数组。</p>
+
+<pre><code># Defining a kernel function
+</code></pre>
+
+<p>因此，要启动核函数，您必须传入两个参数：</p>
+
+<ol>
+<li>每块的线程数，</li>
+<li>块的数量。</li>
+</ol>
+
+<p>例如：</p>
+
+<pre><code class="language-python">    threadsperblock = 32
+</code></pre>
+
+<p>每个线程中的核函数必须知道它在哪个线程中，以便了解它负责数组的哪些元素。Numba 只需调用一次即可轻松获得这些元素的位置。</p>
+
+<pre><code class="language-python">    @cuda.jit
+
+</code></pre>
+
+<p>为了节省将 numpy 数组复制到指定设备，然后又将结果存储到 numpy 数组中所浪费的时间，Numba 提供了一些 函数 来声明并将数组送到指定设备，如：<code>numba.cuda.device_array</code>，<code>numba.cuda。 device_array_like</code>，<code>numba.cuda.to_device</code> 等函数来节省不必要的复制到 cpu 的时间（除非必要）。</p>
+
+<p>另一方面，<strong>设备函数</strong> 只能从设备内部（通过核函数或其他设备函数）调用。 比较好的一点是，您可以从 <strong>设备函数</strong> 中返</p>
+
+<pre><code class="language-python">
+from numba import cuda
+</code></pre>
+
+<p>您还应该在这里查看 Numba 的 cuda 库支持的功能。</p>
+
+<p>Numba 在其 cuda 库中也有自己的 原子操作，随机数生成器,共享内存实现（以加快数据的访问）等功能。</p>
+
+<p>ctypes/cffi/cython 的互用性：</p>
+
+<ul>
+<li><code>cffi</code> – 在 nopython 模式下支持调用 CFFI 函数。</li>
+<li>– 在 nopython 模式下支持调用  包装函数。</li>
+<li>Cython 导出的函数是可调用的。</li>
+</ul>
+
+<h1 id="总结">总结</h1>
+
+<p>本文主要是介绍通过使用numba来加快python代码的执行速度。对于在性能方面有要求的时候可以起到帮助。</p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/313.html">https://www.bobobk.com/313.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/291.html">最大回文字符串算法Manacher</a></li>
+        
+        <li><a href="/289.html">python查找两个数组公有值</a></li>
+        
+        <li><a href="/285.html">Python3二进制数值表示和位操作</a></li>
+        
+        <li><a href="/275.html">Python实现经典排序算法(1)</a></li>
+        
+        <li><a href="/271.html">faceswap训练资源获取与处理</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

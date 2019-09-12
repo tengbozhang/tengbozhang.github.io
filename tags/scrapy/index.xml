@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scrapy on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/scrapy/</link>
+    <description>Recent content in scrapy on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 19 Dec 2018 14:26:16 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/scrapy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python获取vip解析网站视频地址</title>
+      <link>https://www.bobobk.com/81.html</link>
+      <pubDate>Wed, 19 Dec 2018 14:26:16 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/81.html</guid>
+      <description>现在国内有大量的视频网站，包括腾讯视频、爱奇艺、优酷，AB站等等。这些网站都有很多需要付费的VIP视频。最近有几部想看的电视剧，但是，却只能比VIP会员少看好几集。而且广告特别的多，一来就是2分钟。。 我们知道现在有很多网站都有VIP解析服务，只要输入视频网站的播放地址就可以免费观</description>
+    </item>
+    
+    <item>
+      <title>scrapy爬取字幕组今日更新影视-附源码</title>
+      <link>https://www.bobobk.com/43.html</link>
+      <pubDate>Wed, 21 Nov 2018 04:23:53 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/43.html</guid>
+      <description>由于本人比较喜欢看美剧，字幕组的美剧资源更新又是非常快的，而本人scrapy爬虫写的也比较多，同时维护了一个小小的影视站给朋友下载，就想着能不能够用脚本实现每天的字幕组影视资源的更新与抓取，google后发现https://blog.csdn.net/lzw2016/articl</description>
+    </item>
+    
+  </channel>
+</rss>

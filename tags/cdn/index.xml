@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CDN on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/cdn/</link>
+    <description>Recent content in CDN on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 26 Nov 2018 04:36:50 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/cdn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>同时使用腾讯cdn与cloudflare CDN服务</title>
+      <link>https://www.bobobk.com/61.html</link>
+      <pubDate>Mon, 26 Nov 2018 04:36:50 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/61.html</guid>
+      <description>对于同时提供中英文服务的网站来说，如何兼顾国内访问速度和国外访问速度显得非常重要。腾讯的对象存储是面向非结构化数据，支持 HTTP/HTTPS 协议访问的分布式存储服务，它能容纳海量数据并保证用户对带宽和容量扩充无感知，可以作为我们网站的静态文件存储地。当我们在 https://cloud.tencent.com/product/cos 申请免费的cos空间后，同时就可以免费</description>
+    </item>
+    
+  </channel>
+</rss>

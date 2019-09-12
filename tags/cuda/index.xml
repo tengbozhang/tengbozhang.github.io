@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cuda on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/cuda/</link>
+    <description>Recent content in cuda on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 30 Nov 2018 12:55:25 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/cuda/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>tensorflow深度学习服务器环境搭建</title>
+      <link>https://www.bobobk.com/70.html</link>
+      <pubDate>Fri, 30 Nov 2018 12:55:25 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/70.html</guid>
+      <description>实验室新进了一台服务器，配置了nvida 1080TI显卡做深度学习使用，装好机器后第一件事就是如何配置好tensorflow的深度学习环境，这里把我在搭建环境的过程以及遇到的坑一一写下来，给有同样需求的筒子提供一些帮助。 操作系统是师兄刻好的ubuntu最新版本Ubuntu 18.04.1 LTS （可</description>
+    </item>
+    
+  </channel>
+</rss>

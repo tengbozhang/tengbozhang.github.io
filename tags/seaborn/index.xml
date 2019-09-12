@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>seaborn on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/seaborn/</link>
+    <description>Recent content in seaborn on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 20 Jan 2019 11:41:58 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/seaborn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Seaborn绘制核密度曲线实例详解</title>
+      <link>https://www.bobobk.com/263.html</link>
+      <pubDate>Sun, 20 Jan 2019 11:41:58 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/263.html</guid>
+      <description>在频率分布直方图中，当样本容量充分放大到极限时，组距极限缩短，这个时候频率直方图中的阶梯折线就会演变成一条光滑的曲线，这条曲线就称为总体的密度分布曲线。 这篇文章春江暮客将详细介绍如何使用python绘图库seaborn和panda里面的iris也就是鸢尾花卉数据集来绘制各种炫酷的</description>
+    </item>
+    
+    <item>
+      <title>TypeError: ufunc &#39;isnan&#39; not supported for the input types解决办法</title>
+      <link>https://www.bobobk.com/245.html</link>
+      <pubDate>Mon, 14 Jan 2019 12:42:00 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/245.html</guid>
+      <description>今天在使用python的seaborn画热图(clustermap)的时候，发现了总是出现这个错误，而且可以知道自己的数据完全是符合条件的，在搜索了谷歌后也没有找到好的解决方法，经过摸索后这里把最终解决方法告诉大家。 1.生成dataframe import pandas as pd import numpy as np import matplotlib.pyplot as plt from seaborn import clustermap import seaborn as</description>
+    </item>
+    
+    <item>
+      <title>seaborn画小提琴图(violin plot)</title>
+      <link>https://www.bobobk.com/206.html</link>
+      <pubDate>Fri, 04 Jan 2019 12:02:11 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/206.html</guid>
+      <description>简介 小提琴图是用来展示多组数据的分布状态以及概率密度。跟箱线图类似，但是可以密度层面展示更好。在数据量非常大不方便一个一个展示的时候小提琴图特别适用。而python里面的seaborn包可以很方便的画出小提琴图。 参数 小提琴图各位置对应参数，中间一条就是箱线图数据，25%，50%，</description>
+    </item>
+    
+    <item>
+      <title>使用seaborn绘制聚类热图</title>
+      <link>https://www.bobobk.com/98.html</link>
+      <pubDate>Wed, 12 Dec 2018 02:30:25 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/98.html</guid>
+      <description>在生物信息领域，无论是基因芯片，RNAseq还是其他各种生信分析里面，差异基因的寻找总是最基础的工作，而热图在差异基因的可视化展示方面占据了独一无二的地位，在这里我将介绍如何使用seaborn库里面的clustermap函数来进行差异基因的可视化展示。 代码 1.导入seaborn等</description>
+    </item>
+    
+  </channel>
+</rss>

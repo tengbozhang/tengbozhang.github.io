@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>python实现千千音乐mp3下载 | 春江暮客</title>
+    <meta property="og:title" content="python实现千千音乐mp3下载 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-01-08T05:31:43&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-01-08T05:31:43&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="python实现千千音乐mp3下载">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/216.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">python实现千千音乐mp3下载</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年1月8日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>进入千千音乐主页面，选择周杰伦的音乐告白气球，发现竟然是2016年的音乐试听都木有，悲伤。那么有没有办法可以获取到mp3文件呢？答案是肯定的。音乐下载可运行程序可在文末获取。</p>
+
+<p>说干就干，打开榜单，选择新歌一首可以试听的，第一首生僻字就可以听。</p>
+
+<p><img layer-src="https://www.bobobk.com/wp-content/uploads/2019/01/bangdan.webp" src="https://www.bobobk.com/wp-content/uploads/2019/01/bangdan.webp" alt="《python实现千千音乐mp3下载》" /></p>
+
+<h2 id="1-分析接口信息">1.分析接口信息</h2>
+
+<p>打开开发者工具，这种音乐文件肯定是通过api提交的，在毛毛多的请求中发现可以获取音乐文件的请求，看图</p>
+
+<p><img layer-src="https://www.bobobk.com/wp-content/uploads/2019/01/music_net.webp" src="https://www.bobobk.com/wp-content/uploads/2019/01/music_net.webp" alt="《python实现千千音乐mp3下载》" /></p>
+
+<p>查看请求详细信息</p>
+
+<p><img layer-src="https://www.bobobk.com/wp-content/uploads/2019/01/qqyy_request.webp" src="https://www.bobobk.com/wp-content/uploads/2019/01/qqyy_request.webp" alt="《python实现千千音乐mp3下载》" /></p>
+
+<p>参数songid在当前url地址 <a href="http://music.taihe.com/song/611238837里面可以找到，简单，from应该是web或者app之类的，format定义返回数据形式不用改，method不用改，_参数timestamp" target="_blank"  rel="nofollow" ><a href="http://music.taihe.com/song/611238837里面可以找到，简单，from应该是web或者app之类的，format定义返回数据形式不用改，method不用改，_参数timestamp">http://music.taihe.com/song/611238837里面可以找到，简单，from应该是web或者app之类的，format定义返回数据形式不用改，method不用改，_参数timestamp</a></a> 13位时间戳，callback是返回数据的json数据的前面的名字，其中下划线后面的1546915161467为13位的timestamp 时间戳，前面的17200943498528136486就不知道是啥意思了，我们先不改变不知道的内容，试试知道含义的内容看看能否获取到信息</p>
+
+<p>python3代码</p>
+
+<pre><code class="language-python">    import requests
+    import time
+    apiurl= "http://musicapi.taihe.com/v1/restserver/ting"
+    callback = "jQuery17200943498528136486_"+str(round(time.time()*1000))
+    hua = str(round(time.time()*1000))
+    params = {"method"="baidu.ting.song.playAAC","format":"jsonp","songid":"611238837","from":"web","callback":callback,"_":hua}
+    text = requests.get(apiurl,params=params).text
+    text
+</code></pre>
+
+<p><img layer-src="https://www.bobobk.com/wp-content/uploads/2019/01/spz_text.webp" src="https://www.bobobk.com/wp-content/uploads/2019/01/spz_text.webp" alt="《python实现千千音乐mp3下载》" /></p>
+
+<p>发现可以获取到结果，那么接下来就是批量下载下来听了。</p>
+
+<h2 id="2-批量下载音乐到本地">2.批量下载音乐到本地</h2>
+
+<p>由于上面的例子返回的是json格式的文本，那么只需要使用json解析json文本获取mp3文件使用requests下载就可以了。上代码</p>
+
+<pre><code class="language-python">    import requests
+    import time
+    import re,json
+
+    def get_song_list():
+        text = requests.get("http://music.taihe.com").text
+        songid = re.findall(r&#039;href="/song/(\d+)"&#039;,text)
+        return songid
+    def get_mp3_address_and_download(songid): 
+        apiurl= "http://musicapi.taihe.com/v1/restserver/ting" 
+        callback = "jQuery17200943498528136486_"+str(round(time.time()*1000)) 
+        hua = str(round(time.time()*1000)) 
+        params = {"method":"baidu.ting.song.playAAC","format":"jsonp","songid":songid,"from":"web","callback":callback,"_":hua} 
+        text =  json.loads(requests.get(apiurl,params=params).text.split(callback)[1][1:-2])
+        song_address = text["bitrate"]["file_link"]
+        mp3w = open(songid+".mp3",&#039;wb&#039;)
+        mp3w.write(requests.get(song_address).content)
+        mp3w.close()
+    def main():
+        try:
+            for songid in get_song_list():
+                get_mp3_address_and_download(songid)
+        except:
+            print("network error")
+</code></pre>
+
+<p>这下就完全下载了千千音乐首页的mp3了</p>
+
+<p><img layer-src="https://www.bobobk.com/wp-content/uploads/2019/01/mp3_download.webp" src="https://www.bobobk.com/wp-content/uploads/2019/01/mp3_download.webp" alt="《python实现千千音乐mp3下载》" /></p>
+
+<h2 id="3-搜索并下载音乐到本地">3.搜索并下载音乐到本地</h2>
+
+<pre><code class="language-python">    #!env python
+    import requests
+    import re,json,time,sys
+    def helpmessage():
+        msg = r&#039;&#039;&#039;
+           /\          /\          /\          /\
+        /\//\\/\    /\//\\/\    /\//\\/\    /\//\\/\
+     /\//\\\///\\/\//\\\///\\/\//\\\///\\/\//\\\///\\/\
+    //\\\//\/\\///\\\//\/\\///\\\//\/\\///\\\//\/\\///\\
+    \\//\/  本程序由 春江暮客             \/\\//
+     \/      发布在www.bobobk.com 上             \/
+     /\     程序打开后会打开网站           /\
+    //\\    大家不要急着关闭                //\\
+    \\//    作者：春江暮客                   \\//
+     \/     用途：音乐下载                    \/
+     /\     用法看程序运行时界面           /\
+    //\\    如有任何疑问请在                //\\
+    \\//    博客页面留言或者发邮件到    \\//
+     \/     2180614215@qq.com                        \/
+     /\                                              /\
+    //\\/\                                        /\//\\
+    \\///\\/\//\\\///\\/\//\\\///\\/\//\\\///\\/\//\\\//
+     \/\\///\\\//\/\\///\\\//\/\\///\\\//\/\\///\\\//\/
+        \/\\//\/    \/\\//\/    \/\\//\/    \/\\//\/
+           \/          \/          \/          \/
+    &#039;&#039;&#039;
+        print(msg)
+
+    def get_mp3_address_and_download(songid,songname):
+        apiurl= "http://musicapi.taihe.com/v1/restserver/ting"
+        callback = "jQuery17200943498528136486_"+str(round(time.time()*1000))
+        hua = str(round(time.time()*1000))
+        params = {"method":"baidu.ting.song.playAAC","format":"jsonp","songid":songid,"from":"web","callback":callback,"_":hua}
+        text =  json.loads(requests.get(apiurl,params=params).text.split(callback)[1][1:-2])
+        song_address = text["bitrate"]["file_link"]
+        mp3w = open(songname+".mp3",&#039;wb&#039;)
+        mp3w.write(requests.get(song_address).content)
+        mp3w.close()
+    def search_music(keyword):
+        if keyword in ["exit",u"退出"]:
+            print(u"你选择了退出当前程序")
+
+            sys.exit(0)
+
+        text = requests.get("http://music.taihe.com/search?key=%s" % keyword).content.decode("utf8")
+        songlist = re.findall(r&#039;href="/song/(\d+)".*?data-songdata.*?title="(.+?)"&#039;,text)
+        return songlist
+
+    def main():
+        song = input(u"请输入想要下载的音乐名称: ").strip()
+        songlist = search_music(song)
+
+        for i in range(len(songlist)):
+            print("%d:  %s" % (i+1,songlist[i][1]))
+        songid = input(u&#039;请选择想要下载的歌曲前面的数字:&#039;)
+
+        get_mp3_address_and_download(songlist[int(songid)-1][0],song)
+        print(u"-------下载当前歌曲完成---------")
+        print(u"退出请输入&#039;exit&#039;或者&#039;退出&#039;")
+    if __name__==&#039;__main__&#039;:
+        helpmessage()
+        while True:
+    #        main()
+            try:
+                main()
+            except:
+                print(u"5秒后关闭程序")
+                time.sleep(5)
+                sys.exit(0)
+</code></pre>
+
+<p>然后使用pyinstaller打包脚本成exe文件，命令</p>
+
+<pre><code class="language-python">    pyinstaller --onefile download_music.py </code></pre>
+
+<h2 id="总结">总结</h2>
+
+<p>这里我们使用python的requests模块获取了千千音乐的首页音乐列表并下载到了本地，这种方式可以突破网页的限制实现vip音乐或者版权限制的mp3文件下载，为了方便大家调用下载，exe文件已经使用zip压缩。</p>
+
+<p>音乐搜索下载可运行文件下载地址：</p>
+
+<p><a href="https://www.bobobk.com/wp-content/uploads/2019/01/down_music.zip">down_music.zip</a></p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/216.html">https://www.bobobk.com/216.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/85.html">利用Python递归下载文件夹下所有文件</a></li>
+        
+        <li><a href="/32.html">宝塔面板设置python3默认环境</a></li>
+        
+        <li><a href="/213.html">python画横线竖线作为分界线</a></li>
+        
+        <li><a href="/211.html">Linux挂载移动硬盘</a></li>
+        
+        <li><a href="/206.html">seaborn画小提琴图(violin plot)</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://www.bobobk.com/tags/python3">python3</a></li>
+                                
+                                <li><a href="https://www.bobobk.com/tags/requests">requests</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

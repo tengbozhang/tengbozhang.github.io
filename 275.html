@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Python实现经典排序算法(1) | 春江暮客</title>
+    <meta property="og:title" content="Python实现经典排序算法(1) - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-01-29T07:29:52&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-01-29T07:29:52&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="Python实现经典排序算法(1)">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/275.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Python实现经典排序算法(1)</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年1月29日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF">技术</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>在计算科学中，一个排序算法是一种能将一串数据依照特定排序方式进行排列的一种算法。最常用到的排序方式是数值顺序以及字典顺序。有效的排序算法在一些算法中是重要的。排序算法也用在处理文字数据以及产生人类可读的输出结果。</p>
+
+<p>基本上，排序算法的输出必须遵守下列两个原则：1. 输出结果为递增序列（递增是针对所需的排序顺序而言） 2.输出结果是原输入的一种排列、或是重组</p>
+
+<p>经典的10大排序算法可以被分为两大类</p>
+
+<p>非线性时间比较类排序：通过比较来决定元素间的相对次序，由于其时间复杂度不能突破O(nlogn)，因此称为非线性时间比较类排序。</p>
+
+<p>线性时间非比较类排序：不通过比较来决定元素间的相对次序，它可以突破基于比较排序的时间下界，以线性时间运行，因此称为线性时间非比较类排序。</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/sort_algo.webp" alt="《Python实现经典排序算法(1)》" /></p>
+
+<p>它们的时间空间复杂度为</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/time_space_com.webp" alt="《Python实现经典排序算法(1)》" /></p>
+
+<p>下面详细介绍各排序算法及python实现</p>
+
+<h2 id="1-冒泡排序-bubble-sort">1.冒泡排序(Bubble Sort)</h2>
+
+<p>冒泡排序是一种简单的排序算法。它重复地走访过要排序的数组，一次比较两个元素，如果它们的顺序有误就把它们交换过来。重复地进行数组长度的次数直到没有再需要交换，退出循环排序完成。算法的名字由来是因为越小的元素会经由交换像水里的气泡一样慢慢地“浮”到数列的顶端。</p>
+
+<h3 id="1-1-算法描述">1.1 算法描述</h3>
+
+<p>比较相邻的元素。如果第一个比第二个大，就交换它们两个；</p>
+
+<p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；</p>
+
+<p>针对所有的元素重复以上的步骤，除了最后一个；</p>
+
+<p>重复上面步骤，直到没有交换发生，排序完成。</p>
+
+<h3 id="1-2-动图演示">1.2 动图演示</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/bubble_sort_animation.gif" alt="《Python实现经典排序算法(1)》" /></p>
+
+<h3 id="1-3-python3代码实现">1.3 Python3代码实现</h3>
+
+<pre><code class="language-python">    import numpy as np
+    import random
+
+    def bubble_sort(ownlist):
+        n = len(ownlist)
+
+        # Traverse through all array elements
+        for i in range(n):
+
+            # Last i elements are already in place
+            for j in range(0, n-i-1):
+
+                # traverse the array from 0 to n-i-1
+                # Swap if the element found is greater
+                # than the next element
+                if ownlist[j] &gt; ownlist[j+1] :
+                    ownlist[j], ownlist[j+1] = ownlist[j+1], ownlist[j]
+            print(ownlist)
+
+    a = random.sample(list(np.arange(100)),20)
+    bubble_sort(a)
+
+</code></pre>
+
+<h2 id="2-选择排序-selection-sort">2.选择排序(Selection Sort)</h2>
+
+<p>选择排序（Selection sort）是一种简单直观的排序算法。它的工作原理如下。首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+
+<h3 id="2-1-算法描述">2.1 算法描述</h3>
+
+<p>n个记录的直接选择排序可经过n-1趟直接选择排序得到有序结果。</p>
+
+<p>初始状态：无序区为[1..n]，有序区为空；</p>
+
+<p>第i趟排序(i=1,2,3…n-1)开始时，当前有序区和无序区分别为R[1..i-1]和R(i..n）。该趟排序从当前无序区中选出关键字最小的记录 R[k]，将它与无序区的第1个记录交换，使R[1..i]和R[i+1..n)分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区；</p>
+
+<p>n-1次循环结束，数组变得有序化。</p>
+
+<h3 id="2-2-动图演示">2.2 动图演示</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/selection_sort.gif" alt="《Python实现经典排序算法(1)》" /></p>
+
+<h3 id="2-3-python3代码实现">2.3 Python3代码实现</h3>
+
+<pre><code class="language-python">    import numpy as np
+    import random
+
+    def selection_sort(ownlist):
+        n = len(ownlist)
+
+        for i in range(n):
+
+            minn = i
+            for j in range(i, n):
+
+                if ownlist[j] &lt; ownlist[minn] :
+                    minn = j
+            if minn!=i:
+                ownlist[i],ownlist[minn] = ownlist[minn],ownlist[i]
+            print(ownlist)
+
+    a = random.sample(list(np.arange(100)),20)
+    selection_sort(a)
+
+</code></pre>
+
+<h2 id="3-插入排序-insertion-sort">3.插入排序(Insertion Sort)</h2>
+
+<p>插入排序(Insertion-Sort)是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+
+<h3 id="3-1-算法描述">3.1 算法描述</h3>
+
+<p>1.从第一个元素开始，该元素可以认为已经被排序；</p>
+
+<p>2.取出下一个元素，在已经排序的元素序列中从后向前扫描；如果该元素（已排序）大于新元素，将该元素移到下一位置；重复直到找到已排序的元素小于或者等于新元素的位置；将新元素插入到该位置；</p>
+
+<p>3重复步骤。</p>
+
+<h3 id="3-2-动图演示">3.2 动图演示</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/insertion_sort.gif" alt="《Python实现经典排序算法(1)》" /></p>
+
+<h3 id="3-3-python3代码实现">3.3 Python3代码实现</h3>
+
+<pre><code class="language-python">    import numpy as np
+    import random
+    def insertion_sort(ownlist):
+        for index in range(1,len(ownlist)):
+
+            currentvalue = ownlist[index]
+            position = index
+
+            while position&gt;0 and ownlist[position-1]&gt;currentvalue:
+                ownlist[position]=ownlist[position-1]
+                position = position-1
+
+            ownlist[position]=currentvalue
+            print(ownlist)
+    a = random.sample(list(np.arange(100)),20)
+    insertion_sort(a)
+
+</code></pre>
+
+<h2 id="4-希尔排序-shell-sort">4.希尔排序(Shell Sort)</h2>
+
+<p>希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。希尔排序是非稳定排序算法。希尔排序是基于插入排序的以下两点性质而提出改进方法的：插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位.</p>
+
+<h3 id="4-1-算法描述">4.1 算法描述</h3>
+
+<p>先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，具体算法描述：</p>
+
+<ul>
+<li>选择一个增量序列t1，t2，…，tk，其中ti&gt;tj，tk=1；</li>
+<li>按增量序列个数k，对序列进行k 趟排序；</li>
+<li>每趟排序，根据对应的增量ti，将待排序列分割成若干长度为m 的子序列，分别对各子表进行直接插入排序。仅增量因子为1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</li>
+</ul>
+
+<h3 id="4-2-动图演示">4.2 动图演示</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/shell_sort.gif" alt="《Python实现经典排序算法(1)》" /></p>
+
+<h3 id="4-3-python3代码实现">4.3 Python3代码实现</h3>
+
+<pre><code class="language-python">    import numpy as np
+    import random
+    def shell_sort(ownlist): 
+
+        n = len(ownlist) 
+        gap = n//2
+        while gap &gt; 0: 
+
+            for i in range(gap,n): 
+
+                temp = ownlist[i] 
+
+                j = i 
+                while  j &gt;= gap and ownlist[j-gap] &gt;temp: 
+                    ownlist[j] = ownlist[j-gap] 
+                    j -= gap 
+
+                ownlist[j] = temp 
+            gap //= 2
+            print(ownlist)
+    a = random.sample(list(np.arange(100)),20)
+    print(a)
+    shell_sort(a)
+
+</code></pre>
+
+<h2 id="5-归并排序-merge-sort">5.归并排序(Merge Sort)</h2>
+
+<p>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为2-路归并。</p>
+
+<h3 id="5-1-算法描述">5.1 算法描述</h3>
+
+<p>把长度为n的输入序列分成两个长度为n/2的子序列；</p>
+
+<p>对这两个子序列分别采用归并排序；</p>
+
+<p>将两个排序好的子序列合并成一个最终的排序序列</p>
+
+<h3 id="5-2-动图演示">5.2 动图演示</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/merge_sort.gif" alt="《Python实现经典排序算法(1)》" /></p>
+
+<h3 id="5-3-python3代码实现">5.3 Python3代码实现</h3>
+
+<pre><code class="language-python">    import numpy as np
+    import random
+    def merge_sort(ownlist):
+        print(&quot;分割 &quot;,ownlist)
+        if len(ownlist)&gt;1:
+            mid = len(ownlist)//2
+            lefthalf = ownlist[:mid]
+            righthalf = ownlist[mid:]
+
+            merge_sort(lefthalf)
+            merge_sort(righthalf)
+
+            i=0 #left
+            j=0  #right
+            k=0  #
+            while i &lt; len(lefthalf) and j &lt; len(righthalf):
+                if lefthalf[i] &lt; righthalf[j]:
+                    ownlist[k]=lefthalf[i]
+                    i=i+1
+                else:
+                    ownlist[k]=righthalf[j]
+                    j=j+1
+                k=k+1
+
+            while i &lt; len(lefthalf):
+                ownlist[k]=lefthalf[i]
+                i=i+1
+                k=k+1
+
+            while j &lt; len(righthalf):
+                ownlist[k]=righthalf[j]
+                j=j+1
+                k=k+1
+        print(&quot;合并 &quot;,ownlist)
+    a = random.sample(list(np.arange(100)),20)
+    print(a)
+    merge_sort(a)
+
+</code></pre>
+
+<h2 id="总结">总结：</h2>
+
+<p>这篇文章介绍了5中排序算法的原理以及python3算法实现，下一篇将会就剩下的快速排序，堆排序，计数排序，桶排序，基数排序进行详细分析及pythn3实现代码.</p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/275.html">https://www.bobobk.com/275.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/271.html">faceswap训练资源获取与处理</a></li>
+        
+        <li><a href="/263.html">Seaborn绘制核密度曲线实例详解</a></li>
+        
+        <li><a href="/258.html">faceswap深度学习AI实现视频换脸详解</a></li>
+        
+        <li><a href="/252.html">python3绘制炫酷的红楼梦词云</a></li>
+        
+        <li><a href="/248.html">python生成器generator,yield</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

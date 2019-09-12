@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pillow on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/pillow/</link>
+    <description>Recent content in Pillow on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 04 Dec 2018 15:32:34 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/pillow/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python将全站图片改为webp格式</title>
+      <link>https://www.bobobk.com/78.html</link>
+      <pubDate>Tue, 04 Dec 2018 15:32:34 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/78.html</guid>
+      <description>不知道大家是否发现，本站所有的图片基本都是使用的webp格式。 那么webp是什么呢？WebP，是一种同时提供了有损压缩与无损压缩的图片文件格式，是由Google发展出来的。 webp图片格式可以极大地减少文件大小，但同时达到和JPEG格式相同的图片质量，因此可以显著减少图片文件在网</description>
+    </item>
+    
+  </channel>
+</rss>

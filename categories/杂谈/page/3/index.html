@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>杂谈 | 春江暮客</title>
+    <meta property="og:title" content="杂谈 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="杂谈">
+        
+    <meta name="author" content="春江暮客">
+    <meta property="og:url" content="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml+xml" href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/index.xml" title="春江暮客" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    
+                    <h3 class="archive-title">
+                        分类
+                        <span class="keyword">杂谈</span>
+                        中的文章
+                    </h3>
+                    
+
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/310.html">screen session外关闭session会话</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月21日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                screen作为一个用来后台运行的程序非常好用，一般情况下screen -r连接到会话使用ctr + c就可以关闭会话了，但是像我这样在python脚本里面使用了try except捕获异常的话就会发现根本关闭不了整个会话，而仅仅是跳出了循环而已，所以在会话外直接关闭特定会话就比较方便，……
+                                <p class="readmore"><a href="https://www.bobobk.com/310.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/305.html">yum update更新错误rpmdb,空间不足</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月21日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                1.Error: rpmdb open failed 登录linux，使用yum update -y 更新发现Error: rpmdb open failed错误 错误发生原因是RPM数据库被破坏 这里我们重建数据库后恢复正常 代码如下 cd /var/lib/rpm/ for i in `ls | grep 'db.'`;do mv $i $i.bak;done rpm --rebuilddb yum clean all 2.重建后发现空间不足错误 这里需要通过删除过去老的内核来空出空间，然后再来更新，代码 yum list kernel #查看内核……
+                                <p class="readmore"><a href="https://www.bobobk.com/305.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/299.html">thunder迅雷下载地址真实地址解析</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                经常下载视频游戏之类的同学们应该经常碰到thunder开头的迅雷下载地址，但是却经常由于版权问题不能下载，那么这里就普通下载url与迅雷下载地址转换进行说明。 例如我随便给一个下载地址是 https://www.bobobk.com/favicon.ico 1.普通地址转换为迅雷地址 1.1在原地址前面加”AA”，后面加”ZZ”，地址变为AAhttps……
+                                <p class="readmore"><a href="https://www.bobobk.com/299.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/297.html">windows下运行conda命令行脚本</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                由于在家需要使用windows远程更新网站内容，windows上也安装了conda，但是发现无法在windows下直接写下脚本运行，只能从启动项里面找到conda运行后一行一行输入才行。 通过搜索学习，最终找到解决办法。 首先为什么无法直接写好bat批处理文件来运行, 命令使用到con……
+                                <p class="readmore"><a href="https://www.bobobk.com/297.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/313.html">用 Numba 加速 Python 代码，变得像 C&#43;&#43; 一样快</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 介绍 为什么选择 Numba？ Numba 是如何工作的？ 使用 Numba 的基本功能（只需要加上@jit) @vectorize 装饰器&gt; 在 GPU 上运行函数 1. 介绍 Numba 是 python 的即时（Just-in-time）编译器，即当您调用 python 函数时，您的全部或部分代码就会被转换为“即时”执行的机器码，它将以您的本地机器码速度运行！它由 Anaconda 公司……
+                                <p class="readmore"><a href="https://www.bobobk.com/313.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/285.html">Python3二进制数值表示和位操作</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月7日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在信息论中，两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数，如果字符串是二进制的话，使用位运算异或可以非常简单的算出两字符串的汉明距离。 这里我们将介绍python3中如何使用二进制的使用以及二……
+                                <p class="readmore"><a href="https://www.bobobk.com/285.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/216.html">python实现千千音乐mp3下载</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年1月8日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                进入千千音乐主页面，选择周杰伦的音乐告白气球，发现竟然是2016年的音乐试听都木有，悲伤。那么有没有办法可以获取到mp3文件呢？答案是肯定的。音乐下载可运行程序可在文末获取。 说干就干，打开榜单，选择新歌一首可以试听的，第一首生僻字就可以听。 1.分析接口信息 打开开发者工具，这种音乐……
+                                <p class="readmore"><a href="https://www.bobobk.com/216.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/213.html">python画横线竖线作为分界线</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年1月7日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在作图的时候，经常会碰到需要添加分界线的情况，那么python里面那些函数可以方便的画出水平横线或者垂直竖线呢，下面介绍两种可以方便的添加水平或者垂直直线的函数。 1.使用matplotlib.pyplot的hlines和vhlines ######导入需要模块 import numpy as np import matplotlib.pyplot as plt ###……
+                                <p class="readmore"><a href="https://www.bobobk.com/213.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/211.html">Linux挂载移动硬盘</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年1月6日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                机器重启后，移动硬盘就不识别了，需要重新挂载，但是使用fdisk -l之后并没有发现移动硬盘的踪迹。也就无从挂载了。 挂载磁盘方法 首先使用fdisk -l查看当前硬盘状态。 ➜ ~ fdisk -l WARNING: fdisk GPT support is currently new, and therefore in an experimental phase. Use at your own discretion. 磁盘 /dev/sdb：320.1 GB, 320072933376 字节，625142448 个扇区 Units =……
+                                <p class="readmore"><a href="https://www.bobobk.com/211.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://www.bobobk.com/204.html">五步轻松实现linux免密登录</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年1月2日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                SSH英文全程Secure SHELL，是被广泛用于linux系统安全可靠的远程命令执行程序，而用来进行安全文件传输的SCP同样基于SSH的安全协议。 当服务器比较多的时候，每次都要频繁输入密码显得特别麻烦，那么怎样免密码登录且做到安全可靠呢，当然是可以的。这里我们将分为五步完成RH……
+                                <p class="readmore"><a href="https://www.bobobk.com/204.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+
+                    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/page/2/">上一页</a>
+    </li>
+    
+
+    
+    <li >
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/page/2/">2</a>
+    </li>
+    
+    <li  class="current">
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/page/3/">3</a>
+    </li>
+    
+    <li >
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/page/4/">4</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/page/4/">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+                </div>
+            </div>
+
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>宝塔面板设置python3默认环境 | 春江暮客</title>
+    <meta property="og:title" content="宝塔面板设置python3默认环境 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-11-16T02:28:18&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-11-16T02:28:18&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="宝塔面板设置python3默认环境">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/32.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">宝塔面板设置python3默认环境</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2018年11月16日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<h1 id="使用宝塔面板搭建web环境并配置python3为默认python环境">使用宝塔面板搭建web环境并配置python3为默认python环境</h1>
+
+<p><a href="https://www.bt.cn">宝塔面板</a>是一个可以通过Web端轻松管理服务器，提升运维效率的管理面板。它不仅可以方便的安装网站必须程序，而且可以创建管理网站、FTP、数据库，拥有可视化文件管理器，可视化CPU、内存、流量监控图表，计划任务等功能。因此搭建网站选用宝塔面板是非常方便的事情，但是一个服务器仅仅搭建一个小网站的话显得有点浪费，使用服务器跑些爬虫写点程序还是非常好的。 但是宝塔并没有默认的python3，由于python2已经不再维护，升级python3并设置为默认python成为首先要做的事情。在网上查看各种教程并没有直接的相关内容，因此在摸索好搭建环境成功后把详细过程分享给大家，以防类似情况发生再次独自摸索。</p>
+
+<p>首先简要说下过程，查看宝塔脚本<code>vi /usr/bin/bt</code>发现</p>
+
+<pre><code class="language-bash">`py26=$(python -V 2&gt;&amp;1|grep '2.6.')
+if [ &quot;$py26&quot; != &quot;&quot; ];then
+pythonV=python3
+fi`
+</code></pre>
+
+<p>python3是可以运行宝塔面板的，因此python3其实是兼容的，但是宝塔面板安装的时候要求的是python2，所以处理过程需要这样
+1.先运行宝塔面板安装脚本安装好面板
+2.安装好python3设置为默认python3
+3.修改yum使其使用python2</p>
+
+<h2 id="运行宝塔脚本安装宝塔面板">运行宝塔脚本安装宝塔面板</h2>
+
+<p>纯净centos系统直接运行官方脚本安装，我这里系统是centos7，因此使用的是最新的linux面板6.0</p>
+
+<pre><code class="language-bash">bash
+yum install -y wget &amp;&amp; wget -O install.sh https://download.bt.cn/install/install_6.0.sh &amp;&amp; bash install.sh
+
+</code></pre>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2018/11/linux_pc.png" alt="linux_pc" /></p>
+
+<p>安装好就有提示了，默认为8888端口，粘贴进入便可以看到了。</p>
+
+<h2 id="安装python3">安装python3</h2>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2018/11/python.png" alt="python" />
+由于熟悉而且非常强大的爬虫框架scrapy中python3里面3.6是兼容的，更高版本安装会出错，因此这里使用3.6.7作为本次安装的python版本</p>
+
+<pre><code class="language-bash">wget https://www.python.org/ftp/python/3.6.7/Python-3.6.7.tgz
+tar zxvf Python-3.6.7.tgz
+cd Python-3.6.7
+./configure
+make &amp;&amp; make install
+</code></pre>
+
+<p>python3便安装好了</p>
+
+<h2 id="设置python3位默认python"> 设置python3位默认python</h2>
+
+<pre><code class="language-bash">rm -f /usr/bin/python
+ln -s /usr/local/bin/python3 /usr/bin/python
+rm /usr/bin/pip
+ln -s /usr/local/bin/pip /usr/local/bin/pip
+</code></pre>
+
+<h2 id="修改yum为python2">修改yum为python2</h2>
+
+<pre><code class="language-bash">vi /usr/bin/yum
+</code></pre>
+
+<p>把/usr/bin/python 修改为/usr/bin/python2</p>
+
+<p>修改好后使用<code>yum update -y &amp;amp;&amp;amp; python --version &amp;amp;&amp;amp;pip --version</code>如果yum没有出错而且是python3，且pip版本是python3里面的说明环境搭建成功,接下来就可以方便的搭建好scrapy爬虫环境了。</p>
+
+<h1 id="直接使用conda安装python3">直接使用conda安装python3</h1>
+
+<p>##下载安装conda</p>
+
+<pre><code class="language-bash">wget https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh
+bash  Anaconda3-2019.07-Linux-x86_64.sh
+</code></pre>
+
+<p>一路确定就安装好了</p>
+
+<h2 id="把conda加入path">把conda加入PATH</h2>
+
+<pre><code class="language-bash"># &gt;&gt;&gt; conda init &gt;&gt;&gt;
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup=&quot;$(CONDA_REPORT_ERRORS=false '/root/anaconda3/bin/conda' shell.bash hook 2&gt; /dev/null)&quot;
+if [ $? -eq 0 ]; then
+    \eval &quot;$__conda_setup&quot;
+else
+    if [ -f &quot;/root/anaconda3/etc/profile.d/conda.sh&quot; ]; then
+        . &quot;/root/anaconda3/etc/profile.d/conda.sh&quot;
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH=&quot;/root/anaconda3/bin:$PATH&quot;
+    fi
+fi
+unset __conda_setup
+# &lt;&lt;&lt; conda init &lt;&lt;&lt;
+</code></pre>
+
+<h1 id="总结">总结</h1>
+
+<p>以上就是2种安装宝塔面板的服务器安装python3环境的过程,推荐大家使用conda的第二种安装方式。
+希望对大家有所帮助.</p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/32.html">https://www.bobobk.com/32.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/24.html">python画蝴蝶曲线图</a></li>
+        
+        <li><a href="/about_me/">关于</a></li>
+        
+        <li><a href="/about/">关于</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://www.bobobk.com/tags/python3">python3</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

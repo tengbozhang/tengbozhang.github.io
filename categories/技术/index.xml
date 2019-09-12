@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术 on 春江暮客</title>
+    <link>https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/</link>
+    <description>Recent content in 技术 on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 08 Jul 2019 04:34:47 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>10个建议提高你的python数据分析技巧</title>
+      <link>https://www.bobobk.com/385.html</link>
+      <pubDate>Mon, 08 Jul 2019 04:34:47 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/385.html</guid>
+      <description>在编程的世界里，经常一些小小的建议或者帮助就可以起到很大的作用。 比如说有个快捷键或者一个包简单应用就可以起到简化大量工作，达到事半功倍的效果，这里我就介绍几种我经常用到的小技巧。 1. pandas dataframe的pandas_profiling函数查看数据情况 在分析数据前，了解我们的数据是</description>
+    </item>
+    
+    <item>
+      <title>python中的序列化与反序列化</title>
+      <link>https://www.bobobk.com/361.html</link>
+      <pubDate>Mon, 01 Jul 2019 10:36:01 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/361.html</guid>
+      <description>有时候需要临时将数据存储起来，方便下次运行程序时可以直接调用，或者不同线程之间交换数据都是可以用序列化的方式把数据存储起来，然后调用，这里我们以pickle包来解释python中的序列化与反序列化。 什么是序列化与反序列化 序列化：将python数据转换成二进制的数据流。 反序列化：将</description>
+    </item>
+    
+    <item>
+      <title>Python 数据可视化 - 00 后高考大军</title>
+      <link>https://www.bobobk.com/320.html</link>
+      <pubDate>Sat, 01 Jun 2019 17:50:52 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/320.html</guid>
+      <description>00后大军高考结束了，网络上对这次高考的报道很多(毕竟00后小鲜肉嘛)，很多都关注了今年的考生数据，并且用炫酷的图表展示。看着是不是有点小嫉妒，为什么图表还可以做得这么漂亮？？？是不是也想自己动手做一张？？？其实这些图表都可以用python制作出来的数据可视化的产物，所以当然是可</description>
+    </item>
+    
+    <item>
+      <title>一行 Python 代码实现并行</title>
+      <link>https://www.bobobk.com/318.html</link>
+      <pubDate>Sat, 01 Jun 2019 17:47:59 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/318.html</guid>
+      <description>一行 Python 代码实现并行 Python 在程序并行化方面多少有些声名狼藉。撇开技术上的问题，例如线程的实现和 GIL，我觉得错误的教学指导才是主要问题。常见的经典 Python 多线程、多进程教程多显得偏”重”。而且往往隔靴搔痒，没有深入探讨日常工作中最有用的内容。 传统的例子 简单搜索下”Python 多线程教程”，不</description>
+    </item>
+    
+    <item>
+      <title>最大回文字符串算法Manacher</title>
+      <link>https://www.bobobk.com/291.html</link>
+      <pubDate>Thu, 28 Mar 2019 07:17:29 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/291.html</guid>
+      <description>在刷leetcode时有个求最长回文字符串的问题。 #官方题解提供了4中解决办法，分别是 1.暴力法， 2.动态规划， 3.中心扩展算法， 4.就是我们今天要介绍的Manacher方法。 在介绍算法之前，首先介绍一下什么是回文串，所谓回文串，简单来说就是正着读和反着读都是一样的字符串，比如”</description>
+    </item>
+    
+    <item>
+      <title>python查找两个数组公有值</title>
+      <link>https://www.bobobk.com/289.html</link>
+      <pubDate>Fri, 08 Mar 2019 08:23:32 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/289.html</guid>
+      <description>生活中经常碰到需要获取两数组公有值，那么python如何优雅获取两个数组之间的公有值，这里提供多种简单实用方法。 1.使用set元组的 &amp;amp; list1 = [1,2,3,4,5,6,7] list2 = [1,3, 5, 7, 9] set(list1) &amp;amp; set(list2) #{1, 3, 5, 7} 2.使用set元组的intersection交集 list1 = [1,2,3,4,5,6,7] list2 = [1,3, 5, 7, 9] set(list1).intersection(list2) #{1, 3, 5, 7} 3.暴力查询list元素是否在第二个l</description>
+    </item>
+    
+    <item>
+      <title>Python实现经典排序算法(1)</title>
+      <link>https://www.bobobk.com/275.html</link>
+      <pubDate>Tue, 29 Jan 2019 07:29:52 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/275.html</guid>
+      <description>在计算科学中，一个排序算法是一种能将一串数据依照特定排序方式进行排列的一种算法。最常用到的排序方式是数值顺序以及字典顺序。有效的排序算法在一些算法中是重要的。排序算法也用在处理文字数据以及产生人类可读的输出结果。 基本上，排序算法的输出必须遵守下列两个原则：1. 输出结果为递增序列（</description>
+    </item>
+    
+    <item>
+      <title>faceswap训练资源获取与处理</title>
+      <link>https://www.bobobk.com/271.html</link>
+      <pubDate>Wed, 23 Jan 2019 14:19:38 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/271.html</guid>
+      <description>在上回faceswap深度学习AI实现视频换脸详解文章后，大家都已经学会了怎样通过训练模型来使用AI进行视频中人物脸部替换。但是现实中用来训练AI的图片资源的获取以及前期处理非常重要，如果没有良好的符合标准图片进行训练的话，也就无法获得良好的模型。 1.谷歌图片批量下载 作为一名程序</description>
+    </item>
+    
+    <item>
+      <title>Seaborn绘制核密度曲线实例详解</title>
+      <link>https://www.bobobk.com/263.html</link>
+      <pubDate>Sun, 20 Jan 2019 11:41:58 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/263.html</guid>
+      <description>在频率分布直方图中，当样本容量充分放大到极限时，组距极限缩短，这个时候频率直方图中的阶梯折线就会演变成一条光滑的曲线，这条曲线就称为总体的密度分布曲线。 这篇文章春江暮客将详细介绍如何使用python绘图库seaborn和panda里面的iris也就是鸢尾花卉数据集来绘制各种炫酷的</description>
+    </item>
+    
+    <item>
+      <title>faceswap深度学习AI实现视频换脸详解</title>
+      <link>https://www.bobobk.com/258.html</link>
+      <pubDate>Fri, 18 Jan 2019 09:29:15 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/258.html</guid>
+      <description>春江暮客将给大家介绍最近超级火的黑科技应用deepfake，这是一个实现图片和视频换脸的app。前段时间神奇女侠加尔盖朵的脸被换到了爱情动作片上，233333。我们这里将会从github项目faceswap开始一步一步实现一个视频换脸的教程。 注意： 本技术存在一定的使用风险，本教程</description>
+    </item>
+    
+    <item>
+      <title>python3绘制炫酷的红楼梦词云</title>
+      <link>https://www.bobobk.com/252.html</link>
+      <pubDate>Thu, 17 Jan 2019 03:21:06 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/252.html</guid>
+      <description>词云，相信大家都看到过，这是一个使用python的著名的词云工具wordcloud库绘制而成的，本文将详细介绍如何使用wordcloud绘制中国四大名著之一的《红楼梦》的词云。 1.准备工作 包括3部分： 2.wordcloud库和jieba库，可使用pip install wordcloud,pip install jieba进行安装 3.</description>
+    </item>
+    
+    <item>
+      <title>python生成器generator,yield</title>
+      <link>https://www.bobobk.com/248.html</link>
+      <pubDate>Tue, 15 Jan 2019 12:26:07 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/248.html</guid>
+      <description>在python学习过程中，像这些使用if else流程控制或者说函数的定义和使用都比较好理解，但是生成器是一个相对来说很难理解的概念，使用也就相对困难，本文将详细解析python里面的生成器。 1.什么是python生成器 python生成器generator是一个通过调用yield返</description>
+    </item>
+    
+    <item>
+      <title>TypeError: ufunc &#39;isnan&#39; not supported for the input types解决办法</title>
+      <link>https://www.bobobk.com/245.html</link>
+      <pubDate>Mon, 14 Jan 2019 12:42:00 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/245.html</guid>
+      <description>今天在使用python的seaborn画热图(clustermap)的时候，发现了总是出现这个错误，而且可以知道自己的数据完全是符合条件的，在搜索了谷歌后也没有找到好的解决方法，经过摸索后这里把最终解决方法告诉大家。 1.生成dataframe import pandas as pd import numpy as np import matplotlib.pyplot as plt from seaborn import clustermap import seaborn as</description>
+    </item>
+    
+    <item>
+      <title>python实现酷狗音乐mp3下载</title>
+      <link>https://www.bobobk.com/234.html</link>
+      <pubDate>Sun, 13 Jan 2019 14:45:59 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/234.html</guid>
+      <description>在python实现千千音乐mp3下载 后小伙伴使用发现很多音乐在千千音乐都搜不到，所以今天春江暮客就拓展了一下酷狗音乐的下载，有源码。 同样的配方，首先在酷狗官网上直接搜索歌曲，然后打开谷歌浏览器的网络监视器，再次搜索同样的关键字就可以发现接口信息（注：此处最好再次搜索的时候查看网络</description>
+    </item>
+    
+    <item>
+      <title>python3中NetworkX网络图绘制</title>
+      <link>https://www.bobobk.com/229.html</link>
+      <pubDate>Sat, 12 Jan 2019 01:58:34 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/229.html</guid>
+      <description>NetworkX是一个用于研究图形和网络的Python库。 NetworkX是根据BSD-new许可证发布的免费软件。可用于创造和操作复杂网络，学习复杂网络的结构及其功能。 有了NetworkX你就可以用标准或者不标准的数据格式加载或者存储网络，它可以产生许多种类的随机网络或经典网络</description>
+    </item>
+    
+    <item>
+      <title>python3搭配selenium实现12306抢票程序</title>
+      <link>https://www.bobobk.com/224.html</link>
+      <pubDate>Fri, 11 Jan 2019 01:35:04 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/224.html</guid>
+      <description>春节临近了，小伙伴们都在忙着抢票了，很多人总是被各种乱七八糟的抢票程序误导，诱骗，不如自己用python写一个12306抢票脚本好了。 言归正传，有了需求自然就要实现。技术部分，抢票程序由selenium驱动chrome进行，主要分为几下几部分。(别问我为什么不直接用request</description>
+    </item>
+    
+    <item>
+      <title>seaborn画小提琴图(violin plot)</title>
+      <link>https://www.bobobk.com/206.html</link>
+      <pubDate>Fri, 04 Jan 2019 12:02:11 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/206.html</guid>
+      <description>简介 小提琴图是用来展示多组数据的分布状态以及概率密度。跟箱线图类似，但是可以密度层面展示更好。在数据量非常大不方便一个一个展示的时候小提琴图特别适用。而python里面的seaborn包可以很方便的画出小提琴图。 参数 小提琴图各位置对应参数，中间一条就是箱线图数据，25%，50%，</description>
+    </item>
+    
+    <item>
+      <title>python里shadowcopy和deepcopy的区别</title>
+      <link>https://www.bobobk.com/200.html</link>
+      <pubDate>Sat, 29 Dec 2018 02:22:22 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/200.html</guid>
+      <description>python中，经常会需要拷贝特定对象，在此可能就会遇到各种bug，原因就是明白这三种操作的区别，赋值，浅拷贝，深拷贝。 赋值(=)，浅拷贝(copy)和深拷贝(deepcopy)比较容易区别开的是赋值和两种拷贝的区别，但是对于浅拷贝和深拷贝却不那么容易区分。 赋值语句并不会赋值对象</description>
+    </item>
+    
+    <item>
+      <title>python3 requests模块用法实例</title>
+      <link>https://www.bobobk.com/198.html</link>
+      <pubDate>Fri, 28 Dec 2018 04:57:52 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/198.html</guid>
+      <description>python3的网络模块相对python2真的方便了很多，requests一个包就包含了python2的多个包，这从实例说明requests用法,作为复习和以后的参考。 requests并不是python默认安装的，没安装使用pip install requests安装便是，下面是requests</description>
+    </item>
+    
+    <item>
+      <title>kaggle之本地运行识别狗品种</title>
+      <link>https://www.bobobk.com/127.html</link>
+      <pubDate>Sat, 15 Dec 2018 10:36:29 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/127.html</guid>
+      <description>在搭建了深度学习环境后，第一件事就是试试行不行，最简单的当然是使用已经训练好的模型拿来预测新样本了。这里我们使用kaggle上面训练好的狗狗品种预测模型进行使用说明。(后面有完整的数据和脚本，下载到本地即可运行。) 1.加载待预测图片 from os.path import join image_dir = &#39;train/&#39; img_paths = [join(image_dir, filename) for filename in [&#39;0246f44bb123ce3f91c939861eb97fb7.jpg&#39;, &#39;84728e78632c0910a69d33f82e62638c.jpg&#39;]] 这里选用了2张图</description>
+    </item>
+    
+    <item>
+      <title>使用seaborn绘制聚类热图</title>
+      <link>https://www.bobobk.com/98.html</link>
+      <pubDate>Wed, 12 Dec 2018 02:30:25 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/98.html</guid>
+      <description>在生物信息领域，无论是基因芯片，RNAseq还是其他各种生信分析里面，差异基因的寻找总是最基础的工作，而热图在差异基因的可视化展示方面占据了独一无二的地位，在这里我将介绍如何使用seaborn库里面的clustermap函数来进行差异基因的可视化展示。 代码 1.导入seaborn等</description>
+    </item>
+    
+    <item>
+      <title>人工神经网络初探</title>
+      <link>https://www.bobobk.com/90.html</link>
+      <pubDate>Mon, 10 Dec 2018 05:27:33 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/90.html</guid>
+      <description>什么是人工神经网络？本文将从3个方面阐述。概念，直观例子，应用。 1.概念 人工神经网络（Artificial Neural Network，ANN），简称神经网络（Neural Network，NN）或类神经网络，是一种模仿生物神经网络的结构和功能的数学模型。它由大量神经元联结进行运算，大多数情况</description>
+    </item>
+    
+    <item>
+      <title>利用Python递归下载文件夹下所有文件</title>
+      <link>https://www.bobobk.com/85.html</link>
+      <pubDate>Sat, 08 Dec 2018 06:42:32 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/85.html</guid>
+      <description>最近想备份网站，但是php下载文件的大小是限制的，而我也懒得装ftp再下载了，就想着暂时弄个二级域名站，然后用python(python3)的requests库直接下载网站根目录下的所有文件以及文件夹，以达到备份的目的。 1.安装requests库 pip install requests 2.下载文件夹下所有文件及文</description>
+    </item>
+    
+    <item>
+      <title>python将全站图片改为webp格式</title>
+      <link>https://www.bobobk.com/78.html</link>
+      <pubDate>Tue, 04 Dec 2018 15:32:34 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/78.html</guid>
+      <description>不知道大家是否发现，本站所有的图片基本都是使用的webp格式。 那么webp是什么呢？WebP，是一种同时提供了有损压缩与无损压缩的图片文件格式，是由Google发展出来的。 webp图片格式可以极大地减少文件大小，但同时达到和JPEG格式相同的图片质量，因此可以显著减少图片文件在网</description>
+    </item>
+    
+    <item>
+      <title>scrapy爬取字幕组今日更新影视-附源码</title>
+      <link>https://www.bobobk.com/43.html</link>
+      <pubDate>Wed, 21 Nov 2018 04:23:53 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/43.html</guid>
+      <description>由于本人比较喜欢看美剧，字幕组的美剧资源更新又是非常快的，而本人scrapy爬虫写的也比较多，同时维护了一个小小的影视站给朋友下载，就想着能不能够用脚本实现每天的字幕组影视资源的更新与抓取，google后发现https://blog.csdn.net/lzw2016/articl</description>
+    </item>
+    
+    <item>
+      <title>用turtle实现用正方形画圆</title>
+      <link>https://www.bobobk.com/39.html</link>
+      <pubDate>Mon, 19 Nov 2018 04:38:15 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/39.html</guid>
+      <description>最近发现一个很有意思的画图的python库，叫做turtle，这里先说下用turtle这个库来实现用正方形画圆的思路。 每次都用乌龟（turtle） 来画出一个正方形，然后通过旋转3°后，继续画一样的正方形，在通过120次循环后就实现了完整的圆，这里当然也可以用其他的角度和次数，只要</description>
+    </item>
+    
+    <item>
+      <title>python画蝴蝶曲线图</title>
+      <link>https://www.bobobk.com/24.html</link>
+      <pubDate>Wed, 07 Nov 2018 08:03:32 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/24.html</guid>
+      <description>蝴蝶曲线是由Temple H·Fay发现的可用极坐标函数表示的蝴蝶曲线。由于此曲线优美，因此就想把它作为博客favicon.ico，这里我使用python matplotlib.pyplot包来绘制需要的蝴蝶曲线图。先看下漂亮的蝴蝶曲线吧。 1.首先我们需要确定蝴蝶曲线的函数表达 也可用</description>
+    </item>
+    
+  </channel>
+</rss>

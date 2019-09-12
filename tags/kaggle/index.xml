@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kaggle on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/kaggle/</link>
+    <description>Recent content in kaggle on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 15 Dec 2018 10:36:29 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/kaggle/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>kaggle之本地运行识别狗品种</title>
+      <link>https://www.bobobk.com/127.html</link>
+      <pubDate>Sat, 15 Dec 2018 10:36:29 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/127.html</guid>
+      <description>在搭建了深度学习环境后，第一件事就是试试行不行，最简单的当然是使用已经训练好的模型拿来预测新样本了。这里我们使用kaggle上面训练好的狗狗品种预测模型进行使用说明。(后面有完整的数据和脚本，下载到本地即可运行。) 1.加载待预测图片 from os.path import join image_dir = &#39;train/&#39; img_paths = [join(image_dir, filename) for filename in [&#39;0246f44bb123ce3f91c939861eb97fb7.jpg&#39;, &#39;84728e78632c0910a69d33f82e62638c.jpg&#39;]] 这里选用了2张图</description>
+    </item>
+    
+  </channel>
+</rss>

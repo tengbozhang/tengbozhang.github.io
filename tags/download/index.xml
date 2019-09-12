@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>download on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/download/</link>
+    <description>Recent content in download on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 08 Dec 2018 06:42:32 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/download/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>利用Python递归下载文件夹下所有文件</title>
+      <link>https://www.bobobk.com/85.html</link>
+      <pubDate>Sat, 08 Dec 2018 06:42:32 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/85.html</guid>
+      <description>最近想备份网站，但是php下载文件的大小是限制的，而我也懒得装ftp再下载了，就想着暂时弄个二级域名站，然后用python(python3)的requests库直接下载网站根目录下的所有文件以及文件夹，以达到备份的目的。 1.安装requests库 pip install requests 2.下载文件夹下所有文件及文</description>
+    </item>
+    
+  </channel>
+</rss>

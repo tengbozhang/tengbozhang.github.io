@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>python 魔术方法详解 | 春江暮客</title>
+    <meta property="og:title" content="python 魔术方法详解 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-12-26T04:15:44&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-12-26T04:15:44&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="python 魔术方法详解">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/194.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">python 魔术方法详解</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2018年12月26日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<h1 id="什么是python魔术方法">什么是Python魔术方法</h1>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2018/12/wizard.webp" alt="wizard" />
+什么是魔术方法呢？当然它跟魔术师没有真正的联系。在面向对象的Python中处处可见。它们是一些可以让你对类添加“魔术”的特殊方法。这些方法在进行特定的操作时会被自动调用，它们是Python面向对象下智慧的结晶。初学者掌握Python的魔法方法也就变得尤为重要。</p>
+
+<p>魔术方法经常由两个下划线包围来命名的。但是现在没有很好的文档来解释它们而且很难找到真正正确的发音，比如<strong>init</strong>，我们叫双下划线init双下划线吗，听起来就好别扭。</p>
+
+<p>那么<strong>init</strong>到底有什么魔术呢？答案是你并不需要直接定义说明。而是在调用类的时候自动调用。比如当我们使用&rdquo;x = A()&ldquo;的时候，A类的<strong>new</strong> 和 <strong>init</strong>方法便会自动调用。</p>
+
+<h1 id="构造和初始化魔术方法">构造和初始化魔术方法</h1>
+
+<p>我们都知道最长使用的魔术方法就是<strong>init</strong>，在定义一个类的时候需要声明的初始化方法，但是<strong>init</strong>并不是第一个被使用的魔术方法，在初始化前最先调用的是<strong>new</strong>，这个方法首先创建一个实例，然后再使用<strong>init</strong>初始化实例，在实例的声明周期里面，<strong>del</strong>最后被调用，删除实例。我们这类先来看下这3个魔术方法吧。</p>
+
+<pre><code class="language-python">__new__(cls, [...)
+
+</code></pre>
+
+<ul>
+<li><p><strong>new</strong> 是实例化类型中的第一个被调用函数，在调用<strong><strong>new</strong></strong>之后才会传给<strong>init</strong>，当然<strong><strong>new</strong></strong>使用的比较少，但是具有独特的作用，详情可看<a href="https://www.python.org/download/releases/2.2/descrintro/#__new__">python官方文档</a></p>
+
+<pre><code class="language-python">__init__(self, [...)
+</code></pre></li>
+</ul>
+
+<p><strong>init</strong>是类实例化的初始化函数，会把构造器里面的初始化内容传入（比如说x = ClassA(10, &lsquo;foo&rsquo;)），那么在10和&rsquo;foo&rsquo;便会作为初始化参数传入类，这是一个几乎所有类都会定义的一个函数</p>
+
+<pre><code class="language-python">__del__(self)
+</code></pre>
+
+<p><strong>new</strong>和<strong>init</strong>都是创建新的类，<strong>del</strong>就是回收器，在一个类被销毁之前调用，它在类被销毁前需要进行其他额外的处理的时候是相当有用的，像socket或者文件。但是需要注意这个函数并不能保证一定能够成功运行，所以在编写程序的时候保持好的编程习惯，关闭文件或者关闭网络连接。</p>
+
+<p>综上，下面是一个使用<strong>init</strong> 和<strong>del</strong>魔术方法的实例。</p>
+
+<pre><code class="language-python">from os.path import join
+class FileObject:
+    '''保证关闭已经打开的文件.'''
+
+    def __init__(self, filepath='./', filename='sample.txt'):
+        # 以r+模式打开文件
+        self.file = open(join(filepath, filename), 'r+')
+
+    def __del__(self):
+        self.file.close()
+##关闭文件
+        del self.file
+
+
+</code></pre>
+
+<h1 id="自定类使用运算符">自定类使用运算符</h1>
+
+<p>魔术方法的一大好处就是可以方便的使得自己定义的类可以像内部定义的类一样，我们可以避免大量的丑陋而不标准的代码。在其他语言我们可能需要</p>
+
+<pre><code class="language-python">if instance.equals(other_instance):
+    # do something
+
+
+</code></pre>
+
+<p>当然在python里面也可以使用，但是python有更优雅的方式<strong>eq</strong>就可以了</p>
+
+<pre><code class="language-python">def __eq__:
+    return instance==other_instance
+
+</code></pre>
+
+<p>这只是强大的魔术方法一部分，大部分的魔术方法都允许我们定义运算符的含义使得我们自己的函数可以表现得像是内建的函数一样。</p>
+
+<h2 id="比较类魔术方法">比较类魔术方法</h2>
+
+<p>python拥有一整套的魔术方法使得我们可以定义大部分的比较方法，我们甚至可以重写内建的函数意义。</p>
+
+<table>
+<thead>
+<tr>
+<th>&lt;</th>
+<th>object.<strong>lt</strong>(self, other)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>&lt;=</td>
+<td>object.<strong>le</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>==</td>
+<td>object.<strong>eq</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>!=</td>
+<td>object.<strong>ne</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>&gt;=</td>
+<td>object.<strong>ge</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>&gt;</td>
+<td>object.<strong>gt</strong>(self, other)</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="数字运算符">数字运算符</h2>
+
+<table>
+<thead>
+<tr>
+<th>+</th>
+<th>object.<strong>add</strong>(self, other)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>-</td>
+<td>object.<strong>sub</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>*</td>
+<td>object.<strong>mul</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>//</td>
+<td>object.<strong>floordiv</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>/</td>
+<td>object.<strong>truediv</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>%</td>
+<td>object.<strong>mod</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>**</td>
+<td>object.<strong>pow</strong>(self, other[, modulo])</td>
+</tr>
+
+<tr>
+<td>&lt;&lt;</td>
+<td>object.<strong>lshift</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>&gt;&gt;</td>
+<td>object.<strong>rshift</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>&amp;</td>
+<td>object.<strong>and</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>^</td>
+<td>object.<strong>xor</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="扩展运算符">扩展运算符</h2>
+
+<table>
+<thead>
+<tr>
+<th>+=</th>
+<th>object.<strong>iadd</strong>(self, other)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>-=</td>
+<td>object.<strong>isub</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>*=</td>
+<td>object.<strong>imul</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>/=</td>
+<td>object.<strong>idiv</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>//=</td>
+<td>object.<strong>ifloordiv</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>%=</td>
+<td>object.<strong>imod</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>**=</td>
+<td>object.<strong>ipow</strong>(self, other[, modulo])</td>
+</tr>
+
+<tr>
+<td>&lt;&lt;=</td>
+<td>object.<strong>ilshift</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>&gt;&gt;=</td>
+<td>object.<strong>irshift</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>&amp;=</td>
+<td>object.<strong>iand</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td>^=</td>
+<td>object.<strong>ixor</strong>(self, other)</td>
+</tr>
+
+<tr>
+<td></td>
+<td>=</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="元运算符">元运算符</h2>
+
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>object.<strong>neg</strong>(self)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>+</td>
+<td>object.<strong>pos</strong>(self)</td>
+</tr>
+
+<tr>
+<td>abs()</td>
+<td>object.<strong>abs</strong>(self)</td>
+</tr>
+
+<tr>
+<td>~</td>
+<td>object.<strong>invert</strong>(self)</td>
+</tr>
+
+<tr>
+<td>complex()</td>
+<td>object.<strong>complex</strong>(self)</td>
+</tr>
+
+<tr>
+<td>int()</td>
+<td>object.<strong>int</strong>(self)</td>
+</tr>
+
+<tr>
+<td>long()</td>
+<td>object.<strong>long</strong>(self)</td>
+</tr>
+
+<tr>
+<td>float()</td>
+<td>object.<strong>float</strong>(self)</td>
+</tr>
+
+<tr>
+<td>oct()</td>
+<td>object.<strong>oct</strong>(self)</td>
+</tr>
+
+<tr>
+<td>hex()</td>
+<td>object.<strong>hex</strong>(self</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="魔术方法实例">魔术方法实例</h1>
+
+<p>这里我们将定义一个length类，它可以进行长度运算，计算不同的单位</p>
+
+<pre><code class="language-python">class Length:
+
+    __metric = {&quot;mm&quot; : 0.001, &quot;cm&quot; : 0.01, &quot;m&quot; : 1, &quot;km&quot; : 1000,
+                &quot;in&quot; : 0.0254, &quot;ft&quot; : 0.3048, &quot;yd&quot; : 0.9144,
+                &quot;mi&quot; : 1609.344 }
+    
+    def __init__(self, value, unit = &quot;m&quot; ):
+        self.value = value
+        self.unit = unit
+    
+    def Converse2Metres(self):
+        return self.value * Length.__metric[self.unit]
+    
+    def __add__(self, other):
+        l = self.Converse2Metres() + other.Converse2Metres()
+        return Length(l / Length.__metric[self.unit], self.unit )
+    
+    def __str__(self):
+        return str(self.Converse2Metres())
+    
+    def __repr__(self):
+        return &quot;Length(&quot; + str(self.value) + &quot;, '&quot; + self.unit + &quot;')&quot;
+
+if __name__ == &quot;__main__&quot;:
+    x = Length(4)
+    print(x)
+    y = eval(repr(x))
+
+    z = Length(4.5, &quot;yd&quot;) + Length(1)
+    print(repr(z))
+    print(z)
+</code></pre>
+
+<p>输出</p>
+
+<pre><code class="language-python">4
+Length(5.593613298337708, 'yd')
+5.1148
+</code></pre>
+
+<h2 id="call-nbsp-方法"><strong>call</strong>&nbsp;方法</h2>
+
+<p>相信大家写python的时候很多时候都出现“TypeError &lsquo;xxx&rsquo; object is not callable”就是因为这个类不能被call，那么定义call方法可以使得自定义的类变成callable的，下面是一个call的实例</p>
+
+<pre><code class="language-python">
+class Polynomial:
+    
+    def __init__(self, *coefficients):
+        self.coefficients = coefficients[::-1]
+        
+    def __call__(self, x):
+        res = 0
+        for index, coeff in enumerate(self.coefficients):
+            res += coeff * x** index
+        return res
+
+# a constant function
+p1 = Polynomial(42)
+
+# a straight Line
+p2 = Polynomial(0.75, 2)
+
+# a third degree Polynomial
+p3 = Polynomial(1, -0.5, 0.75, 2)
+
+for i in range(1, 10):
+    print(i, p1(i), p2(i), p3(i))
+
+</code></pre>
+
+<p>输出</p>
+
+<pre><code class="language-python">2 42 3.5 9.5
+3 42 4.25 26.75
+4 42 5.0 61.0
+5 42 5.75 118.25
+6 42 6.5 204.5
+7 42 7.25 325.75
+8 42 8.0 488.0
+9 42 8.75 697.25
+
+</code></pre>
+
+<p>参考：
+&gt; <a href="https://www.python-course.eu/python3_magic_methods.php">https://www.python-course.eu/python3_magic_methods.php</a>
+&gt; <a href="https://rszalski.github.io/magicmethods/">https://rszalski.github.io/magicmethods/</a></p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/194.html">https://www.bobobk.com/194.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/downloaod_paper/">文献下载</a></li>
+        
+        <li><a href="/185.html">boxes:有趣的命令行字符串形状工具</a></li>
+        
+        <li><a href="/sgrna_jietou/">sgRNA接头添加</a></li>
+        
+        <li><a href="/vip_parse/">VIP视频解析</a></li>
+        
+        <li><a href="/81.html">python获取vip解析网站视频地址</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

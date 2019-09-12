@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>用turtle实现用正方形画圆 | 春江暮客</title>
+    <meta property="og:title" content="用turtle实现用正方形画圆 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-11-19T04:38:15&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-11-19T04:38:15&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="用turtle实现用正方形画圆">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/39.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">用turtle实现用正方形画圆</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2018年11月19日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF">技术</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>最近发现一个很有意思的画图的python库，叫做turtle，这里先说下用turtle这个库来实现用正方形画圆的思路。
+每次都用乌龟（turtle）</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2018/11/Screen-Shot-2018-11-19-at-9.51.23-AM.webp" alt="乌龟" /></p>
+
+<p>来画出一个正方形，然后通过旋转3°后，继续画一样的正方形，在通过120次循环后就实现了完整的圆，这里当然也可以用其他的角度和次数，只要能完成360度就可以了。</p>
+
+<h3 id="先看完成的图形和代码">先看完成的图形和代码。</h3>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2018/11/Screen-Shot-2018-11-19-at-9.14.46-AM.webp" alt="" /></p>
+
+<h4 id="代码如下">代码如下：</h4>
+
+<pre><code class="language-python">import turtle
+window = turtle.Screen() #设置好画图的基本参数
+window.bgcolor(&quot;blue&quot;)
+wugui= turtle.Turtle()
+wugui.shape(&quot;turtle&quot;)
+wugui.color(&quot;red&quot;)
+wugui.speed(5)
+for i in range(120):    #这里设定正方形的个数
+    wugui.forward(100)
+    wuguiright(90)
+    wugui.forward(100)
+    wugui.right(90)
+    wugui.forward(100)
+    wugui.right(90)
+    wugui.forward(100)
+    wugui.right(93)#这里决定每次旋转角度，也就决定了需要画正方形的次数。
+window.exitonclick()
+</code></pre>
+
+<p>代码应该很简单易懂，就不再说了。turtle真的是非常强大的一个绘图工具，可以绘制各种各样有趣的图形，详情请看&nbsp;<a href="https://docs.python.org/3.3/library/turtle.html?highlight=turtle" target="_blank"  rel="nofollow" >turtle官方文档</a>，这里说点基本的参数吧。包括两部分，乌龟与画布</p>
+
+<h1 id="乌龟方法">乌龟方法</h1>
+
+<h2 id="乌龟运动">乌龟运动</h2>
+
+<h3 id="乌龟移动与绘画">乌龟移动与绘画</h3>
+
+<p><span style="color: #3366ff;">forward() | fd()&nbsp;</span> <strong>向前</strong>移动指定的距离。参数：（integer or float)）一个数字</p>
+
+<p><span style="color: #3366ff;">backward() | bk() | back()</span>&nbsp; &nbsp;<strong>向后</strong>移动指定的距离。参数：（integer or float)）一个数字</p>
+
+<p><span style="color: #3366ff;">right() | rt() left() | lt()</span>&nbsp; &nbsp;<strong>向右&nbsp;&nbsp;</strong>旋转指定的角度。参数：（integer or float)）一个数字</p>
+
+<p><span style="color: #3366ff;">goto() | setpos() | setposition()&nbsp;</span> 去到位置（x,y）。参数：（<em>x</em>,&nbsp;<em>y=None</em>)）一个数字</p>
+
+<p><span style="color: #3366ff;">setx()&nbsp;</span> 设置<strong>X</strong>位置。参数：（integer or float）一个数字</p>
+
+<p><span style="color: #3366ff;">sety()</span>&nbsp;&nbsp;设置<strong>Y</strong>位置。参数：（integer or float）一个数字</p>
+
+<p><span style="color: #3366ff;">setheading() | seth()</span>&nbsp;&nbsp;方向设置为to_angle.就是东西南北方向，上北下南左西右东</p>
+
+<p><span style="color: #3366ff;">home()&nbsp; &nbsp;</span> &nbsp; &nbsp; 移动到原点 &#8211; 坐标（0，0）：并将其标题设置为其起始方向</p>
+
+<p><span style="color: #3366ff;">circle()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;绘制一个给定半径的圆。参数：（radius,extent,steps）（一个数字__半径，如果值为正则逆时针，负数为顺时针__，一个数字, 执行的步数)</p>
+
+<p><span style="color: #3366ff;">dot()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; 用颜色画出一个直径大小的圆点。参数：(size,color)(一个大于1的整数_可None,颜色值)</p>
+
+<p><span style="color: #3366ff;">stamp()&nbsp;</span> &nbsp;&nbsp;将当前位置上的形状复制到画布上,返回stamp_id.可通过下方的clearstamp删除</p>
+
+<p><span style="color: #3366ff;">clearstamp()&nbsp;</span> &nbsp;&nbsp;删除stamp()返回来的值，参数：（stamp_id）stamp函数返回值</p>
+
+<p><span style="color: #3366ff;">clearstamps()&nbsp;&nbsp;</span>删除所有的stamp，默认无参数，删除所有</p>
+
+<p><span style="color: #3366ff;">undo()&nbsp;</span>&nbsp;撤销上一步动作</p>
+
+<p><span style="color: #3366ff;">speed()</span> 乌龟爬行速度，我们这设置的是5，不设置为最快，直接生成</p>
+
+<h3 id="乌龟当前状态">乌龟当前状态</h3>
+
+<p><span style="color: #3366ff;">position() | pos()</span>&nbsp; &nbsp;当前位置</p>
+
+<p><span style="color: #3366ff;">towards()</span>&nbsp; &nbsp; 返回与指定点之间的角度&nbsp; &nbsp;参数：（X,Y）一个位置</p>
+
+<p><span style="color: #3366ff;">xcor()&nbsp;</span> &nbsp; &nbsp; 返回乌龟X坐标</p>
+
+<p><span style="color: #3366ff;">ycor()&nbsp;</span> &nbsp; &nbsp;&nbsp;返回乌龟Y坐标</p>
+
+<p><span style="color: #3366ff;">heading()&nbsp;</span> &nbsp;返回当前乌龟的方向值</p>
+
+<p><span style="color: #3366ff;">distance()&nbsp;</span> &nbsp;返回乌龟与坐标点之间的距离。参数：（X,Y）一个位置</p>
+
+<h3 id="设置与测量">设置与测量</h3>
+
+<p><span style="color: #3366ff;">degrees()&nbsp;</span> &nbsp;设置整个圆的角度，最好不要动。参数：（integer or float）一个整数</p>
+
+<p><span style="color: #3366ff;">radians()</span>&nbsp; &nbsp;&nbsp;将角度测量单位设置为弧度。360度就是2π</p>
+
+<h2 id="画笔控制">画笔控制</h2>
+
+<h3 id="绘画状态">绘画状态</h3>
+
+<p><span style="color: #3366ff;">pendown() | pd() | down()</span>&nbsp; &nbsp;将笔落下放在图上，移动的时候将<strong>会</strong>绘图</p>
+
+<p><span style="color: #3366ff;">penup() | pu() | up()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;将笔提起来，移动的时候将<strong>不会</strong>绘图</p>
+
+<p><span style="color: #3366ff;">pensize() | width()&nbsp;</span> &nbsp; &nbsp; &nbsp;设置线条的粗细。参数：（width）一个正数</p>
+
+<p><span style="color: #3366ff;">pen()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;使用键值对设置笔的属性</p>
+
+<p>&nbsp;</p>
+
+<ul class="simple">
+  <li>
+    “shown”: True/False&nbsp; 显示
+  </li>
+  <li>
+    “pendown”: True/False&nbsp; &nbsp; 笔落下
+  </li>
+  <li>
+    “pencolor”: color-string or color-tuple&nbsp; &nbsp;笔的颜色
+  </li>
+  <li>
+    “fillcolor”: color-string or color-tuple&nbsp; &nbsp; 填充颜色
+  </li>
+  <li>
+    “pensize”: positive number&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 笔大小（正整数）
+  </li>
+  <li>
+    “speed”: number in range 0..10&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 绘画速度（范围0-10）
+  </li>
+  <li>
+    “resizemode”: “auto” or “user” or “noresize”&nbsp; 大小调整模式
+  </li>
+  <li>
+    “stretchfactor”: (positive number, positive number)&nbsp; &nbsp; 拉伸参数
+  </li>
+  <li>
+    “outline”: positive number&nbsp; &nbsp;外部
+  </li>
+  <li>
+    “tilt”: number&nbsp; &nbsp;倾斜
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">isdown()&nbsp;</span> &nbsp;如果笔停止返回True，反之返回False</p>
+
+<h3 id="颜色控制">颜色控制</h3>
+
+<p><span style="color: #3366ff;">color()&nbsp;</span> &nbsp; 颜色，直接使用返回当前笔颜色与填充颜色</p>
+
+<p><span style="color: #3366ff;">pencolor()&nbsp;</span>&nbsp;设置笔的颜色</p>
+
+<p><span style="color: #3366ff;">fillcolor()&nbsp; &nbsp;</span>&nbsp;设置笔的填充颜色</p>
+
+<h3 id="填充">填充</h3>
+
+<p><span style="color: #3366ff;">filling()&nbsp;</span> &nbsp; &nbsp; &nbsp;返回填充状态，</p>
+
+<p><span style="color: #3366ff;">begin_fill()&nbsp;</span> &nbsp;在填充之前使用</p>
+
+<p><span style="color: #3366ff;">end_fill()&nbsp;</span> &nbsp; &nbsp; 结束填充</p>
+
+<h3 id="更多绘画控制">更多绘画控制</h3>
+
+<p><span style="color: #3366ff;">reset()&nbsp;</span> &nbsp;重置所有参数</p>
+
+<p><span style="color: #3366ff;">clear()</span>&nbsp; &nbsp; 删除绘画，与reset不同之处仅仅是删除图形，参数保留</p>
+
+<p><span style="color: #3366ff;">write()&nbsp;</span> &nbsp; 写文字</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>arg</strong>&nbsp;– object to be written to the&nbsp;<span class="highlighted">Turtle</span>Screen&nbsp; &nbsp;写到TurtleScreen的参数
+  </li>
+  <li>
+    <strong>move</strong>&nbsp;– True/False&nbsp; &nbsp; &nbsp;移动
+  </li>
+  <li>
+    <strong>align</strong>&nbsp;– one of the strings “left”, “center” or right”&nbsp; &nbsp; 对齐参数3选1（left，right，center）
+  </li>
+  <li>
+    <strong>font</strong>&nbsp;– a triple (fontname, fontsize, fonttype)&nbsp; 字体
+  </li>
+</ul>
+
+<h2 id="乌龟状态">乌龟状态</h2>
+
+<h3 id="可视性">可视性</h3>
+
+<p><span style="color: #3366ff;">showturtle() | st()</span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;显示乌龟的形状</p>
+
+<p><span style="color: #3366ff;">hideturtle() | ht()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp;隐藏乌龟的形状</p>
+
+<p><span style="color: #3366ff;">isvisible()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;是否可见，返回True or False</p>
+
+<h3 id="外表">外表</h3>
+
+<p><span style="color: #3366ff;">shape()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;设置乌龟的图形形状，可选（&nbsp;“arrow”, “turtle”, “circle”, “square”, “triangle”, “classic”）</p>
+
+<p><span style="color: #3366ff;">resizemode()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 大小调整模式</p>
+
+<ul class="simple">
+  <li>
+    “auto”: adapts the appearance of the&nbsp;<span class="highlighted">turtle</span>&nbsp;corresponding to the value of pensize.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;由画笔大小决定（自动）
+  </li>
+  <li>
+    “user”: adapts the appearance of the&nbsp;<span class="highlighted">turtle</span>&nbsp;according to the values of stretchfactor and outlinewidth (outline), 由拉伸参数决定
+  </li>
+  <li>
+    “noresize”: no adaption of the&nbsp;<span class="highlighted">turtle</span>’s appearance takes place.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 不调整
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">shapesize() | turtlesize()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;返回笔的属性。</p>
+
+<p><span style="color: #3366ff;">shearfactor()&nbsp; &nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;设置或者返回当前剪切因子</p>
+
+<p><span style="color: #3366ff;">settiltangle()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;与tilt() 一样，只是可以为空，则返回当前旋转角度</p>
+
+<p><span style="color: #3366ff;">tiltangle()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;弃用</p>
+
+<p><span style="color: #3366ff;">tilt()&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;设置当前乌龟角度，不调整乌龟前进方向（仅仅改变乌龟样子）</p>
+
+<p><span style="color: #3366ff;">shapetransform()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;设置或返回乌龟的形状的当前转换矩阵</p>
+
+<p><span style="color: #3366ff;">get_shapepoly()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;返回当前形状的坐标</p>
+
+<h2 id="监听动作">监听动作</h2>
+
+<p><span style="color: #3366ff;">onclick()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;鼠标点击事件</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>fun</strong>&nbsp;– a function with two arguments which will be called with the coordinates of the clicked point on the canvas函数需要有两个参数
+  </li>
+  <li>
+    <strong>num</strong>&nbsp;– number of the mouse-button, defaults to 1 (left mouse button)&nbsp; &nbsp; 单击次数，默认1
+  </li>
+  <li>
+    <strong>add</strong>&nbsp;–&nbsp;<tt class="docutils literal"><span class="pre">True</span></tt>&nbsp;or&nbsp;<tt class="docutils literal"><span class="pre">False</span></tt>&nbsp;– if&nbsp;<tt class="docutils literal"><span class="pre">True</span></tt>, a new binding will be added, otherwise it will replace a former binding&nbsp; 添加新的绑定函数，否则替代之前函数
+  </li>
+  <li>
+    <pre><span class="k">例子：def</span> <span class="nf">turn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+     。。。 <span class="n">left</span><span class="p">(</span><span class="mi">180</span><span class="p">)
+</span></pre>
+    
+    <pre><span class="n">onclick</span><span class="p">(</span><span class="n">turn</span><span class="p">)</span></pre>
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">onrelease()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;鼠标释放事件，同上</p>
+
+<p><span style="color: #3366ff;">ondrag()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;鼠标移动事件，同上</p>
+
+<h2 id="乌龟一些特殊方法">乌龟一些特殊方法</h2>
+
+<p><span style="color: #3366ff;">begin_poly()</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;开始记录多边形的顶点，当前点为起始点</p>
+
+<p><span style="color: #3366ff;">end_poly()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;结束记录多边形的顶点，当前点为起始点</p>
+
+<p><span style="color: #3366ff;">get_poly()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 返回最后记录的多边形</p>
+
+<p><span style="color: #3366ff;">clone()&nbsp; &nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;复制一个一模一样的乌龟</p>
+
+<p><span style="color: #3366ff;">getturtle() | getpen()&nbsp;</span> &nbsp; &nbsp; &nbsp; 获取trutle对象本身</p>
+
+<p><span style="color: #3366ff;">getscreen()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;获取画布对象</p>
+
+<p><span style="color: #3366ff;">setundobuffer()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;设置或禁用中断器</p>
+
+<p><span style="color: #3366ff;">undobufferentries()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp;&nbsp;返回undobuffer中的条目数</p>
+
+<h1 id="画布的方法">画布的方法</h1>
+
+<h2 id="窗口控制">窗口控制</h2>
+
+<p><span style="color: #3366ff;">bgcolor()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 设置或返回当前画布的背景颜色</p>
+
+<p><span style="color: #3366ff;">bgpic()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;设置或返回当前画布的背景图片名称</p>
+
+<p><span style="color: #3366ff;">clear() | clearscreen()&nbsp;</span> &nbsp; &nbsp; 清除图形</p>
+
+<p><span style="color: #3366ff;">reset() | resetscreen()</span>&nbsp; &nbsp; &nbsp; 重置画布</p>
+
+<p><span style="color: #3366ff;">screensize()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 画布大小</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>canvwidth</strong>&nbsp;– positive integer, new width of canvas in pixels&nbsp; &nbsp; 宽度
+  </li>
+  <li>
+    <strong>canvheight</strong>&nbsp;– positive integer, new height of canvas in pixels&nbsp; 高度
+  </li>
+  <li>
+    <strong>bg</strong>&nbsp;– colorstring or color-tuple, new background color&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;颜色
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">setworldcoordinates()&nbsp;</span> &nbsp; &nbsp; 全局坐标</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>llx</strong>&nbsp;– a number, x-coordinate of lower left corner of canvas&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 左下X坐标
+  </li>
+  <li>
+    <strong>lly</strong>&nbsp;– a number, y-coordinate of lower left corner of canvas&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;左下X坐标
+  </li>
+  <li>
+    <strong>urx</strong>&nbsp;– a number, x-coordinate of upper right corner of canvas&nbsp; &nbsp; &nbsp; 右下X坐标
+  </li>
+  <li>
+    <strong>ury</strong>&nbsp;– a number, y-coordinate of upper right corner of canvas&nbsp; &nbsp; &nbsp; &nbsp;右下X坐标
+  </li>
+</ul>
+
+<h2 id="动画控制">动画控制</h2>
+
+<p><span style="color: #3366ff;">delay()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;动画延迟（毫秒）参数：（integer ）一个数字</p>
+
+<p><span style="color: #3366ff;">tracer()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;开启动画，设置延迟</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>n</strong>&nbsp;– nonnegative integer&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; n个动作执行一次
+  </li>
+  <li>
+    <strong>delay</strong>&nbsp;– nonnegative integer&nbsp; &nbsp; &nbsp; 延迟，毫秒
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">update()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;更新画布，当tracer关闭时使用</p>
+
+<h2 id="画布监听">画布监听</h2>
+
+<p><span style="color: #3366ff;">listen()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 开启监听，将鼠标定位到画布</p>
+
+<p><span style="color: #3366ff;">onkey() | onkeyrelease()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;键盘弹起（需要位于焦点上，使用上面listen后）</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>fun</strong>&nbsp;– a function with no arguments or&nbsp;<tt class="docutils literal"><span class="pre">None&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;动作函数</span></tt>
+  </li>
+  <li>
+    <strong>key</strong>&nbsp;– a string: key (e.g. “a”) or key-symbol (e.g. “space”)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 按键
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">onkeypress()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;键盘按下事件，同上</p>
+
+<p><span style="color: #3366ff;">onclick() | onscreenclick()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;鼠标点击事件</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>fun</strong>&nbsp;– a function with two arguments which will be called with the coordinates of the clicked point on the canvas 函数需要两个参数
+  </li>
+  <li>
+    <strong>num</strong>&nbsp;– number of the mouse-button, defaults to 1 (left mouse button)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 点击次数
+  </li>
+  <li>
+    <strong>add</strong>&nbsp;–&nbsp;<tt class="docutils literal"><span class="pre">True</span></tt>&nbsp;or&nbsp;<tt class="docutils literal"><span class="pre">False</span></tt>&nbsp;– if&nbsp;<tt class="docutils literal"><span class="pre">True</span></tt>, a new binding will be added, otherwise it will replace a former binding&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;是否是添加，还是替换
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">ontimer()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;计时器</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>fun</strong>&nbsp;– a function with no arguments&nbsp; 无需函数
+  </li>
+  <li>
+    <strong>t</strong>&nbsp;– a number >= 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 事件间隔
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">mainloop() | done()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;开始事件循环，必须是乌龟绘画中的最后一个函数</p>
+
+<h2 id="设置与特殊方法">设置与特殊方法</h2>
+
+<p><span style="color: #3366ff;">mode()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;绘图模式，3选1 “standard”, “logo” or “world”</p>
+
+<p><span style="color: #3366ff;">colormode()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;颜色模式， 1.0 或者 255</p>
+
+<p><span style="color: #3366ff;">getcanvas()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;返回当前<span class="highlighted">Turtle</span>Screen.的Canvas</p>
+
+<p><span style="color: #3366ff;">getshapes()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 返回当前可用形状</p>
+
+<p><span style="color: #3366ff;">register_shape() | addshape()&nbsp;</span> &nbsp; &nbsp; &nbsp; 3种调用方式。</p>
+
+<p>1.直接调用图片。<span class="n">screen</span><span class="o">.</span><span class="n">register_shape</span><span class="p">(</span><span class="s">&#8220;<span class="highlighted">turtle</span>.gif&#8221;</span><span class="p">)</span></p>
+
+<p>2.调用形状，制定点位置。</p>
+
+<pre><span class="n">         screen</span><span class="o">.</span><span class="n">register_shape</span><span class="p">(</span><span class="s">"triangle"</span><span class="p">,</span> <span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi"></span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">)))</span></pre>
+
+<p>3，调用形状，名字随便取</p>
+
+<p><span style="color: #3366ff;">turtles()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;返回乌龟list数组</p>
+
+<p><span style="color: #3366ff;">window_height()&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;返回窗口高度</p>
+
+<p><span style="color: #3366ff;">window_width()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 返回窗口宽度</p>
+
+<h2 id="输入方法">输入方法</h2>
+
+<p><span style="color: #3366ff;">textinput()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 文字输入</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>title</strong>&nbsp;– string&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;输入名字
+  </li>
+  <li>
+    <strong>prompt</strong>&nbsp;– string&nbsp; &nbsp; 输入的文本
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">numinput()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;数字输入</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>title</strong>&nbsp;– string&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;输入名字
+  </li>
+  <li>
+    <strong>prompt</strong>&nbsp;– string&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;输入文本
+  </li>
+  <li>
+    <strong>default</strong>&nbsp;– number (optional)&nbsp; &nbsp; 默认
+  </li>
+  <li>
+    <strong>minval</strong>&nbsp;– number (optional)&nbsp; &nbsp; &nbsp;最小
+  </li>
+  <li>
+    <strong>maxval</strong>&nbsp;– number (optional)&nbsp; &nbsp; &nbsp;最大
+  </li>
+</ul>
+
+<h2 id="屏幕特有方法">屏幕特有方法</h2>
+
+<p><span style="color: #3366ff;">bye()&nbsp; &nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;关闭turtle窗口</p>
+
+<p><span style="color: #3366ff;">exitonclick()&nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 鼠标点击关闭窗口</p>
+
+<p><span style="color: #3366ff;">setup()&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;设置主窗口参数</p>
+
+<ul class="first last simple">
+  <li>
+    <strong>width</strong>&nbsp;– if an integer, a size in pixels, if a float, a fraction of the screen; default is 50% of screen&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;宽 度
+  </li>
+  <li>
+    <strong>height</strong>&nbsp;– if an integer, the height in pixels, if a float, a fraction of the screen; default is 75% of screen&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 高度
+  </li>
+  <li>
+    <strong>startx</strong>&nbsp;– if positive, starting position in pixels from the left edge of the screen, if negative from the right edge, if None, center window horizontally&nbsp; &nbsp; 左边开始位置
+  </li>
+  <li>
+    <strong>startx</strong>&nbsp;– if positive, starting position in pixels from the top edge of the screen, if negative from the bottom edge, if None, center window vertically&nbsp; &nbsp; &nbsp;右边开始位置
+  </li>
+</ul>
+
+<p><span style="color: #3366ff;">title()&nbsp; &nbsp; &nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;设置绘画窗口标题</p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/39.html">https://www.bobobk.com/39.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/32.html">宝塔面板设置python3默认环境</a></li>
+        
+        <li><a href="/24.html">python画蝴蝶曲线图</a></li>
+        
+        <li><a href="/about_me/">关于</a></li>
+        
+        <li><a href="/about/">关于</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://www.bobobk.com/tags/turtle">turtle</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

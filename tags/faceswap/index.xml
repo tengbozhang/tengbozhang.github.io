@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>faceswap on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/faceswap/</link>
+    <description>Recent content in faceswap on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 23 Jan 2019 14:19:38 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/faceswap/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>faceswap训练资源获取与处理</title>
+      <link>https://www.bobobk.com/271.html</link>
+      <pubDate>Wed, 23 Jan 2019 14:19:38 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/271.html</guid>
+      <description>在上回faceswap深度学习AI实现视频换脸详解文章后，大家都已经学会了怎样通过训练模型来使用AI进行视频中人物脸部替换。但是现实中用来训练AI的图片资源的获取以及前期处理非常重要，如果没有良好的符合标准图片进行训练的话，也就无法获得良好的模型。 1.谷歌图片批量下载 作为一名程序</description>
+    </item>
+    
+    <item>
+      <title>faceswap深度学习AI实现视频换脸详解</title>
+      <link>https://www.bobobk.com/258.html</link>
+      <pubDate>Fri, 18 Jan 2019 09:29:15 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/258.html</guid>
+      <description>春江暮客将给大家介绍最近超级火的黑科技应用deepfake，这是一个实现图片和视频换脸的app。前段时间神奇女侠加尔盖朵的脸被换到了爱情动作片上，233333。我们这里将会从github项目faceswap开始一步一步实现一个视频换脸的教程。 注意： 本技术存在一定的使用风险，本教程</description>
+    </item>
+    
+  </channel>
+</rss>

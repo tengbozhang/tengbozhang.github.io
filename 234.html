@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>python实现酷狗音乐mp3下载 | 春江暮客</title>
+    <meta property="og:title" content="python实现酷狗音乐mp3下载 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-01-13T14:45:59&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-01-13T14:45:59&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="python实现酷狗音乐mp3下载">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/234.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">python实现酷狗音乐mp3下载</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年1月13日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF">技术</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>在<a href="https://www.bobobk.com/216.html">python实现千千音乐mp3下载 </a>后小伙伴使用发现很多音乐在千千音乐都搜不到，所以今天春江暮客就拓展了一下酷狗音乐的下载，有源码。</p>
+
+<p>同样的配方，首先在酷狗官网上直接搜索歌曲，然后打开谷歌浏览器的网络监视器，再次搜索同样的关键字就可以发现接口信息（注：此处最好再次搜索的时候查看网络，可以剔除很多多余的信息）。</p>
+
+<h2 id="1-分析搜索接口信息">1.分析搜索接口信息</h2>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/kugou_search.webp" alt="《python实现酷狗音乐mp3下载》" />
+只有4条网络请求，可以很方便的知道是第一条请求是真正的返回了歌曲信息，因此构造此条请求即可。</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/kugou_search_response.webp" alt="《python实现酷狗音乐mp3下载》" /></p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/kugou_search_header.webp" alt="《python实现酷狗音乐mp3下载》" /></p>
+
+<p>请求详细信息，在看了千千音乐的文章后，相信大家也熟悉了，callback是前面加上13位的timestamp时间戳，_为13位的timestamp时间戳。</p>
+
+<h2 id="2-分析播放接口信息">2.分析播放接口信息</h2>
+
+<p>到这里已经知道了搜索的详细请求以及结果，接下来看音乐下载地址，点击第一首歌曲播放</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/kugou_bofang.webp" alt="《python实现酷狗音乐mp3下载》" /></p>
+
+<p>查看url为<a href="https://www.kugou.com/song/#hash=0D0CD85787B2988DC372A315EFD632FC&amp;album_id=2713184，由此直接知道要想获得音乐下载地址，只需要一个hash，一个album_id，回到上一步搜索结果，看看response里面的两个信息。">https://www.kugou.com/song/#hash=0D0CD85787B2988DC372A315EFD632FC&amp;album_id=2713184，由此直接知道要想获得音乐下载地址，只需要一个hash，一个album_id，回到上一步搜索结果，看看response里面的两个信息。</a></p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/kugou_song_detail.webp" alt="《python实现酷狗音乐mp3下载》" /></p>
+
+<p>只需要使用json解析结果然后获取信息，json_page_source[“data”][“list”][0][“AlbumID”]和json_page_source[“data”][“list”][0][“FileHash”]即可获取下载所需信息。</p>
+
+<p>直接查看网络，刷新，查看网络连接，从茫茫多的请求中找到真正的获取mp3地址的请求。</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/kugou_get_mp3.webp" alt="《python实现酷狗音乐mp3下载》" /></p>
+
+<p>同样是json，同样的配方。play_url为mp3地址，lyc歌词信息直接以文本格式返回，lyrics。json_page_source[“data”][“play_url”]得到mp3地址，json_page_source[“data”][“lyrics”]获取lrc歌词。</p>
+
+<h2 id="3-python实现搜索下载">3.python实现搜索下载</h2>
+
+<p>接口分析清楚了，就可以直接上python了，这里酷狗对爬虫限制比较严格，不知道为什么requests获取不到信息，因此借助万能的selenium实现调用浏览器获取源码，然后mp3再用requests下载。上代码</p>
+
+<pre><code class="language-python">
+    #!env python
+    # -*- coding: utf-8 -*-
+    import requests
+    from selenium import webdriver
+    from selenium.webdriver.common.keys import Keys
+    import re,json,time,sys,os
+
+    CHROME_PATH = os.getcwd()+&quot;/chromedrive&quot;
+    #print(CHROME_PATH)
+    def helpmessage():
+        msg = r'''
+           /\          /\          /\          /\
+        /\//\\/\    /\//\\/\    /\//\\/\    /\//\\/\
+     /\//\\\///\\/\//\\\///\\/\//\\\///\\/\//\\\///\\/\
+    //\\\//\/\\///\\\//\/\\///\\\//\/\\///\\\//\/\\///\\
+    \\//\/                                        \/\\//
+     \/     本程序由 春江暮客                \/
+     /\     发布在www.bobobk.com 上              /\
+    //\\    程序打开后会打开网站          //\\
+    \\//    大家不要急着关闭                \\//
+     \/     作者：春江暮客                    \/
+     /\     酷狗音乐下载              /\
+    //\\    用法看程序运行时界面          //\\
+    \\//    如有任何疑问请在                \\//
+     \/     博客页面留言或者发邮件到     \/
+     /\     2180614215@qq.com                        /\
+    //\\    下载的音乐仅供学习交流       //\\
+    \\//    严禁用于商业用途                \\//
+     \/     请于24小时内删除                  \/
+     /\                                              /\
+    //\\/\                                        /\//\\
+    \\///\\/\//\\\///\\/\//\\\///\\/\//\\\///\\/\//\\\//
+     \/\\///\\\//\/\\///\\\//\/\\///\\\//\/\\///\\\//\/
+        \/\\//\/    \/\\//\/    \/\\//\/    \/\\//\/
+           \/          \/          \/          \/
+    '''
+        print(msg)
+    #####图案由boxes生成，不懂请看https://www.bobobk.com/185.html
+
+</code></pre>
+
+<pre><code class="language-python">
+    def get_kugou_mp3_address_and_download(song_hash,albumid):
+        apiurl= &quot;https://wwwapi.kugou.com/yy/index.php&quot;
+
+        chrome_url = apiurl+&quot;?&quot;+&quot;r=play/getdata&amp;hash=%s&amp;album_id=%s&quot; % (song_hash,albumid)
+        browser = webdriver.Chrome(CHROME_PATH)
+        browser.get(chrome_url)
+        text =  json.loads(browser.page_source.split(&quot;&quot;)[1].split(&quot;&quot;)[0])
+        browser.close()
+        song_address = text[&quot;data&quot;][&quot;play_url&quot;]
+        songname = text[&quot;data&quot;][&quot;author_name&quot;]+&quot;_&quot;+text[&quot;data&quot;][&quot;album_name&quot;]+&quot;_&quot;+text[&quot;data&quot;][&quot;song_name&quot;]
+        mp3w = open(songname+&quot;.mp3&quot;,'wb')
+        mp3r = requests.get(song_address)
+        for chunk1 in mp3r.iter_content(chunk_size=512 * 1024):
+            if chunk1:
+                mp3w.write(chunk1)   
+        mp3w.close()
+        lrc = open(songname + &quot;.lrc&quot;,'w')
+        lrc.write(text[&quot;data&quot;][&quot;lyrics&quot;])
+        lrc.close()
+
+    def search_music(keyword):
+        if keyword in [&quot;exit&quot;,u&quot;退出&quot;]:
+            print(u&quot;你选择了退出当前程序&quot;)
+
+            sys.exit(0)
+        callback = &quot;jQuery112404564878798811507_&quot;+str(round(time.time()*1000))
+        hua = str(round(time.time()*1000))
+        basic_url = 'https://songsearch.kugou.com/song_search_v2?'
+        kugou_s_url = basic_url + &quot;callback=%s&amp;keyword=%s&amp;page=1&amp;pagesize=40&amp;userid=-1&amp;clientver=2.7.8&amp;platform=WebFilter&amp;tag=em&amp;filter=2&amp;iscorrection=7&amp;privilege_filter=0&amp;_=%s&quot; % (callback,keyword,hua)
+        browser = webdriver.Chrome(CHROME_PATH)
+        browser.get(kugou_s_url) 
+
+        songlist = json.loads(browser.page_source.split(callback)[1].split(&quot;...&quot;)[0][1:-2].strip())[&quot;data&quot;][&quot;lists&quot;]##...由于网页展示问题被替换
+        browser.close()
+
+        return songlist
+
+
+</code></pre>
+
+<pre><code class="language-python">
+    def main():
+        while True:
+            song = input(u&quot;请输入想要下载的音乐或歌手或专辑...名称: &quot;).strip()
+            if song!=&quot;&quot;:
+                break
+        songlist = search_music(song)
+        page = 1
+        print(&quot;\n搜索结果如下&quot;)
+        for i in range(len(songlist)):
+            print(&quot;%d:%s_%s_%s&quot; % (i+1,songlist[i][&quot;SingerName&quot;].replace(&quot;&lt;&quot;,&quot;&quot;).replace(&quot;;&quot;,'').replace(&quot;&gt;&quot;,&quot;&quot;).replace(&quot;em&quot;,'').replace(&quot;/&quot;,'').strip(),songlist[i][&quot;AlbumName&quot;],songlist[i][&quot;SongName&quot;].replace(&quot;&lt;&quot;,&quot;&quot;).replace(&quot;;&quot;,'').replace(&quot;&gt;&quot;,&quot;&quot;).replace(&quot;em&quot;,'').replace(&quot;/&quot;,'')))
+        print(&quot;\n&quot;)
+        while True: 
+
+            songid = input(u'请选择想要下载的歌曲前面的数字\n多首歌曲以空格分开，如&quot;1 2&quot;回车\n输入非数字退出选择，进入搜索状态\n全部下载请输入100000:').strip()
+            if songid == '':
+                continue
+            try:
+                songid = [int(i) for i in songid.strip().split()]
+    #            print(songid)
+                if songid[0] != 100000:
+                    for song in songid:
+                      #  print(songlist[song-1][&quot;FileHash&quot;])
+                       # print(songlist[song-1][&quot;AlbumID&quot;])
+                        songname = songlist[song-1][&quot;SingerName&quot;].replace(&quot;&lt;&quot;,&quot;&quot;).replace(&quot;;&quot;,'').replace(&quot;&gt;&quot;,&quot;&quot;).replace(&quot;em&quot;,'').replace(&quot;/&quot;,'').strip()+&quot;_&quot;+songlist[song-1][&quot;AlbumName&quot;]+&quot;_&quot;+songlist[song-1][&quot;SongName&quot;].replace(&quot;&lt;&quot;,&quot;&quot;).replace(&quot;;&quot;,'').replace(&quot;&gt;&quot;,&quot;&quot;).replace(&quot;em&quot;,'').replace(&quot;/&quot;,'').strip()
+                        try:        
+                            get_kugou_mp3_address_and_download(songlist[song-1][&quot;FileHash&quot;],songlist[song-1][&quot;AlbumID&quot;])
+                            print(u&quot;\n-------恭喜,当前歌曲--%s--下载完成---------\n&quot; % songname)
+                        except:
+                            print(&quot;网络错误&quot;)
+
+                    print(u&quot;退出请输入'exit'或者'退出'&quot;)
+                else:
+                    print(&quot;正在开始下载搜索到的所有歌曲，请耐心等待\n\n&quot;)
+                    for songid in songlist:
+                        print(&quot;-------正在下载歌曲--------%s----------&quot; % songid[1])
+                        time.sleep(2)
+                        try:
+                            get_mp3_address_and_download(songid[0])
+                            print(&quot;-------恭喜,歌曲--------%s---下载完成-------\n&quot; % songid[1])
+                        except:
+                            print(&quot;下载%s时错误发生&quot; % songid[1])
+            except:
+                print(&quot;数字错误，重新搜索歌曲\n&quot;)
+                break
+                main()
+    if __name__=='__main__':
+        print(&quot;\n\n\n&quot;)
+    #    search_music(u&quot;可不可以&quot;)
+    #    get_kugou_mp3_address_and_download(&quot;96E064A41AB84EBE4C03C6AAE3CB9334&quot;,&quot;9618875&quot;)    
+        helpmessage()
+        os.system(&quot;start https://www.bobobk.com/234.html&quot;)
+        print(&quot;\n\n\n&quot;)
+        while True:
+    #        main()
+            try:
+                main()
+            except:
+                print(u&quot;2秒后关闭程序&quot;)
+                time.sleep(2)
+                sys.exit(0)
+
+</code></pre>
+
+<h2 id="总结">总结</h2>
+
+<p>本文是在<a href="https://www.bobobk.com/216.html">python实现千千音乐mp3下载  </a>后，发现很多资源没有，因此增加了这个酷狗音乐的下载程序，其中在使用requests获取网页的过程中遇到了障碍，不得不使用了selenium调用浏览器的方式获取。但是结果总是好的，最好还是完美的实现了酷狗音乐的下载。</p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/234.html">https://www.bobobk.com/234.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/229.html">python3中NetworkX网络图绘制</a></li>
+        
+        <li><a href="/224.html">python3搭配selenium实现12306抢票程序</a></li>
+        
+        <li><a href="/216.html">python实现千千音乐mp3下载</a></li>
+        
+        <li><a href="/213.html">python画横线竖线作为分界线</a></li>
+        
+        <li><a href="/211.html">Linux挂载移动硬盘</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

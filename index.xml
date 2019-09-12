@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>春江暮客</title>
+    <link>https://www.bobobk.com/</link>
+    <description>Recent content on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 12 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>博客从wordpress无缝迁移到hugo全静态网站</title>
+      <link>https://www.bobobk.com/555.html</link>
+      <pubDate>Thu, 12 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/555.html</guid>
+      <description>博客在使用网站评估的时候发现很多js，css等内容有太多的比例都没有完全用上，但是又不知道如何高效的合并删减js，css等内容。又想试着静态博客的意愿，就想着直接迁移到新的完全静态的博客系统了，这里我选择了hugo作为新的系统。 主要步骤 下载安装WordPress to Hugo Exporte</description>
+    </item>
+    
+    <item>
+      <title>scrapy爬取表情包使用flask搭建搜索网站</title>
+      <link>https://www.bobobk.com/471.html</link>
+      <pubDate>Thu, 05 Sep 2019 09:12:25 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/471.html</guid>
+      <description>今天跟师弟聊天说到他花钱从淘宝购买表情包，而我自身的表情包也不多，但是网上有很多表情包网站，何不自己爬取搭一个表情包搜索网站呢？因此本文以doutula为演示站点，详细说明从网上使用scrapy爬取表情包并最终搭建一个自己的表情包搜索网站的过程。主要步骤如下： 1. scrapy爬取表</description>
+    </item>
+    
+    <item>
+      <title>使用百度云加速和cloudflare共存的作死经历</title>
+      <link>https://www.bobobk.com/467.html</link>
+      <pubDate>Mon, 02 Sep 2019 06:20:39 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/467.html</guid>
+      <description>考虑到coudflare的免费站点在国内的速度真的又慢了，考虑到国内百度云加速使用了cloudflare的技术，想着国内使用百度云加速的cdn应该会加快网站在国内的访问速度。 这里把本人使用cf作为cdn到网站无法访问的全部过程记录0-0 1.网站已经在阿里云备案，因此可以直接使用百</description>
+    </item>
+    
+    <item>
+      <title>定制修改上传自己的docker镜像</title>
+      <link>https://www.bobobk.com/459.html</link>
+      <pubDate>Thu, 22 Aug 2019 03:28:13 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/459.html</guid>
+      <description>什么是docker？ Dockers是有能力打包应用程序及其虚拟容器，可以在任何Linux服务器上运行的依赖性工具，这有助于实现灵活性和便携性，应用程序在任何地方都可以运行，无论是公有云、私有云、单机等。 在arukas.io搞了个免费docker之后，开始折腾着弄个自己的docke</description>
+    </item>
+    
+    <item>
+      <title>生产环境利用gunicorn部署Flask的python web服务</title>
+      <link>https://www.bobobk.com/456.html</link>
+      <pubDate>Tue, 20 Aug 2019 04:33:25 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/456.html</guid>
+      <description>今天登陆服务器发现python占用了相当高比例的cpu，然后发现是本站点使用flask做的的一些web小工具带来的，因此总算明白了启动flask的时候为什么提示不要在生产环境直接部署。0-0。因此决定部署好flask的生产环境，由于大部分人都对gunicorn评价很好，容易配置，</description>
+    </item>
+    
+    <item>
+      <title>阿里云域名启用DNSSEC域名解析防止DNS劫持</title>
+      <link>https://www.bobobk.com/444.html</link>
+      <pubDate>Tue, 13 Aug 2019 05:39:07 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/444.html</guid>
+      <description>在日常玩cloudflare的时候发现dns下的免费 DNSSEC 竟然没有使用，这怎么行呢，先看看DNSSEC是什么。 域名系统安全扩展(简称：DNSSEC)是添加到域名的DNS域名系统确定源域名的可靠性数字签名，并有助于防止恶意活动缓存中毒、域欺骗和拦截中的攻击，所以这当然是要给域名bobo</description>
+    </item>
+    
+    <item>
+      <title>利用cloudflare workers免费加速wordpress博客</title>
+      <link>https://www.bobobk.com/434.html</link>
+      <pubDate>Mon, 05 Aug 2019 02:33:54 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/434.html</guid>
+      <description>在提升体验上，网站总是不惜代价提升自己的网站的加载速度，为了获得这种效果，google推出了amp项目，百度推出了imp项目，但是为了获得这种效果，需要另外部署一套网站代码，实在过于繁琐，增加开发成本。但是对于使用cloudflare CDN的用户来说，却有一个十分方便快速的选择，</description>
+    </item>
+    
+    <item>
+      <title>谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</title>
+      <link>https://www.bobobk.com/425.html</link>
+      <pubDate>Thu, 01 Aug 2019 07:44:18 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/425.html</guid>
+      <description>这两天在adsense上总是提示 收益受损风险 - 您需要修正一些 ads.txt file 问题，以免收入严重受损。虽然没有几毛钱，但看到这种提示还是免不了要好好解决一下的，哈哈。 就是这种提示。 这里告诉大家正确的问题处理思路。 1.首先自己下载adsense上面的ads.txt到本地并上传到服务器。 在浏览器打</description>
+    </item>
+    
+    <item>
+      <title>nginx反向代理tcp/udp请求实现映射远端服务器</title>
+      <link>https://www.bobobk.com/422.html</link>
+      <pubDate>Fri, 26 Jul 2019 10:28:37 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/422.html</guid>
+      <description>Nginx 是一个高性能的HTTP服务器和反向代理服务器，也是一个IMAP/POP3/SMTP服务器。在1.9.13版本后，Nginx已经支持端口转发。 在centos7上面rinetd配置简单，使用方便，但遗憾的是不支持UDP转发。如果业务需要同时支持TCP/UDP端口转发那么可以使用Ng</description>
+    </item>
+    
+    <item>
+      <title>阿里云centos7安装VNC Server实现图形化访问</title>
+      <link>https://www.bobobk.com/414.html</link>
+      <pubDate>Sat, 20 Jul 2019 05:13:29 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/414.html</guid>
+      <description>本文介绍用tigervnc-server和Server with GUI进行对linux centos7的图形化界面访问。所有操作都是在安装了centos7的阿里云ecs完成的，想要添加图形化界面的centos7按照步骤操作就可以了。 步骤如下： 1.安装Server with GUI 2.安装tigervnc</description>
+    </item>
+    
+    <item>
+      <title>利用谷歌浏览器测试接口技巧</title>
+      <link>https://www.bobobk.com/410.html</link>
+      <pubDate>Wed, 17 Jul 2019 08:32:49 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/410.html</guid>
+      <description>在编写爬虫的时候，经常会因为手动修改header和cookie之类的问题弄得焦头烂额，总是出错，这里介绍一个非常方便的利用chrome自带的工具进行python版本的requests请求。 准备工具： 1.chrome 步骤 1.首先浏览器中打开网络调试工具，这里以12306的查询余票为例。 2.查询就</description>
+    </item>
+    
+    <item>
+      <title>10个建议提高你的python数据分析技巧</title>
+      <link>https://www.bobobk.com/385.html</link>
+      <pubDate>Mon, 08 Jul 2019 04:34:47 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/385.html</guid>
+      <description>在编程的世界里，经常一些小小的建议或者帮助就可以起到很大的作用。 比如说有个快捷键或者一个包简单应用就可以起到简化大量工作，达到事半功倍的效果，这里我就介绍几种我经常用到的小技巧。 1. pandas dataframe的pandas_profiling函数查看数据情况 在分析数据前，了解我们的数据是</description>
+    </item>
+    
+    <item>
+      <title>如何给阿里云ecs开启ipv6访问</title>
+      <link>https://www.bobobk.com/377.html</link>
+      <pubDate>Fri, 05 Jul 2019 02:17:44 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/377.html</guid>
+      <description>阿里云centos镜像默认是把ipv6给注释掉的，如果要开启的话需要使用IPv4 和 IPv6 双栈网络，这需要申请公测资格，不是很方便，这里我们使用tunnelbroker提供的ipv6隧道来使其支持ipv6访问。而学校电信是可以直接获取ipv6地址的，如果阿里云服务器可以ipv6访问的话</description>
+    </item>
+    
+    <item>
+      <title>使用Soft-EtherVP-N搭建openvpn绕过网页认证</title>
+      <link>https://www.bobobk.com/365.html</link>
+      <pubDate>Wed, 03 Jul 2019 03:26:21 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/365.html</guid>
+      <description>校园网需要使用手机号认证，但是由于手机卡较贵，已经停止使用，在登录后发现网页跳转到充值页面。虽然有免费的ipv6，但是绝大多数互联网有不具备ipv6的访问功能。如果有一台具有ipv6的远程服务器的话，就可以通过远程计算机上网了。这时使用ping检测发现可以找到百度ip地址，因此设</description>
+    </item>
+    
+    <item>
+      <title>python中的序列化与反序列化</title>
+      <link>https://www.bobobk.com/361.html</link>
+      <pubDate>Mon, 01 Jul 2019 10:36:01 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/361.html</guid>
+      <description>有时候需要临时将数据存储起来，方便下次运行程序时可以直接调用，或者不同线程之间交换数据都是可以用序列化的方式把数据存储起来，然后调用，这里我们以pickle包来解释python中的序列化与反序列化。 什么是序列化与反序列化 序列化：将python数据转换成二进制的数据流。 反序列化：将</description>
+    </item>
+    
+    <item>
+      <title>利用docker容器技术搭建Google镜像</title>
+      <link>https://www.bobobk.com/354.html</link>
+      <pubDate>Thu, 27 Jun 2019 08:28:59 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/354.html</guid>
+      <description>由于新环境路由器不具备安装酸酸的条件，在路由器上实现上google搜索海量英文技术内容就不行了，我们这里采用官方的google镜像容器做一个谷-歌的镜像网站并映射到自己已有的域名上。 搭建条件： 1.vultr等各种VPS 2.有个域名，这里我们使用google.bobobk.com作</description>
+    </item>
+    
+    <item>
+      <title>python3提取免费高匿代理</title>
+      <link>https://www.bobobk.com/352.html</link>
+      <pubDate>Tue, 25 Jun 2019 04:41:34 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/352.html</guid>
+      <description>写爬虫总是免不了被ban ip，限制流量等问题，有个高效的ip代理池还是很重要的，这里我们就介绍如何从已有公开代理总提取有效ip组建自己高效的爬虫代理池 主要以下几个模块 1.requests爬取代理 2.更新检测可用代理 requests爬取代理，选取xici代理为例 高匿网页地址xici</description>
+    </item>
+    
+    <item>
+      <title>Python 的这几个技巧分享</title>
+      <link>https://www.bobobk.com/349.html</link>
+      <pubDate>Mon, 17 Jun 2019 15:27:15 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/349.html</guid>
+      <description>尽管本人已经使用Python编程有多年了，今天仍然惊奇于这种语言所能让代码表现出的整洁和对DRY编程原则的适用。这些年来的经历让我学到了很多的小技巧和知识，大多数是通过阅读很流行的开源软件，如Django, Flask,Requests中获得的。 下面我挑选出的这几个技巧常常会被人们</description>
+    </item>
+    
+    <item>
+      <title>python类的继承和多态</title>
+      <link>https://www.bobobk.com/334.html</link>
+      <pubDate>Mon, 03 Jun 2019 14:29:00 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/334.html</guid>
+      <description>在面向对象(OOP)程序设计中，当定义一个class的时候，可从某个现有的class继承 新的class称为子类(Subclass)，而被继承的class称为基类、父类或超类(Base class、Super class) 格式： 子类名(父类名): pass 使用示例 class Animal(object): def run(self): print(&#39;Animal is running...&#39;) class Dog(Animal): pass class Dog1(Animal): def run(self): print(&#39;Dog is running...&#39;) def run_twice(animal): animal.run()</description>
+    </item>
+    
+    <item>
+      <title>python中进程池，线程池与协程</title>
+      <link>https://www.bobobk.com/337.html</link>
+      <pubDate>Sun, 02 Jun 2019 21:18:38 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/337.html</guid>
+      <description>本文摘要： 进程池与线程池 同步调用和异步调用 回调函数 协程 &amp;nbsp; 一、进程池与线程池： 1、池的概念： 不管是线程还是进程，都不能无限制的开下去，总会消耗和占用资源。 也就是说，硬件的承载能力是有限度的，在保证高效率工作的同时应该还需要保证硬件的资源占用情况，所以需要给硬件设置一个上限来减轻硬件</description>
+    </item>
+    
+    <item>
+      <title>python中zipfile模块实例化解析</title>
+      <link>https://www.bobobk.com/325.html</link>
+      <pubDate>Sun, 02 Jun 2019 16:37:00 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/325.html</guid>
+      <description>简介： zipfile是python里用来做zip格式编码的压缩和解压缩的，由于是很常见的zip格式，所以这个模块使用频率也是比较高的， 在这里对zipfile的使用方法做一些记录。即方便自己也方便别人。 Python zipfile模块用来做zip格式编码的压缩和解压缩的，要进行相关操作，首先需</description>
+    </item>
+    
+    <item>
+      <title>Python3 print 函数用法总结</title>
+      <link>https://www.bobobk.com/323.html</link>
+      <pubDate>Sat, 01 Jun 2019 17:53:38 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/323.html</guid>
+      <description>python3与python2在print函数上做的更加明确 1. 输出字符串和数字 print(“runoob”) # 输出字符串 runoob print(100) # 输出数字 100 str = ‘runoob’ print(str) # 输出变量 runoob L = [1,2,’a’] # 列表 print(L) [1, 2, ‘a’] t = (1,2,’a’) # 元组 print(t) (1, 2, ‘a’) d = {‘a’:1, ‘b’:</description>
+    </item>
+    
+    <item>
+      <title>Python 数据可视化 - 00 后高考大军</title>
+      <link>https://www.bobobk.com/320.html</link>
+      <pubDate>Sat, 01 Jun 2019 17:50:52 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/320.html</guid>
+      <description>00后大军高考结束了，网络上对这次高考的报道很多(毕竟00后小鲜肉嘛)，很多都关注了今年的考生数据，并且用炫酷的图表展示。看着是不是有点小嫉妒，为什么图表还可以做得这么漂亮？？？是不是也想自己动手做一张？？？其实这些图表都可以用python制作出来的数据可视化的产物，所以当然是可</description>
+    </item>
+    
+    <item>
+      <title>一行 Python 代码实现并行</title>
+      <link>https://www.bobobk.com/318.html</link>
+      <pubDate>Sat, 01 Jun 2019 17:47:59 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/318.html</guid>
+      <description>一行 Python 代码实现并行 Python 在程序并行化方面多少有些声名狼藉。撇开技术上的问题，例如线程的实现和 GIL，我觉得错误的教学指导才是主要问题。常见的经典 Python 多线程、多进程教程多显得偏”重”。而且往往隔靴搔痒，没有深入探讨日常工作中最有用的内容。 传统的例子 简单搜索下”Python 多线程教程”，不</description>
+    </item>
+    
+    <item>
+      <title>screen session外关闭session会话</title>
+      <link>https://www.bobobk.com/310.html</link>
+      <pubDate>Tue, 21 May 2019 10:52:13 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/310.html</guid>
+      <description>screen作为一个用来后台运行的程序非常好用，一般情况下screen -r连接到会话使用ctr + c就可以关闭会话了，但是像我这样在python脚本里面使用了try except捕获异常的话就会发现根本关闭不了整个会话，而仅仅是跳出了循环而已，所以在会话外直接关闭特定会话就比较方便，</description>
+    </item>
+    
+    <item>
+      <title>yum update更新错误rpmdb,空间不足</title>
+      <link>https://www.bobobk.com/305.html</link>
+      <pubDate>Tue, 21 May 2019 02:07:30 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/305.html</guid>
+      <description>1.Error: rpmdb open failed 登录linux，使用yum update -y 更新发现Error: rpmdb open failed错误 错误发生原因是RPM数据库被破坏 这里我们重建数据库后恢复正常 代码如下 cd /var/lib/rpm/ for i in `ls | grep &#39;db.&#39;`;do mv $i $i.bak;done rpm --rebuilddb yum clean all 2.重建后发现空间不足错误 这里需要通过删除过去老的内核来空出空间，然后再来更新，代码 yum list kernel #查看内核</description>
+    </item>
+    
+    <item>
+      <title>迅雷链接解析</title>
+      <link>https://www.bobobk.com/thunde_parse/</link>
+      <pubDate>Mon, 20 May 2019 05:30:38 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/thunde_parse/</guid>
+      <description>此工具是用于解析迅雷链接真实地址。 使用方法 1.填写迅雷链接地址。完整的包含thunder://的地址</description>
+    </item>
+    
+    <item>
+      <title>thunder迅雷下载地址真实地址解析</title>
+      <link>https://www.bobobk.com/299.html</link>
+      <pubDate>Fri, 17 May 2019 14:30:26 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/299.html</guid>
+      <description>经常下载视频游戏之类的同学们应该经常碰到thunder开头的迅雷下载地址，但是却经常由于版权问题不能下载，那么这里就普通下载url与迅雷下载地址转换进行说明。 例如我随便给一个下载地址是 https://www.bobobk.com/favicon.ico 1.普通地址转换为迅雷地址 1.1在原地址前面加”AA”，后面加”ZZ”，地址变为AAhttps</description>
+    </item>
+    
+    <item>
+      <title>windows下运行conda命令行脚本</title>
+      <link>https://www.bobobk.com/297.html</link>
+      <pubDate>Fri, 17 May 2019 03:35:33 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/297.html</guid>
+      <description>由于在家需要使用windows远程更新网站内容，windows上也安装了conda，但是发现无法在windows下直接写下脚本运行，只能从启动项里面找到conda运行后一行一行输入才行。 通过搜索学习，最终找到解决办法。 首先为什么无法直接写好bat批处理文件来运行, 命令使用到con</description>
+    </item>
+    
+    <item>
+      <title>用 Numba 加速 Python 代码，变得像 C&#43;&#43; 一样快</title>
+      <link>https://www.bobobk.com/313.html</link>
+      <pubDate>Wed, 15 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/313.html</guid>
+      <description>目录 介绍 为什么选择 Numba？ Numba 是如何工作的？ 使用 Numba 的基本功能（只需要加上@jit) @vectorize 装饰器&amp;gt; 在 GPU 上运行函数 1. 介绍 Numba 是 python 的即时（Just-in-time）编译器，即当您调用 python 函数时，您的全部或部分代码就会被转换为“即时”执行的机器码，它将以您的本地机器码速度运行！它由 Anaconda 公司</description>
+    </item>
+    
+    <item>
+      <title>最大回文字符串算法Manacher</title>
+      <link>https://www.bobobk.com/291.html</link>
+      <pubDate>Thu, 28 Mar 2019 07:17:29 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/291.html</guid>
+      <description>在刷leetcode时有个求最长回文字符串的问题。 #官方题解提供了4中解决办法，分别是 1.暴力法， 2.动态规划， 3.中心扩展算法， 4.就是我们今天要介绍的Manacher方法。 在介绍算法之前，首先介绍一下什么是回文串，所谓回文串，简单来说就是正着读和反着读都是一样的字符串，比如”</description>
+    </item>
+    
+    <item>
+      <title>python查找两个数组公有值</title>
+      <link>https://www.bobobk.com/289.html</link>
+      <pubDate>Fri, 08 Mar 2019 08:23:32 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/289.html</guid>
+      <description>生活中经常碰到需要获取两数组公有值，那么python如何优雅获取两个数组之间的公有值，这里提供多种简单实用方法。 1.使用set元组的 &amp;amp; list1 = [1,2,3,4,5,6,7] list2 = [1,3, 5, 7, 9] set(list1) &amp;amp; set(list2) #{1, 3, 5, 7} 2.使用set元组的intersection交集 list1 = [1,2,3,4,5,6,7] list2 = [1,3, 5, 7, 9] set(list1).intersection(list2) #{1, 3, 5, 7} 3.暴力查询list元素是否在第二个l</description>
+    </item>
+    
+    <item>
+      <title>Python3二进制数值表示和位操作</title>
+      <link>https://www.bobobk.com/285.html</link>
+      <pubDate>Thu, 07 Mar 2019 08:54:12 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/285.html</guid>
+      <description>在信息论中，两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数，如果字符串是二进制的话，使用位运算异或可以非常简单的算出两字符串的汉明距离。 这里我们将介绍python3中如何使用二进制的使用以及二</description>
+    </item>
+    
+    <item>
+      <title>Python实现经典排序算法(1)</title>
+      <link>https://www.bobobk.com/275.html</link>
+      <pubDate>Tue, 29 Jan 2019 07:29:52 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/275.html</guid>
+      <description>在计算科学中，一个排序算法是一种能将一串数据依照特定排序方式进行排列的一种算法。最常用到的排序方式是数值顺序以及字典顺序。有效的排序算法在一些算法中是重要的。排序算法也用在处理文字数据以及产生人类可读的输出结果。 基本上，排序算法的输出必须遵守下列两个原则：1. 输出结果为递增序列（</description>
+    </item>
+    
+    <item>
+      <title>faceswap训练资源获取与处理</title>
+      <link>https://www.bobobk.com/271.html</link>
+      <pubDate>Wed, 23 Jan 2019 14:19:38 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/271.html</guid>
+      <description>在上回faceswap深度学习AI实现视频换脸详解文章后，大家都已经学会了怎样通过训练模型来使用AI进行视频中人物脸部替换。但是现实中用来训练AI的图片资源的获取以及前期处理非常重要，如果没有良好的符合标准图片进行训练的话，也就无法获得良好的模型。 1.谷歌图片批量下载 作为一名程序</description>
+    </item>
+    
+    <item>
+      <title>Seaborn绘制核密度曲线实例详解</title>
+      <link>https://www.bobobk.com/263.html</link>
+      <pubDate>Sun, 20 Jan 2019 11:41:58 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/263.html</guid>
+      <description>在频率分布直方图中，当样本容量充分放大到极限时，组距极限缩短，这个时候频率直方图中的阶梯折线就会演变成一条光滑的曲线，这条曲线就称为总体的密度分布曲线。 这篇文章春江暮客将详细介绍如何使用python绘图库seaborn和panda里面的iris也就是鸢尾花卉数据集来绘制各种炫酷的</description>
+    </item>
+    
+    <item>
+      <title>faceswap深度学习AI实现视频换脸详解</title>
+      <link>https://www.bobobk.com/258.html</link>
+      <pubDate>Fri, 18 Jan 2019 09:29:15 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/258.html</guid>
+      <description>春江暮客将给大家介绍最近超级火的黑科技应用deepfake，这是一个实现图片和视频换脸的app。前段时间神奇女侠加尔盖朵的脸被换到了爱情动作片上，233333。我们这里将会从github项目faceswap开始一步一步实现一个视频换脸的教程。 注意： 本技术存在一定的使用风险，本教程</description>
+    </item>
+    
+    <item>
+      <title>python3绘制炫酷的红楼梦词云</title>
+      <link>https://www.bobobk.com/252.html</link>
+      <pubDate>Thu, 17 Jan 2019 03:21:06 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/252.html</guid>
+      <description>词云，相信大家都看到过，这是一个使用python的著名的词云工具wordcloud库绘制而成的，本文将详细介绍如何使用wordcloud绘制中国四大名著之一的《红楼梦》的词云。 1.准备工作 包括3部分： 2.wordcloud库和jieba库，可使用pip install wordcloud,pip install jieba进行安装 3.</description>
+    </item>
+    
+    <item>
+      <title>python生成器generator,yield</title>
+      <link>https://www.bobobk.com/248.html</link>
+      <pubDate>Tue, 15 Jan 2019 12:26:07 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/248.html</guid>
+      <description>在python学习过程中，像这些使用if else流程控制或者说函数的定义和使用都比较好理解，但是生成器是一个相对来说很难理解的概念，使用也就相对困难，本文将详细解析python里面的生成器。 1.什么是python生成器 python生成器generator是一个通过调用yield返</description>
+    </item>
+    
+    <item>
+      <title>TypeError: ufunc &#39;isnan&#39; not supported for the input types解决办法</title>
+      <link>https://www.bobobk.com/245.html</link>
+      <pubDate>Mon, 14 Jan 2019 12:42:00 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/245.html</guid>
+      <description>今天在使用python的seaborn画热图(clustermap)的时候，发现了总是出现这个错误，而且可以知道自己的数据完全是符合条件的，在搜索了谷歌后也没有找到好的解决方法，经过摸索后这里把最终解决方法告诉大家。 1.生成dataframe import pandas as pd import numpy as np import matplotlib.pyplot as plt from seaborn import clustermap import seaborn as</description>
+    </item>
+    
+    <item>
+      <title>python实现酷狗音乐mp3下载</title>
+      <link>https://www.bobobk.com/234.html</link>
+      <pubDate>Sun, 13 Jan 2019 14:45:59 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/234.html</guid>
+      <description>在python实现千千音乐mp3下载 后小伙伴使用发现很多音乐在千千音乐都搜不到，所以今天春江暮客就拓展了一下酷狗音乐的下载，有源码。 同样的配方，首先在酷狗官网上直接搜索歌曲，然后打开谷歌浏览器的网络监视器，再次搜索同样的关键字就可以发现接口信息（注：此处最好再次搜索的时候查看网络</description>
+    </item>
+    
+    <item>
+      <title>python3中NetworkX网络图绘制</title>
+      <link>https://www.bobobk.com/229.html</link>
+      <pubDate>Sat, 12 Jan 2019 01:58:34 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/229.html</guid>
+      <description>NetworkX是一个用于研究图形和网络的Python库。 NetworkX是根据BSD-new许可证发布的免费软件。可用于创造和操作复杂网络，学习复杂网络的结构及其功能。 有了NetworkX你就可以用标准或者不标准的数据格式加载或者存储网络，它可以产生许多种类的随机网络或经典网络</description>
+    </item>
+    
+    <item>
+      <title>python3搭配selenium实现12306抢票程序</title>
+      <link>https://www.bobobk.com/224.html</link>
+      <pubDate>Fri, 11 Jan 2019 01:35:04 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/224.html</guid>
+      <description>春节临近了，小伙伴们都在忙着抢票了，很多人总是被各种乱七八糟的抢票程序误导，诱骗，不如自己用python写一个12306抢票脚本好了。 言归正传，有了需求自然就要实现。技术部分，抢票程序由selenium驱动chrome进行，主要分为几下几部分。(别问我为什么不直接用request</description>
+    </item>
+    
+    <item>
+      <title>python实现千千音乐mp3下载</title>
+      <link>https://www.bobobk.com/216.html</link>
+      <pubDate>Tue, 08 Jan 2019 05:31:43 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/216.html</guid>
+      <description>进入千千音乐主页面，选择周杰伦的音乐告白气球，发现竟然是2016年的音乐试听都木有，悲伤。那么有没有办法可以获取到mp3文件呢？答案是肯定的。音乐下载可运行程序可在文末获取。 说干就干，打开榜单，选择新歌一首可以试听的，第一首生僻字就可以听。 1.分析接口信息 打开开发者工具，这种音乐</description>
+    </item>
+    
+    <item>
+      <title>python画横线竖线作为分界线</title>
+      <link>https://www.bobobk.com/213.html</link>
+      <pubDate>Mon, 07 Jan 2019 14:30:41 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/213.html</guid>
+      <description>在作图的时候，经常会碰到需要添加分界线的情况，那么python里面那些函数可以方便的画出水平横线或者垂直竖线呢，下面介绍两种可以方便的添加水平或者垂直直线的函数。 1.使用matplotlib.pyplot的hlines和vhlines ######导入需要模块 import numpy as np import matplotlib.pyplot as plt ###</description>
+    </item>
+    
+    <item>
+      <title>Linux挂载移动硬盘</title>
+      <link>https://www.bobobk.com/211.html</link>
+      <pubDate>Sun, 06 Jan 2019 02:35:21 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/211.html</guid>
+      <description>机器重启后，移动硬盘就不识别了，需要重新挂载，但是使用fdisk -l之后并没有发现移动硬盘的踪迹。也就无从挂载了。 挂载磁盘方法 首先使用fdisk -l查看当前硬盘状态。 ➜ ~ fdisk -l WARNING: fdisk GPT support is currently new, and therefore in an experimental phase. Use at your own discretion. 磁盘 /dev/sdb：320.1 GB, 320072933376 字节，625142448 个扇区 Units =</description>
+    </item>
+    
+    <item>
+      <title>seaborn画小提琴图(violin plot)</title>
+      <link>https://www.bobobk.com/206.html</link>
+      <pubDate>Fri, 04 Jan 2019 12:02:11 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/206.html</guid>
+      <description>简介 小提琴图是用来展示多组数据的分布状态以及概率密度。跟箱线图类似，但是可以密度层面展示更好。在数据量非常大不方便一个一个展示的时候小提琴图特别适用。而python里面的seaborn包可以很方便的画出小提琴图。 参数 小提琴图各位置对应参数，中间一条就是箱线图数据，25%，50%，</description>
+    </item>
+    
+    <item>
+      <title>五步轻松实现linux免密登录</title>
+      <link>https://www.bobobk.com/204.html</link>
+      <pubDate>Wed, 02 Jan 2019 01:59:12 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/204.html</guid>
+      <description>SSH英文全程Secure SHELL，是被广泛用于linux系统安全可靠的远程命令执行程序，而用来进行安全文件传输的SCP同样基于SSH的安全协议。 当服务器比较多的时候，每次都要频繁输入密码显得特别麻烦，那么怎样免密码登录且做到安全可靠呢，当然是可以的。这里我们将分为五步完成RH</description>
+    </item>
+    
+    <item>
+      <title>python里shadowcopy和deepcopy的区别</title>
+      <link>https://www.bobobk.com/200.html</link>
+      <pubDate>Sat, 29 Dec 2018 02:22:22 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/200.html</guid>
+      <description>python中，经常会需要拷贝特定对象，在此可能就会遇到各种bug，原因就是明白这三种操作的区别，赋值，浅拷贝，深拷贝。 赋值(=)，浅拷贝(copy)和深拷贝(deepcopy)比较容易区别开的是赋值和两种拷贝的区别，但是对于浅拷贝和深拷贝却不那么容易区分。 赋值语句并不会赋值对象</description>
+    </item>
+    
+    <item>
+      <title>python3 requests模块用法实例</title>
+      <link>https://www.bobobk.com/198.html</link>
+      <pubDate>Fri, 28 Dec 2018 04:57:52 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/198.html</guid>
+      <description>python3的网络模块相对python2真的方便了很多，requests一个包就包含了python2的多个包，这从实例说明requests用法,作为复习和以后的参考。 requests并不是python默认安装的，没安装使用pip install requests安装便是，下面是requests</description>
+    </item>
+    
+    <item>
+      <title>python 魔术方法详解</title>
+      <link>https://www.bobobk.com/194.html</link>
+      <pubDate>Wed, 26 Dec 2018 04:15:44 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/194.html</guid>
+      <description>什么是Python魔术方法 什么是魔术方法呢？当然它跟魔术师没有真正的联系。在面向对象的Python中处处可见。它们是一些可以让你对类添加“魔术”的特殊方法。这些方法在进行特定的操作时会被自动调用，它们是Python面向对象下智慧的结晶。初学者掌握Python的魔法方法也就变得尤为</description>
+    </item>
+    
+    <item>
+      <title>文献下载</title>
+      <link>https://www.bobobk.com/downloaod_paper/</link>
+      <pubDate>Mon, 24 Dec 2018 02:19:31 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/downloaod_paper/</guid>
+      <description>还在为不会登学校的VPN下载文献或者不知道如何使用sci-hub下载文献吗，这里提供最简单的文献下载服务sci-hub的接口连接。 使用方法 1.找到文献所在杂志对应的页面。 比如今天的cell最新文章Tac1-Expressing Neurons in the Periaqueductal Gray Facilitate the Itch-Scratching Cycle via Descending Regulation。到cell</description>
+    </item>
+    
+    <item>
+      <title>boxes:有趣的命令行字符串形状工具</title>
+      <link>https://www.bobobk.com/185.html</link>
+      <pubDate>Fri, 21 Dec 2018 12:58:56 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/185.html</guid>
+      <description>经常使用github的时候可以发现别人的仓库代码help帮助信息或者查看网页源码里面总是有那么好看的字符串构成的图案，但是自己的代码就没有这些修饰显得那么丑陋。那么如何才能够生成高大上的字符串形状呢？答案就是使用有趣的命令行字符串形状工具boxes。 先来看一个例子 yum install boxes -y echo &amp;quot;this is my</description>
+    </item>
+    
+    <item>
+      <title>sgRNA接头添加</title>
+      <link>https://www.bobobk.com/sgrna_jietou/</link>
+      <pubDate>Thu, 20 Dec 2018 11:02:59 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/sgrna_jietou/</guid>
+      <description>此工具是用于设计好的sgRNA的接头添加。 使用方法 1.填写此sgrna名称。后面加好接头后的sgRNA的名字使用的是此处填写的名称。 2.添加sgRNA的序列。将用各种工具设计好的sgRNA序列填上。 接头添加</description>
+    </item>
+    
+    <item>
+      <title>VIP视频解析</title>
+      <link>https://www.bobobk.com/vip_parse/</link>
+      <pubDate>Thu, 20 Dec 2018 02:07:01 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/vip_parse/</guid>
+      <description>此页面为python获取vip解析网站视频地址 建立起来的解析网页。 使用方法 1.在下面的输入框内输入需要解析的视频地址，比如https://v.qq.com/x/cover/rpup19lfbuf2skc/z0029e7ieor.html 2.点击提交就可以了。 注意事项 此解析因引入的</description>
+    </item>
+    
+    <item>
+      <title>python获取vip解析网站视频地址</title>
+      <link>https://www.bobobk.com/81.html</link>
+      <pubDate>Wed, 19 Dec 2018 14:26:16 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/81.html</guid>
+      <description>现在国内有大量的视频网站，包括腾讯视频、爱奇艺、优酷，AB站等等。这些网站都有很多需要付费的VIP视频。最近有几部想看的电视剧，但是，却只能比VIP会员少看好几集。而且广告特别的多，一来就是2分钟。。 我们知道现在有很多网站都有VIP解析服务，只要输入视频网站的播放地址就可以免费观</description>
+    </item>
+    
+    <item>
+      <title>python随机生成强密码</title>
+      <link>https://www.bobobk.com/136.html</link>
+      <pubDate>Tue, 18 Dec 2018 01:23:13 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/136.html</guid>
+      <description>由于安全需要，建议网友们在不同的网站上都使用不同的强密码，那么每次设置一个强密码还是比较麻烦的，这里我们写一个使用python生成强密码的小程序。以后要用的话直接访问以下网站把密码复制粘贴过来就好了。 代码如下 import random def get_strong_pass(): strongpassword=&amp;quot;&amp;quot; for i in range(16): strongpassword += random.choice(&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_&#39;) return strongpassword get_strong_pass() 接下来把函数放在django里面调用就可以</description>
+    </item>
+    
+    <item>
+      <title>kaggle之本地运行识别狗品种</title>
+      <link>https://www.bobobk.com/127.html</link>
+      <pubDate>Sat, 15 Dec 2018 10:36:29 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/127.html</guid>
+      <description>在搭建了深度学习环境后，第一件事就是试试行不行，最简单的当然是使用已经训练好的模型拿来预测新样本了。这里我们使用kaggle上面训练好的狗狗品种预测模型进行使用说明。(后面有完整的数据和脚本，下载到本地即可运行。) 1.加载待预测图片 from os.path import join image_dir = &#39;train/&#39; img_paths = [join(image_dir, filename) for filename in [&#39;0246f44bb123ce3f91c939861eb97fb7.jpg&#39;, &#39;84728e78632c0910a69d33f82e62638c.jpg&#39;]] 这里选用了2张图</description>
+    </item>
+    
+    <item>
+      <title>wordpress使用prism高亮渲染代码</title>
+      <link>https://www.bobobk.com/115.html</link>
+      <pubDate>Thu, 13 Dec 2018 03:21:03 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/115.html</guid>
+      <description>一直很喜欢CSDN上面的代码模块，既可以设置代码的语言，代码的渲染也做的非常漂亮，就想着能不能在wordpress上面使用，这里我就把我设置wordpress代码渲染的经验过程详细写下来。 声明一下，CSDN代码高亮模块并不是由于编辑器的问题，一开始还弄个markdown的编辑器。</description>
+    </item>
+    
+    <item>
+      <title>使用seaborn绘制聚类热图</title>
+      <link>https://www.bobobk.com/98.html</link>
+      <pubDate>Wed, 12 Dec 2018 02:30:25 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/98.html</guid>
+      <description>在生物信息领域，无论是基因芯片，RNAseq还是其他各种生信分析里面，差异基因的寻找总是最基础的工作，而热图在差异基因的可视化展示方面占据了独一无二的地位，在这里我将介绍如何使用seaborn库里面的clustermap函数来进行差异基因的可视化展示。 代码 1.导入seaborn等</description>
+    </item>
+    
+    <item>
+      <title>人工神经网络初探</title>
+      <link>https://www.bobobk.com/90.html</link>
+      <pubDate>Mon, 10 Dec 2018 05:27:33 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/90.html</guid>
+      <description>什么是人工神经网络？本文将从3个方面阐述。概念，直观例子，应用。 1.概念 人工神经网络（Artificial Neural Network，ANN），简称神经网络（Neural Network，NN）或类神经网络，是一种模仿生物神经网络的结构和功能的数学模型。它由大量神经元联结进行运算，大多数情况</description>
+    </item>
+    
+    <item>
+      <title>利用Python递归下载文件夹下所有文件</title>
+      <link>https://www.bobobk.com/85.html</link>
+      <pubDate>Sat, 08 Dec 2018 06:42:32 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/85.html</guid>
+      <description>最近想备份网站，但是php下载文件的大小是限制的，而我也懒得装ftp再下载了，就想着暂时弄个二级域名站，然后用python(python3)的requests库直接下载网站根目录下的所有文件以及文件夹，以达到备份的目的。 1.安装requests库 pip install requests 2.下载文件夹下所有文件及文</description>
+    </item>
+    
+    <item>
+      <title>python将全站图片改为webp格式</title>
+      <link>https://www.bobobk.com/78.html</link>
+      <pubDate>Tue, 04 Dec 2018 15:32:34 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/78.html</guid>
+      <description>不知道大家是否发现，本站所有的图片基本都是使用的webp格式。 那么webp是什么呢？WebP，是一种同时提供了有损压缩与无损压缩的图片文件格式，是由Google发展出来的。 webp图片格式可以极大地减少文件大小，但同时达到和JPEG格式相同的图片质量，因此可以显著减少图片文件在网</description>
+    </item>
+    
+    <item>
+      <title>tensorflow深度学习服务器环境搭建</title>
+      <link>https://www.bobobk.com/70.html</link>
+      <pubDate>Fri, 30 Nov 2018 12:55:25 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/70.html</guid>
+      <description>实验室新进了一台服务器，配置了nvida 1080TI显卡做深度学习使用，装好机器后第一件事就是如何配置好tensorflow的深度学习环境，这里把我在搭建环境的过程以及遇到的坑一一写下来，给有同样需求的筒子提供一些帮助。 操作系统是师兄刻好的ubuntu最新版本Ubuntu 18.04.1 LTS （可</description>
+    </item>
+    
+    <item>
+      <title>同时使用腾讯cdn与cloudflare CDN服务</title>
+      <link>https://www.bobobk.com/61.html</link>
+      <pubDate>Mon, 26 Nov 2018 04:36:50 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/61.html</guid>
+      <description>对于同时提供中英文服务的网站来说，如何兼顾国内访问速度和国外访问速度显得非常重要。腾讯的对象存储是面向非结构化数据，支持 HTTP/HTTPS 协议访问的分布式存储服务，它能容纳海量数据并保证用户对带宽和容量扩充无感知，可以作为我们网站的静态文件存储地。当我们在 https://cloud.tencent.com/product/cos 申请免费的cos空间后，同时就可以免费</description>
+    </item>
+    
+    <item>
+      <title>scrapy爬取字幕组今日更新影视-附源码</title>
+      <link>https://www.bobobk.com/43.html</link>
+      <pubDate>Wed, 21 Nov 2018 04:23:53 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/43.html</guid>
+      <description>由于本人比较喜欢看美剧，字幕组的美剧资源更新又是非常快的，而本人scrapy爬虫写的也比较多，同时维护了一个小小的影视站给朋友下载，就想着能不能够用脚本实现每天的字幕组影视资源的更新与抓取，google后发现https://blog.csdn.net/lzw2016/articl</description>
+    </item>
+    
+    <item>
+      <title>用turtle实现用正方形画圆</title>
+      <link>https://www.bobobk.com/39.html</link>
+      <pubDate>Mon, 19 Nov 2018 04:38:15 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/39.html</guid>
+      <description>最近发现一个很有意思的画图的python库，叫做turtle，这里先说下用turtle这个库来实现用正方形画圆的思路。 每次都用乌龟（turtle） 来画出一个正方形，然后通过旋转3°后，继续画一样的正方形，在通过120次循环后就实现了完整的圆，这里当然也可以用其他的角度和次数，只要</description>
+    </item>
+    
+    <item>
+      <title>宝塔面板设置python3默认环境</title>
+      <link>https://www.bobobk.com/32.html</link>
+      <pubDate>Fri, 16 Nov 2018 02:28:18 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/32.html</guid>
+      <description>使用宝塔面板搭建web环境并配置python3为默认python环境 宝塔面板是一个可以通过Web端轻松管理服务器，提升运维效率的管理面板。它不仅可以方便的安装网站必须程序，而且可以创建管理网站、FTP、数据库，拥有可视化文件管理器，可视化CPU、内存、流量监控图表，计划任务等功能</description>
+    </item>
+    
+    <item>
+      <title>python画蝴蝶曲线图</title>
+      <link>https://www.bobobk.com/24.html</link>
+      <pubDate>Wed, 07 Nov 2018 08:03:32 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/24.html</guid>
+      <description>蝴蝶曲线是由Temple H·Fay发现的可用极坐标函数表示的蝴蝶曲线。由于此曲线优美，因此就想把它作为博客favicon.ico，这里我使用python matplotlib.pyplot包来绘制需要的蝴蝶曲线图。先看下漂亮的蝴蝶曲线吧。 1.首先我们需要确定蝴蝶曲线的函数表达 也可用</description>
+    </item>
+    
+    <item>
+      <title>关于</title>
+      <link>https://www.bobobk.com/about_me/</link>
+      <pubDate>Tue, 06 Nov 2018 02:52:38 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/about_me/</guid>
+      <description>我是春江暮客，目前上海985在读博士。 平时喜欢折腾，租个服务器各种折腾，平时学习也经常使用C，zsh，R，但是还是最喜欢python，真的是方便，什么库都有， 人生苦短，快用python，哈哈。 自己经常使用python做些好玩的事情，像什么画画图，爬虫爬取电影看啊，做个贪吃蛇小游戏</description>
+    </item>
+    
+    <item>
+      <title>关于</title>
+      <link>https://www.bobobk.com/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/about/</guid>
+      <description>我是春江暮客，目前上海985在读博士。 平时喜欢折腾，租个服务器各种折腾，平时学习也经常使用C，zsh，R，但是还是最喜欢python，真的是方便，什么库都有， 人生苦短，快用python，哈哈。 自己经常使用python做些好玩的事情，像什么画画图，爬虫爬取电影看啊，做个贪吃蛇小游戏</description>
+    </item>
+    
+    <item>
+      <title>归档</title>
+      <link>https://www.bobobk.com/archives/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/archives/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

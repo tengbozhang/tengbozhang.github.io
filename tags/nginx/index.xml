@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/nginx/</link>
+    <description>Recent content in nginx on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 26 Jul 2019 10:28:37 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>nginx反向代理tcp/udp请求实现映射远端服务器</title>
+      <link>https://www.bobobk.com/422.html</link>
+      <pubDate>Fri, 26 Jul 2019 10:28:37 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/422.html</guid>
+      <description>Nginx 是一个高性能的HTTP服务器和反向代理服务器，也是一个IMAP/POP3/SMTP服务器。在1.9.13版本后，Nginx已经支持端口转发。 在centos7上面rinetd配置简单，使用方便，但遗憾的是不支持UDP转发。如果业务需要同时支持TCP/UDP端口转发那么可以使用Ng</description>
+    </item>
+    
+  </channel>
+</rss>

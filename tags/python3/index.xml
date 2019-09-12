@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python3 on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/python3/</link>
+    <description>Recent content in python3 on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 08 Jan 2019 05:31:43 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/python3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python实现千千音乐mp3下载</title>
+      <link>https://www.bobobk.com/216.html</link>
+      <pubDate>Tue, 08 Jan 2019 05:31:43 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/216.html</guid>
+      <description>进入千千音乐主页面，选择周杰伦的音乐告白气球，发现竟然是2016年的音乐试听都木有，悲伤。那么有没有办法可以获取到mp3文件呢？答案是肯定的。音乐下载可运行程序可在文末获取。 说干就干，打开榜单，选择新歌一首可以试听的，第一首生僻字就可以听。 1.分析接口信息 打开开发者工具，这种音乐</description>
+    </item>
+    
+    <item>
+      <title>宝塔面板设置python3默认环境</title>
+      <link>https://www.bobobk.com/32.html</link>
+      <pubDate>Fri, 16 Nov 2018 02:28:18 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/32.html</guid>
+      <description>使用宝塔面板搭建web环境并配置python3为默认python环境 宝塔面板是一个可以通过Web端轻松管理服务器，提升运维效率的管理面板。它不仅可以方便的安装网站必须程序，而且可以创建管理网站、FTP、数据库，拥有可视化文件管理器，可视化CPU、内存、流量监控图表，计划任务等功能</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NetworkX on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/networkx/</link>
+    <description>Recent content in NetworkX on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 12 Jan 2019 01:58:34 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/networkx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python3中NetworkX网络图绘制</title>
+      <link>https://www.bobobk.com/229.html</link>
+      <pubDate>Sat, 12 Jan 2019 01:58:34 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/229.html</guid>
+      <description>NetworkX是一个用于研究图形和网络的Python库。 NetworkX是根据BSD-new许可证发布的免费软件。可用于创造和操作复杂网络，学习复杂网络的结构及其功能。 有了NetworkX你就可以用标准或者不标准的数据格式加载或者存储网络，它可以产生许多种类的随机网络或经典网络</description>
+    </item>
+    
+  </channel>
+</rss>

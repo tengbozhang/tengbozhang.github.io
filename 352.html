@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>python3提取免费高匿代理 | 春江暮客</title>
+    <meta property="og:title" content="python3提取免费高匿代理 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-06-25T04:41:34&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-06-25T04:41:34&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="python3提取免费高匿代理">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/352.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">python3提取免费高匿代理</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年6月25日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>写爬虫总是免不了被ban  ip，限制流量等问题，有个高效的ip代理池还是很重要的，这里我们就介绍如何从已有公开代理总提取有效ip组建自己高效的爬虫代理池</p>
+
+<h2 id="主要以下几个模块">主要以下几个模块</h2>
+
+<p>1.requests爬取代理
+2.更新检测可用代理</p>
+
+<h2 id="requests爬取代理-选取xici代理为例">requests爬取代理，选取xici代理为例</h2>
+
+<p>高匿网页地址<a href="https://www.xicidaili.com/nn/">xici</a>， 检查元素</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/06/xici.webp" alt="xici" /></p>
+
+<p>元素选择就是id为ip_list的tr为一个一个的代理，td下为详细信息，因此css选择器就可以为
+_content.css(&ldquo;#ip<em>list&rdquo;).css(&ldquo;tr&rdquo;)</em> ，然后在提取1，6项即可,后续加入判断ip可用性选项，判断成功后存入json文件，以后就可以通过http形式获取到可用的代理信息。</p>
+
+<pre><code class="language-python">#!/root/anaconda3/bin/python
+
+from scrapy.selector import Selector
+import redis
+import requests
+import json
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+import random
+def get_headers():
+    USER_AGENT_LIST = [
+    'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; 360SE)',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
+    'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET4.0C; .NET4.0E; 360SE)'
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/18.17763',
+    '&quot;Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.96 Mobile Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0',
+
+]
+    USER_AGENT = random.choice(USER_AGENT_LIST)
+
+    return {'User-Agent':USER_AGENT}
+def get_random_proxy():
+    https_pro=[i for i in pro if &quot;https&quot; in i]
+    if len(https_pro)==0:
+        return None
+    else:
+        return https_pro[random.randint(0,len(https_pro))] 
+def crawl_ip():
+   
+    
+    for i in range(5):
+        
+        rand_ip = get_random_proxy()
+        if rand_ip:
+            r =requests.get('https://www.xicidaili.com/nn/{}'.format(str(i+1)),headers=get_headers())
+        else:
+            r =requests.get('https://www.xicidaili.com/nn/{}'.format(str(i+1)),headers=get_headers(),proxies=proxies_ip(rand_ip))
+        content = Selector(r)
+        ip_list = content.css(&quot;#ip_list&quot;).css(&quot;tr&quot;)
+        for i in ip_list[1:]:
+            
+            info = i.css(&quot;td::text&quot;).extract()
+            ip = info[0]
+            protoco = info[5].strip().lower()
+            if protoco==&quot;http&quot; or protoco==&quot;https&quot;:
+                url = protoco + '://' + ip + ':' + info[1] 
+            else:
+                url = 'http://' + ip + ':' + info[1]
+            validate_ip(url)
+
+def proxies_ip(url):
+    if 'https' not in url:
+        proxies={'http':url}
+    else:
+        proxies={'https':url}
+    return proxies
+
+def validate_ip(url):
+    proxies = proxies_ip(url)
+    if url not in pro:
+        bobo_url=http_url
+        if &quot;https&quot; in url:
+            bobo_url=https_url
+        try:
+            r = requests.get(bobo_url, headers=get_headers(), proxies=proxies, timeout=1)
+            pro.append(url)
+            print('ip %s validated' % url)
+        except Exception as e:
+            print('cant check ip %s' % url)
+def check_current_ip():# 更新检测可用代理
+    curr = open(JSON_PATH).read()
+    if curr!='':
+        for url in json.loads(open(JSON_PATH).read()):
+            validate_ip(url)
+if __name__ =='__main__':
+    http_url = &quot;http://www.bobobk.com&quot;
+    https_url = &quot;https://www.bobobk.com&quot;
+    pro = []
+    TXT_PATH = '/www/wwwroot/default/daili.txt'
+    JSON_PATH='/www/wwwroot/default/daili.json'
+    PROXYCHAIN_CONF='/www/wwwroot/default/proxy.conf'
+    check_current_ip()
+    crawl_ip()
+
+    with open(JSON_PATH,'w') as fw:
+        fw.write(json.dumps(list(set(pro))))
+
+    fw.close()
+    with open(TXT_PATH,'w') as fw:
+        for i in set(pro):
+            fw.write(i+&quot;\n&quot;)
+    fw.close()
+
+
+
+</code></pre>
+
+<h2 id="更新检测可用代理">更新检测可用代理</h2>
+
+<p>程序每次抓取页面前先检测可用代理，然后自动使用可用代理来抓取新的代理，可以稳定运行。
+这里设置一下定时运行，那么就可以每小时自动更新代理信息</p>
+
+<pre><code class="language-bash">crontab -e
+</code></pre>
+
+<p>调用定时任务，加入当前脚本，就可以。
+本人服务器实例</p>
+
+<pre><code class="language-bash">0 */1 * * *  /www/service/daili.py &gt;&gt; /www/service/daili.log 2&gt;&amp;1
+</code></pre>
+
+<h2 id="最后访问127-0-0-1-daili-txt就可以看到搜集到的代理了">最后访问127.0.0.1/daili.txt就可以看到搜集到的代理了</h2>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/352.html">https://www.bobobk.com/352.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/349.html">Python 的这几个技巧分享</a></li>
+        
+        <li><a href="/334.html">python类的继承和多态</a></li>
+        
+        <li><a href="/337.html">python中进程池，线程池与协程</a></li>
+        
+        <li><a href="/325.html">python中zipfile模块实例化解析</a></li>
+        
+        <li><a href="/323.html">Python3 print 函数用法总结</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

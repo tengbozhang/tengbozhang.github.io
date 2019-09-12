@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>generator on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/generator/</link>
+    <description>Recent content in generator on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 15 Jan 2019 12:26:07 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/generator/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python生成器generator,yield</title>
+      <link>https://www.bobobk.com/248.html</link>
+      <pubDate>Tue, 15 Jan 2019 12:26:07 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/248.html</guid>
+      <description>在python学习过程中，像这些使用if else流程控制或者说函数的定义和使用都比较好理解，但是生成器是一个相对来说很难理解的概念，使用也就相对困难，本文将详细解析python里面的生成器。 1.什么是python生成器 python生成器generator是一个通过调用yield返</description>
+    </item>
+    
+  </channel>
+</rss>

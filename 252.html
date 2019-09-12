@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>python3绘制炫酷的红楼梦词云 | 春江暮客</title>
+    <meta property="og:title" content="python3绘制炫酷的红楼梦词云 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-01-17T03:21:06&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-01-17T03:21:06&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="python3绘制炫酷的红楼梦词云">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/252.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">python3绘制炫酷的红楼梦词云</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年1月17日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF">技术</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>词云，相信大家都看到过，这是一个使用python的著名的词云工具wordcloud库绘制而成的，本文将详细介绍如何使用wordcloud绘制中国四大名著之一的《红楼梦》的词云。</p>
+
+<h1 id="1-准备工作">1.准备工作</h1>
+
+<p>包括3部分：</p>
+
+<h4 id="2-wordcloud库和jieba库-可使用pip-install-wordcloud-pip-install-jieba进行安装">2.wordcloud库和jieba库，可使用pip install wordcloud,pip install jieba进行安装</h4>
+
+<h4 id="3-准备中文字体文件">3.准备中文字体文件</h4>
+
+<h4 id="txt文本文件和字体文件已打包-以方便大家直接复现本教程实例">txt文本文件和字体文件已打包，以方便大家直接复现本教程实例。</h4>
+
+<h1 id="2-绘制-红楼梦-词云">2.绘制《红楼梦》词云</h1>
+
+<p>直接上代码：</p>
+
+<pre><code class="language-python">    from wordcloud import WordCloud
+    import jieba
+    text = &quot;&quot;.join(jieba.cut(open(&quot;红楼梦.txt&quot;).read()))
+    wordcloud = WordCloud(font_path=&quot;kaibold.ttf&quot;).generate(text)
+
+    # Display the generated image:
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis(&quot;off&quot;)
+    plt.margins(x=0, y=0)
+    plt.show()
+
+</code></pre>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/wordcloud_raw.webp" alt="《python3绘制炫酷的红楼梦词云》" /></p>
+
+<p>虽然上面的实例中，我们首先导入需要的库，然后读取文本文件并使用jieba的cut进行中文分词，分词之后为list，使用空格连接list使其像英文一样满足词云工具的输入要求。然后指定使用的字体文件绘制图形即可。</p>
+
+<p>可以看到，词云已经成功的绘制，但是还存在一些明显的问题，比如“道”这种次就出现在了好多地方而且频率非常高，是需要剔除的。接下来剔除。</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/cloud_remove.webp" alt="《python3绘制炫酷的红楼梦词云》" /></p>
+
+<h1 id="3-特定图形的词云">3.特定图形的词云</h1>
+
+<p>除了上面的直接绘制外，wordcloud还可以根据用户给定的形状绘制词云，而这强大的功能只需要在生成wordcloud的时候使用mask参数指定即可，上代码：</p>
+
+<pre><code class="language-python">    from wordcloud import WordCloud
+    import jieba,requests
+    from PIL import Image
+    import numpy as np
+    text = &quot; &quot;.join(jieba.cut(open(&quot;红楼梦.txt&quot;).read()))
+    remove_word = [i.strip() for i in open(&quot;remove.txt&quot;).readlines()]
+    for i in remove_word:
+        text = text.replace(i+&quot; &quot;,&quot;&quot;)
+    wave_mask = np.array(Image.open(BytesIO(requests.get(\
+            &quot;https://www.bobobk.com/wp-content/uploads/2018/11/butter.jpg&quot;).content)))
+
+    # Make the figure
+
+    wordcloud = WordCloud(mask=wave_mask,background_color=&quot;lightblue&quot;,font_path=&quot;/Library/Fonts/kaibold.ttf&quot;).generate(text)
+
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis(&quot;off&quot;)
+    plt.margins(x=0, y=0)
+    plt.show()
+
+</code></pre>
+
+<p> 这里使用本站绘制的蝴蝶曲线生成的词云图形，如下</p>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/01/wordcloud_back_lb.webp" alt="《python3绘制炫酷的红楼梦词云》" /></p>
+
+<h1 id="总结">总结</h1>
+
+<p>通过公开的python库wordcloud，结合中文分词工具jieba绘制了红楼梦全文的词云。</p>
+
+<p>字体文件及文本文件下载地址：</p>
+
+<p>链接: <a href="https://pan.baidu.com/s/1Wi8sdpj9tva0pglDyfv8gA">https://pan.baidu.com/s/1Wi8sdpj9tva0pglDyfv8gA</a> 提取码: pq6t</p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/252.html">https://www.bobobk.com/252.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/248.html">python生成器generator,yield</a></li>
+        
+        <li><a href="/245.html">TypeError: ufunc &#39;isnan&#39; not supported for the input types解决办法</a></li>
+        
+        <li><a href="/234.html">python实现酷狗音乐mp3下载</a></li>
+        
+        <li><a href="/229.html">python3中NetworkX网络图绘制</a></li>
+        
+        <li><a href="/224.html">python3搭配selenium实现12306抢票程序</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>

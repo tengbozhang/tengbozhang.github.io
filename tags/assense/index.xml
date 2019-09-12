@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>assense on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/assense/</link>
+    <description>Recent content in assense on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 01 Aug 2019 07:44:18 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/assense/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</title>
+      <link>https://www.bobobk.com/425.html</link>
+      <pubDate>Thu, 01 Aug 2019 07:44:18 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/425.html</guid>
+      <description>这两天在adsense上总是提示 收益受损风险 - 您需要修正一些 ads.txt file 问题，以免收入严重受损。虽然没有几毛钱，但看到这种提示还是免不了要好好解决一下的，哈哈。 就是这种提示。 这里告诉大家正确的问题处理思路。 1.首先自己下载adsense上面的ads.txt到本地并上传到服务器。 在浏览器打</description>
+    </item>
+    
+  </channel>
+</rss>

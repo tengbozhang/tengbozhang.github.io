@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>requests on 春江暮客</title>
+    <link>https://www.bobobk.com/tags/requests/</link>
+    <description>Recent content in requests on 春江暮客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 08 Jan 2019 05:31:43 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.bobobk.com/tags/requests/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python实现千千音乐mp3下载</title>
+      <link>https://www.bobobk.com/216.html</link>
+      <pubDate>Tue, 08 Jan 2019 05:31:43 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/216.html</guid>
+      <description>进入千千音乐主页面，选择周杰伦的音乐告白气球，发现竟然是2016年的音乐试听都木有，悲伤。那么有没有办法可以获取到mp3文件呢？答案是肯定的。音乐下载可运行程序可在文末获取。 说干就干，打开榜单，选择新歌一首可以试听的，第一首生僻字就可以听。 1.分析接口信息 打开开发者工具，这种音乐</description>
+    </item>
+    
+    <item>
+      <title>利用Python递归下载文件夹下所有文件</title>
+      <link>https://www.bobobk.com/85.html</link>
+      <pubDate>Sat, 08 Dec 2018 06:42:32 +0000</pubDate>
+      
+      <guid>https://www.bobobk.com/85.html</guid>
+      <description>最近想备份网站，但是php下载文件的大小是限制的，而我也懒得装ftp再下载了，就想着暂时弄个二级域名站，然后用python(python3)的requests库直接下载网站根目录下的所有文件以及文件夹，以达到备份的目的。 1.安装requests库 pip install requests 2.下载文件夹下所有文件及文</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>python中zipfile模块实例化解析 | 春江暮客</title>
+    <meta property="og:title" content="python中zipfile模块实例化解析 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-06-02T16:37:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-06-02T16:37:00&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="python中zipfile模块实例化解析">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/325.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">python中zipfile模块实例化解析</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年6月2日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<h1 id="简介">简介：</h1>
+
+<p>zipfile是python里用来做zip格式编码的压缩和解压缩的，由于是很常见的zip格式，所以这个模块使用频率也是比较高的，</p>
+
+<p>在这里对zipfile的使用方法做一些记录。即方便自己也方便别人。</p>
+
+<p>Python zipfile模块用来做zip格式编码的压缩和解压缩的，要进行相关操作，首先需要实例化一个 ZipFile 对象。ZipFile 接受一个字符串格式压缩包名称作为它的必选参数，第二个参数为可选参数，表示打开模式，类似于文件操作，有r/w/a三种模式，分别代表读、写、添加，默认为r，即读模式。</p>
+
+<p>zipfile里有两个非常重要的class, 分别是ZipFile和ZipInfo, 在绝大多数的情况下，我们只需要使用这两个class就可以了。ZipFile是主要的类，用来创建和读取zip文件而ZipInfo是存储的zip文件的每个文件的信息的。</p>
+
+<h2 id="一-下面我们就来介绍这两个类的基本操作">一、下面我们就来介绍这两个类的基本操作：</h2>
+
+<p>比如要读取一个Python zipfile 模块，这里假设filename是一个文件的路径:</p>
+
+<pre><code class="language-python">import zipfile  
+z =zipfile.ZipFile(filename, 'r') 
+# 这里的第二个参数用r表示是读取zip文件，w是创建一个zip文件  
+for f in z.namelist(): 
+print f
+
+</code></pre>
+
+<p>上面的代码是读取一个zip压缩包里所有文件的名字。z.namelist() 会返回压缩包内所有文件名的列表。
+再看看下面一个:</p>
+
+<pre><code class="language-python">import zipfile  
+z = zipfile.ZipFile(filename, 'r')  
+for i in z.infolist():  
+print i.file_size, i.header_offset
+
+</code></pre>
+
+<p>这里使用了z.infolist(), 它返回的就是压缩包内所有文件的信息，就是一个ZipInfo的列表。一个ZipInfo对象中包含了压缩包内一个文件的信息，其中比较常用的是 filename, file_size, header_offset, 分别为文件名，文件大小，文件数据在压缩包中的偏移。其实之前的z.namelist()就是读取的ZipInfo中的filename，组成一个 list返回的。
+从压缩包里解压缩出一个文件的方法是使用ZipFile的read方法：</p>
+
+<pre><code class="language-python">import zipfile  
+ z = zipfile.ZipFile(filename, 'r')  
+print z.read(z.namelist()[0])
+</code></pre>
+
+<p>这样就读取出z.namelist()中的第一个文件，并且输出到屏幕，当然也可以把它存储到文件。下面是创建zip压缩包的方法，与读取的方法其实很类似的：</p>
+
+<pre><code class="language-python">import zipfile, os  
+ z = zipfile.ZipFile(filename, 'w') 
+# 注意这里的第二个参数是w，这里的filename是压缩包的名字
+
+</code></pre>
+
+<p>注意这里的第二个参数是w，这里的filename是压缩包的名字
+假设要把一个叫testdir中的文件全部添加到压缩包里（这里只添加一级子目录中的文件）：</p>
+
+<pre><code class="language-python">if os.path.isdir(testdir):
+     for d in os.listdir(testdir):
+         z.write(testdir+os.sep+d)
+      
+         z.close()
+</code></pre>
+
+<p>下面的代码非常的简单。想想还有一个问题，如果我把一个test/111.txt 添加到压缩包里之后我希望在包里它放到test22/111.txt怎么办呢？其实这个就是Python ZipFile模块的write方法中第二个参数的作用了。只需要这样调用：</p>
+
+<pre><code class="language-python">z.write(&quot;test/111.txt&quot;, &quot;test22/111.txt&quot;)
+</code></pre>
+
+<h1 id="二-zipfile和zipinfo这两个类的基本操作">二、ZipFile和Zipinfo这两个类的基本操作</h1>
+
+<h2 id="1-class-zipfile-zipfile-file-mode-compression-allowzip64">1、class zipfile.ZipFile(file[, mode[, compression[, allowZip64]]])</h2>
+
+<p>创建一个ZipFile对象，表示一个zip文件。参数file表示文件的路径或类文件对象(file-like object)；参数mode指示打开zip文件的模式，</p>
+
+<p>默认值为&rsquo;r&rsquo;，表示读已经存在的zip文件，也可以为&rsquo;w&rsquo;或&rsquo;a&rsquo;，&rsquo;w&rsquo;表示新建一个zip文档或覆盖一个已经存在的zip文档，</p>
+
+<pre><code class="language-python">import zipfile
+f = zipfile.ZipFile(filename, 'r') # 这里的第二个参数用r表示是读取zip文件，w或a是创建一个zip文件
+ 
+for f_name in f.namelist(): #z.namelist() 会返回压缩包内所有文件名的列表。
+ print(f_name)
+#上面的代码是读取一个zip压缩包里所有文件的名字。
+</code></pre>
+
+<p>&lsquo;a&rsquo;表示将数据附加到一个现存的zip文档中。参数compression表示在写zip文档时使用的压缩方法，它的值可以是zipfile. ZIP_STORED 或zipfile. ZIP_DEFLATED。如果要操作的zip文件大小超过2G，应该将allowZip64设置为True。</p>
+
+<p>ZipFile还提供了如下常用的方法和属性：</p>
+
+<p>ZipFile.getinfo(name)</p>
+
+<p>获取zip文档内指定文件的信息。返回一个zipfile.ZipInfo对象，它包括文件的详细信息。</p>
+
+<p>ZipFile.infolist()</p>
+
+<p>获取zip文档内所有文件的信息，返回一个zipfile.ZipInfo的列表。</p>
+
+<p>ZipFile.namelist()</p>
+
+<p>获取zip文档内所有文件的名称列表。</p>
+
+<p>ZipFile.extract(member[, path[, pwd]])</p>
+
+<p>将zip文档内的指定文件解压到当前目录。参数member指定要解压的文件名称或对应的ZipInfo对象；参数path指定了解析文件保存的文件夹；</p>
+
+<p>参数pwd为解压密码。下面一个例子将保存在程序根目录下的duoduo.zip内的所有文件解压到D:/Work目录：</p>
+
+<pre><code class="language-python">import zipfile, os
+f = zipfile.ZipFile(os.path.join(os.getcwd(), 'duoduo.zip')) #拼接成一个路径
+for file in f.namelist():
+　　f.extract(file, r'd:/Work')  #在d:/Work中解压文件
+f.close()
+</code></pre>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/06/zipfi.webp" alt="zipfi" /></p>
+
+<p>上面是os.getcwd的用法！！</p>
+
+<p>ZipFile.extractall([path[, members[, pwd]]])</p>
+
+<p>解压zip文档中的所有文件到当前目录。参数members的默认值为zip文档内的所有文件名称列表，也可以自己设置，选择要解压的文件名称。</p>
+
+<p>ZipFile.printdir()</p>
+
+<p>将zip文档内的信息打印到控制台上。</p>
+
+<p>ZipFile.setpassword(pwd)</p>
+
+<p>设置zip文档的密码。</p>
+
+<p>ZipFile.read(name[, pwd])</p>
+
+<p>获取zip文档内指定文件的二进制数据。下面的例子演示了read()的使用，zip文档内包括一个duoduo.txt的文本文件，使用read()方法读取其二进制数据，然后保存到D:/duoduo.txt。</p>
+
+<pre><code class="language-python">import zipfile, os
+zipFile = zipfile.ZipFile(os.path.join(os.getcwd(), 'duoduo.zip'))
+data = zipFile.read('duoduo.txt')
+# (lambda f, d: (f.write(d), f.close()))(open(r'd:/duoduo.txt', 'wb'), data) #一行语句就完成了写文件操作。仔细琢磨哦~_~
+with open(r'd:/duoduo.txt','wb') as f:
+ for d in data:
+  f.write(d)
+zipFile.close()
+</code></pre>
+
+<p>ZipFile.write(filename[, arcname[, compress_type]])</p>
+
+<p>将指定文件添加到zip文档中。filename为文件路径，arcname为添加到zip文档之后保存的名称, 参数compress_type表示压缩方法，它的值可以是zipfile. ZIP_STORED 或zipfile. ZIP_DEFLATED。下面的例子演示了如何创建一个zip文档，并将文件D:/test.doc添加到压缩文档中。</p>
+
+<pre><code class="language-python">import zipfile, os
+zipFile = zipfile.ZipFile(r'D:/test.zip'), 'w')
+zipFile.write(r'D:/test.doc', '保存的名字', zipfile.ZIP_DEFLATED)
+zipFile.close()
+</code></pre>
+
+<p>ipFile.writestr(zinfo_or_arcname, bytes)</p>
+
+<p>writestr()支持将二进制数据直接写入到压缩文档。</p>
+
+<h2 id="2-class-zipinfo">2、Class ZipInfo</h2>
+
+<ul>
+<li><p>ZipFile.getinfo(name) 方法返回的是一个ZipInfo对象，表示zip文档中相应文件的信息。它支持如下属性：</p></li>
+
+<li><p>ZipInfo.filename： 获取文件名称。</p></li>
+
+<li><p>ZipInfo.date_time： 获取文件最后修改时间。返回一个包含6个元素的元组：(年, 月, 日, 时, 分, 秒)</p></li>
+
+<li><p>ZipInfo.compress_type： 压缩类型。</p></li>
+
+<li><p>ZipInfo.comment： 文档说明。</p></li>
+
+<li><p>ZipInfo.extr： 扩展项数据。</p></li>
+
+<li><p>ZipInfo.create_system： 获取创建该zip文档的系统。</p></li>
+
+<li><p>ZipInfo.create_version： 获取 创建zip文档的PKZIP版本。</p></li>
+
+<li><p>ZipInfo.extract_version： 获取 解压zip文档所需的PKZIP版本。</p></li>
+
+<li><p>ZipInfo.reserved： 预留字段，当前实现总是返回0。</p></li>
+
+<li><p>ZipInfo.flag_bits： zip标志位。</p></li>
+
+<li><p>ZipInfo.volume： 文件头的卷标。</p></li>
+
+<li><p>ZipInfo.internal_attr： 内部属性。</p></li>
+
+<li><p>ZipInfo.external_attr： 外部属性。</p></li>
+
+<li><p>ZipInfo.header_offset： 文件头偏移位。</p></li>
+
+<li><p>ZipInfo.CRC： 未压缩文件的CRC-32。</p></li>
+
+<li><p>ZipInfo.compress_size： 获取压缩后的大小。</p></li>
+
+<li><p>ZipInfo.file_size： 获取未压缩的文件大小。</p></li>
+</ul>
+
+<p>下面一个简单的例子说明这些属性的意思：</p>
+
+<pre><code class="language-python">import zipfile, os
+zipFile = zipfile.ZipFile(os.path.join(os.getcwd(), 'duoduo.zip'))
+zipInfo = zipFile.getinfo('文件中的文件.txt')
+print ('filename:', zipInfo.filename) #获取文件名称
+print ('date_time:', zipInfo.date_time) #获取文件最后修改时间。返回一个包含6个元素的元组：(年, 月, 日, 时, 分, 秒)
+print ('compress_type:', zipInfo.compress_type) #压缩类型
+print ('comment:', zipInfo.comment) #文档说明
+print ('extra:', zipInfo.extra) #扩展项数据
+print ('create_system:', zipInfo.create_system) #获取创建该zip文档的系统。
+print ('create_version:', zipInfo.create_version) #获取 创建zip文档的PKZIP版本。
+print ('extract_version:', zipInfo.extract_version) #获取 解压zip文档所需的PKZIP版本。
+print ('extract_version:', zipInfo.reserved) # 预留字段，当前实现总是返回0。
+print ('flag_bits:', zipInfo.flag_bits) #zip标志位。
+print ('volume:', zipInfo.volume) # 文件头的卷标。
+print ('internal_attr:', zipInfo.internal_attr) #内部属性。
+print ('external_attr:', zipInfo.external_attr) #外部属性。
+print ('header_offset:', zipInfo.header_offset) # 文件头偏移位。
+print ('CRC:', zipInfo.CRC) # 未压缩文件的CRC-32。
+print ('compress_size:', zipInfo.compress_size) #获取压缩后的大小。
+print ('file_size:', zipInfo.file_size) #获取未压缩的文件大小。
+zipFile.close() #
+
+</code></pre>
+
+<h2 id="三-python使用内存zipfile对象在内存中打包文件示例">三、python使用内存zipfile对象在内存中打包文件示例</h2>
+
+<pre><code class="language-python">import zipfile
+import StringIO
+class InMemoryZip(object):
+    def __init__(self):
+      
+        self.in_memory_zip = StringIO.StringIO()
+    def append(self, filename_in_zip, file_contents):
+
+        # Get a handle to the in-memory zip in append mode
+        zf = zipfile.ZipFile(self.in_memory_zip, &quot;a&quot;, zipfile.ZIP_DEFLATED, False)
+        # Write the file to the in-memory zip
+        zf.writestr(filename_in_zip, file_contents)
+        # Mark the files as having been created on Windows so that
+        # Unix permissions are not inferred as 0000
+        for zfile in zf.filelist:
+            zfile.create_system = 0       
+        return self
+    def read(self):
+    
+        self.in_memory_zip.seek(0)
+        return self.in_memory_zip.read()
+    def writetofile(self, filename):
+      
+        f = file(filename, &quot;w&quot;)
+        f.write(self.read())
+        f.close()
+if __name__ == &quot;__main__&quot;:
+    # Run a test
+    imz = InMemoryZip()
+    imz.append(&quot;test.txt&quot;, &quot;Another test&quot;).append(&quot;test2.txt&quot;, &quot;Still another&quot;)
+    imz.writetofile(&quot;test.zip&quot;)
+</code></pre>
+
+<h3 id="python读zip文件">Python读zip文件</h3>
+
+<p>下面的代码给出了用Python读取zip文件，打印出压缩文件里面所有的文件，并读取压缩文件中的第一个文件。</p>
+
+<pre><code class="language-python">import zipfile
+z = zipfile.ZipFile(&quot;zipfile.zip&quot;, &quot;r&quot;)
+#打印zip文件中的文件列表
+for filename in z.namelist( ):
+	print('File:', filename)
+#读取zip文件中的第一个文件
+first_file_name = z.namelist()[0]
+content = z.read(first_file_name)
+print(first_file_name)
+print(content)
+</code></pre>
+
+<h3 id="python写-创建zip文件">Python写/创建zip文件</h3>
+
+<p>Python写Zip文件主要用到ZipFile的write函数。</p>
+
+<pre><code class="language-python">import zipfile
+z = zipfile.ZipFile('test.zip', 'w', zipfile.ZIP_DEFLATED)
+z.write('test.html')
+z.close( )
+</code></pre>
+
+<p>在创建ZipFile实例的时候，有2点要注意：</p>
+
+<p>1.要用&rsquo;w&rsquo;或&rsquo;a&rsquo;模式，用可写的方式打开zip文件
+2.压缩模式有ZIP_STORED 和 ZIP_DEFLATED，ZIP_STORED只是存储模式，不会对文件进行压缩，这个是默认值，如果你需要对文件进行压缩，必须使用ZIP_DEFLATED模式。</p>
+
+<h2 id="四-python破解zip加密文件的方法">四、python破解zip加密文件的方法</h2>
+
+<p>首先我们先来桌面创建一个文件
+我们创建了一个名为q的txt文件然后我们将它压缩，压缩的时候记得设置上密码
+我这边将密码设置为123456
+使用python的zipfile的模块,编写zip文件口令破解机。需要用到 Zip File类中的 extractall方法。这个类和这个方法对我们编程破解有口令保护的Zip文件是很有用的。请注意 extractant(方法用可选参数指定密码的方式。
+导入库后,用带有口令保护的Zip文件的文件名,实例化一个新的 Zipfile类。要解压这个Zip文件,我们使用 extractall方法,并在可选参数pwd上填入口令。
+创建一个.py文件，在根目录然后在将我们的压缩文件放入同目录里面，项目结构目录：</p>
+
+<p>我们.py文件的代码：</p>
+
+<pre><code class="language-python">import zipfile 
+zipFile = zipfile.ZipFile(&quot;q.zip&quot;,&quot;r&quot;)//这里是我们的压缩文件 
+zipFile.extractall(pwd=&quot;123456&quot;)//这里是我们的密码
+</code></pre>
+
+<p>这段代码其实就是拿着密码去解压我们刚刚压缩的文件，网上大多数教程都是这样写的，但是我这边使用python3.6就会发现运行的时候报错了：</p>
+
+<p>反正错误大概的意思就是pwd的接收的数据应该是bytes类型但是它得到的却是str类型的反正就是类型错了，那我们就将密码转换为bytes类型，我们的py文件的代码如下：</p>
+
+<pre><code class="language-python">import zipfile
+zipFile = zipfile.ZipFile(&quot;q.zip&quot;,&quot;r&quot;)
+password = '123456'
+zipFile.extractall(pwd=str.encode(password) )
+</code></pre>
+
+<p>这时候我们再次运行项目</p>
+
+<p>这次没有报错</p>
+
+<p>我们可以看到在我们的项目根目录下多了一个文件就是我们之前压缩的那个文件</p>
+
+<p>想了解更多zipfile的小伙伴可以点击这里点击打开链接</p>
+
+<p>接下来我们继续改造，如果用一个错误密码执行这个脚本会发生什么情况?让我们在脚本中增加一些捕获和处理异常的代码,显示错误的信息。</p>
+
+<pre><code class="language-python">import zipfile 
+zipFile = zipfile.ZipFile(&quot;q.zip&quot;,&quot;r&quot;) 
+try: 
+	password = '123s456'
+	zipFile.extractall(pwd=str.encode(password)) 
+except Exception as ex: 
+	print(ex)
+</code></pre>
+
+<p>这时候我们的py文件代码，并且我们还将密码故意写错来测试一下，来看一下运行结果</p>
+
+<p>在这里我们可以看到错误 信息，就是告诉我们密码错误</p>
+
+<p>我们可以用因口令不正确而抛出的异常来测试我们的字典文件(接下来的zidian.text)中是否有Zip文件的口令。实例化一个 Zip File类之后,我们打开字典文件,遍历并测试字典中的每个单词。如果 extractall0函数的执行没有出错,则打印一条消息,输出正确的口令。但是,如果 extractall()函数抛出了一个口令错误的异常,就忽略这个异常,并继续测试字典中的下一个口令。</p>
+
+<p>我们先创建一个zidian.text文件</p>
+
+<p>接下来我们在zidian.text文件中编写我们的密码字典，每一行一个密码，红色部分是我们的正确密码</p>
+
+<p>然后将我们的密码字典放入项目中</p>
+
+<p>接着我们继续修改我们的脚本</p>
+
+<pre><code class="language-python">zipFile = zipfile.ZipFile(&quot;q.zip&quot;,&quot;r&quot;) 
+#打开我们的字典表 
+passFile = open('zidian.txt') 
+for line in passFile.readlines(): 
+ #读取每一行数据（每一个密码) 
+     password = line.strip('\n') 
+try: 
+     zipFile.extractall(pwd=str.encode(password)) 
+     print('=========密码是:'+password+'\n') 
+ #如果密码正确退出程序 
+     exit(0) 
+ except Exception as ex: 
+ #跳过 
+ pass
+</code></pre>
+
+<h3 id="接下来我们看一下运行结果">接下来我们看一下运行结果</h3>
+
+<p><img src="https://img2018.cnblogs.com/blog/1660826/201905/1660826-20190531162925533-174469370.png" alt="" /></p>
+
+<p>哈哈我们已经成功破解了zip文件的密码，到这里我们不难发现只要我们字典里面有密码我们就可以破解出来</p>
+
+<p>我们继续将我们的项目优化一下：</p>
+
+<pre><code class="language-python">import zipfile 
+def extractFile(zFile,password): 
+	try: 
+		zFile.extractall(pwd=str.encode(password)) 
+ #如果成功返回密码 
+ 		return password 
+	except: 
+		return
+def main(): 
+	zFile = zipfile.ZipFile(&quot;q.zip&quot;,&quot;r&quot;) 
+ #打开我们的字典表 
+	passFile = open('zidian.txt') 
+	for line in passFile.readlines(): 
+ #读取每一行数据（每一个密码) 
+		password = line.strip('\n') 
+		guess = extractFile(zFile,password) 
+		if (guess): 
+			print(&quot;=========密码是：&quot;+password+&quot;\n&quot;) 
+			exit(0) 
+if __name__=='__main__':
+
+	main()
+</code></pre>
+
+<p>这样就好多了！接下来再给大家贴一个生成全部六位数数字密码的代码：</p>
+
+<pre><code class="language-python">f = open('zidian.txt','w') 
+for id in range(1000000):
+	password = str(id).zfill(6)+'\n'
+	f.write(password) 
+f.close()
+</code></pre>
+
+<blockquote>
+<p>运行成功后我们可以看到再我们的zidian.txt已经生成好了从000000到999999都有了这样我们只要是6位数数字密码的zip文件我们都可以破解了！</p>
+</blockquote>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/325.html">https://www.bobobk.com/325.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/323.html">Python3 print 函数用法总结</a></li>
+        
+        <li><a href="/320.html">Python 数据可视化 - 00 后高考大军</a></li>
+        
+        <li><a href="/318.html">一行 Python 代码实现并行</a></li>
+        
+        <li><a href="/310.html">screen session外关闭session会话</a></li>
+        
+        <li><a href="/305.html">yum update更新错误rpmdb,空间不足</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/414.html" title="阿里云centos7安装VNC Server实现图形化访问">阿里云centos7安装VNC Server实现图形化访问</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(38)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>
