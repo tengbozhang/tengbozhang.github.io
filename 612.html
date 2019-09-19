@@ -136,10 +136,15 @@
 <h3 id="1-注册oracle-cloud账号">1. 注册oracle cloud账号</h3>
 
 <p>首先进入 <a href="https://www.oracle.com/cn/cloud/free/">oracle官网</a>,<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_start_free.webp" alt="oracle_start_free" />
+开始注册，填写邮箱
 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_mail.webp" alt="oracle_register_mail" />
+地址
 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_address.webp" alt="oracle_register_address" />
+手机号，需要接受验证码
 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_phone.webp" alt="oracle_register_phone" />
+信用卡，需要扣费验证
 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_creditcard.webp" alt="oracle_register_creditcard" />
+注册完成
 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_complete.webp" alt="oracle_register_complete" />
 按提示一步一步填写自己的内容，推荐使用gmail邮箱。我这里使用的是美国的一个地址，没有可以网上生成，这里由于我注册过了，所以拒绝，如果没注册过就能过。
 等待自动跳转到主页注册就完成了。注册过后查看邮箱，会有邮件
@@ -153,22 +158,23 @@
 从 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_control_menu.webp" alt="oracle_control_menu" />进入</p>
 
 <p>创建第一个永久免费服务器信息
-<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_compute_free.webp" alt="oracle_compute_free" />
 右键网页打开chrome控制台，提交
-<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_write_info.webp" alt="oracle_write_info" />
 在网络请求中找到instances请求并查看headers详情
-<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_instance_headers.webp" alt="oracle_instance_headers" />
-找到如下信息并记录
-- availabilityDomain  #跟地区相关，我是韩国
-- compartmentId    # 账号相关
-- subnetId  #子网络
-- shape   #服务器类型，永久免费为VM.Standard.E2.1.Micro，可以不变
-- ssh_authorized_keys #这个是服务器的公钥文件
-- imageId #这时系统类型</p>
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_auto_info.webp" alt="oracle_auto_info" />
+找到如下信息并记录</p>
 
-<p>另外需要用户id信息，首先进入用户页面
+<ul>
+<li>availabilityDomain  #跟地区相关，我是韩国</li>
+<li>compartmentId    # 账号相关</li>
+<li>subnetId  #子网络</li>
+<li>shape   #服务器类型，永久免费为VM.Standard.E2.1.Micro，可以不变</li>
+<li>ssh_authorized_keys #这个是服务器的公钥文件</li>
+<li>imageId #这时系统类型</li>
+</ul>
+
+<p>另外需要用户ocid信息，首先进入用户页面
 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_user_id.webp" alt="oracle_user_id" />
-右上角点击进入查看tenancy id。
+右上角点击进入查看tenancy ocid。
 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_tenancy_id.webp" alt="oracle_user_id" /></p>
 
 <p>用小本本记录下这些信息，后面要用。</p>
@@ -189,7 +195,7 @@ bash -c &quot;$(curl –L https://raw.githubusercontent.com/oracle/oci-cli/maste
 
 </code></pre>
 
-<p><img src="https://www.bobobk.com/wp-content/uploads/2019/09/oci_install_success.webp" alt="oci_install_success" /></p>
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_check_oci.webp" alt="oracle_check_oci" /></p>
 
 <h3 id="4-配置cli账号信息-添加api-key">4. 配置cli账号信息，添加api key</h3>
 
@@ -206,7 +212,8 @@ bash -c &quot;$(curl –L https://raw.githubusercontent.com/oracle/oci-cli/maste
 <pre><code class="language-bash">oci iam availability-domain list
 </code></pre>
 
-<p>查看配置文件是否正确
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_oci_list.webp" alt="oracle_oci_list" />
+查看配置文件是否正确
 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_oci_config_succe.webp" alt="oracle_oci_config_succe" />
 如果没有报错说明配置成功。</p>
 
@@ -218,45 +225,46 @@ bash -c &quot;$(curl –L https://raw.githubusercontent.com/oracle/oci-cli/maste
 oci compute instance launch --availability-domain JCbl:AP-SEOUL-1-AD-1 --display-name seoul1 --image-id ocid1.image.oc1.ap-seoul-1.aaaaaaaa4e3nhzytej7iwr4qh6aov3d5yxswfek7wzjyd2tpaqtlwt3kmqta --subnet-id ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa...  --shape VM.Standard.E2.1.Micro --assign-public-ip true --metadata '{&quot;ssh_authorized_keys&quot;: &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+Sk1M9GX6AOoI1RtK33zaltsuSIGofdtI0sT9YqULEP0zSvrHPh8TEWY7XQdz1TbWcXLG7V0YNZgzUMEr6khI4zRygCU8N5OYX/M3VH36FddD0Jr6HiEkHTECVYdxxvJ7Lq8iCe5VP9IfomphjWTVZfml+jX0deR6gHY3MVblEnwLdhxT61aLOUe8Q1P3m6SWjukpSl9Wk/rf96YQIyw23+lWILWw9TkEhJOXwwV89nvlM11jN4fjh1yl1ax+yRl4BsMfRUrfT8CZ+OhR8qZILKPhsY8ehOZs8TbbWU8G55y/PJS8WjhhP3I0BpETazMZWuY41 zhang&quot;}' --compartment-id ocid1.tenancy.oc1...
 
 
-``
-这里几个参数多是前面用小本本记录下来的信息
-- availability-domain 
-- display-name #云服务器名称，随意
-- image-id   前面有记录，我这是centos7的
-- subnet-id 前面有记录
-- shape  永久免费就是这一款VM.Standard.E2.1.Micro
-- assign-public-ip true #是否需要公网ip，当然是true
-- metadata  #这里就是添加了一个免登录秘钥，改成你自己的就行
-- compartment-id  #前面有记录
+</code></pre>
 
-运行命令，如果一会儿有输出的话那么就没问题了，接下来就可以定时执行命令创建云服务器了。
-![oracle_auto_500](https://www.bobobk.com/wp-content/uploads/2019/09/oracle_auto_500.webp)
+<p>这里几个参数多是前面用小本本记录下来的信息</p>
+
+<ul>
+<li>availability-domain</li>
+<li>display-name #云服务器名称，随意</li>
+<li>image-id   前面有记录，我这是centos7的</li>
+<li>subnet-id 前面有记录</li>
+<li>shape  永久免费就是这一款VM.Standard.E2.1.Micro</li>
+<li>assign-public-ip true #是否需要公网ip，当然是true</li>
+<li>metadata  #这里就是添加了一个免登录秘钥，改成你自己的就行</li>
+<li>compartment-id  #前面有记录</li>
+</ul>
+
+<p>运行命令，如果一会儿有输出的话那么就没问题了，接下来就可以定时执行命令创建云服务器了。
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_auto_500.webp" alt="oracle_auto_500" />
 使用crontab定时执行，第二天再来查看是否创建成功就可以了。
-首先把命令写成oci.sh的bash脚本
+首先把命令写成oci.sh的bash脚本</p>
+
+<pre><code class="language-bash">export NVM_DIR=&quot;$HOME/.nvm&quot;
+[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm
+[ -s &quot;$NVM_DIR/bash_completion&quot; ] &amp;&amp; \. &quot;$NVM_DIR/bash_completion&quot;  # This loads nvm bash_completion
+alias ic=&quot;ibmcloud&quot;
+
+export PATH=/home/name/bin:$PATH
+
+[[ -e &quot;/home/name/lib/oracle-cli/lib/python2.7/site-packages/oci_cli/bin/oci_autocomplete.sh&quot; ]] &amp;&amp; source &quot;/home/name/lib/oracle-cli/lib/python2.7/site-packages/oci_cli/bin/oci_autocomplete.sh&quot;
+
+oci compute instance launch --availability-domain JCbl:AP-SEOUL-1-AD-1 --display-name seoul1 --image-id ocid1.image.oc1.ap-seoul-1.aaaaaaaa4e3nhzytej7iwr4qh6aov3d5yxswfek7wzjyd2tpaqtlwt3kmqta --subnet-id ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa...  --shape VM.Standard.E2.1.Micro --assign-public-ip true --metadata '{&quot;ssh_authorized_keys&quot;: &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+Sk1M9GX6AOoI1RtK33zaltsuSIGofdtI0sT9YqULEP0zSvrHPh8TEWY7XQdz1TbWcXLG7V0YNZgzUMEr6khI4zRygCU8N5OYX/M3VH36FddD0Jr6HiEkHTECVYdxxvJ7Lq8iCe5VP9IfomphjWTVZfml+jX0deR6gHY3MVblEnwLdhxT61aLOUe8Q1P3m6SWjukpSl9Wk/rf96YQIyw23+lWILWw9TkEhJOXwwV89nvlM11jN4fjh1yl1ax+yRl4BsMfRUrfT8CZ+OhR8qZILKPhsY8ehOZs8TbbWU8G55y/PJS8WjhhP3I0BpETazMZWuY41 zhang&quot;}' --compartment-id ocid1.tenancy.oc1...
+
+
 </code></pre>
 
-<p>bash
-export NVM_DIR=&ldquo;$HOME/.nvm&rdquo;
-[ -s &ldquo;$NVM_DIR/nvm.sh&rdquo; ] &amp;&amp; . &ldquo;$NVM_DIR/nvm.sh&rdquo;  # This loads nvm
-[ -s &ldquo;$NVM_DIR/bash_completion&rdquo; ] &amp;&amp; . &ldquo;$NVM_DIR/bash_completion&rdquo;  # This loads nvm bash_completion
-alias ic=&ldquo;ibmcloud&rdquo;</p>
-
-<p>export PATH=/home/name/bin:$PATH</p>
-
-<p>[[ -e &ldquo;/home/name/lib/oracle-cli/lib/python2.7/site-packages/oci_cli/bin/oci_autocomplete.sh&rdquo; ]] &amp;&amp; source &ldquo;/home/name/lib/oracle-cli/lib/python2.7/site-packages/oci_cli/bin/oci_autocomplete.sh&rdquo;</p>
-
-<p>oci compute instance launch &ndash;availability-domain JCbl:AP-SEOUL-1-AD-1 &ndash;display-name seoul1 &ndash;image-id ocid1.image.oc1.ap-seoul-1.aaaaaaaa4e3nhzytej7iwr4qh6aov3d5yxswfek7wzjyd2tpaqtlwt3kmqta &ndash;subnet-id ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa&hellip;  &ndash;shape VM.Standard.E2.1.Micro &ndash;assign-public-ip true &ndash;metadata &lsquo;{&ldquo;ssh_authorized_keys&rdquo;: &ldquo;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+Sk1M9GX6AOoI1RtK33zaltsuSIGofdtI0sT9YqULEP0zSvrHPh8TEWY7XQdz1TbWcXLG7V0YNZgzUMEr6khI4zRygCU8N5OYX/M3VH36FddD0Jr6HiEkHTECVYdxxvJ7Lq8iCe5VP9IfomphjWTVZfml+jX0deR6gHY3MVblEnwLdhxT61aLOUe8Q1P3m6SWjukpSl9Wk/rf96YQIyw23+lWILWw9TkEhJOXwwV89nvlM11jN4fjh1yl1ax+yRl4BsMfRUrfT8CZ+OhR8qZILKPhsY8ehOZs8TbbWU8G55y/PJS8WjhhP3I0BpETazMZWuY41 zhang&rdquo;}&rsquo; &ndash;compartment-id ocid1.tenancy.oc1&hellip;</p>
-
-<pre><code>
-</code></pre>
-
-<p>bash
-crontab -e
+<pre><code class="language-bash">crontab -e
 #
 #*/2 * * * *  /bin/bash /home/name/oci.sh
 #根据需要更改
 #我这里是没两分钟执行一次。，让他自动刷可用的机器
-```</p>
+</code></pre>
 
 <h2 id="总结">总结</h2>
 
