@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>撸免费的oracle服务器并使用脚本自动化部署云服务器 | 春江暮客</title>
+    <meta property="og:title" content="撸免费的oracle服务器并使用脚本自动化部署云服务器 - 春江暮客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-09-19T16:11:25&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-09-19T16:11:25&#43;08:00">
+        
+    <meta name="Keywords" content="python,linux,vps,服务器,机器学习,深度学习等内容">
+    <meta name="description" content="撸免费的oracle服务器并使用脚本自动化部署云服务器">
+        <meta name="author" content="yanzhi">
+        
+    <meta property="og:url" content="https://www.bobobk.com/612.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3250570391881200",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://www.bobobk.com">
+                        春江暮客
+                    </a>
+                
+                <p class="description">一个python学习者的个人网站</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://www.bobobk.com">首页</a>
+                    
+                    <a  href="https://www.bobobk.com/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://www.bobobk.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">撸免费的oracle服务器并使用脚本自动化部署云服务器</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年9月19日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88">杂谈</a></span>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="post-content">
+                            
+
+<p>前两天甲骨文oracle cloud 开放注册账号能永久免费使用2个1c1g的云服务器,数据库以及其他的服务，看到这个消息自然马上就注册了一个，并选择了韩国服务器作为主地区，以后创立的免费服务器就在韩国了，对于上海来说访问速度很快。由于韩国服务器很快就被撸爆了，一创建就提示out of host capicity,看文档发现有api和cli两种程序员友好的方式可以用来管理，因此就把使用cli命令行自动化创建服务器的过程记录下来，方便其他要使用脚本创建到可用的用户。</p>
+
+<h2 id="必要条件">必要条件：</h2>
+
+<p>1.手机号
+2.信用卡</p>
+
+<p>前2天一张信用卡可以注册多个账号，被mjj们注册的有点多。现在只能一张信用卡注册一个了。</p>
+
+<h2 id="收获云资源">收获云资源</h2>
+
+<ul>
+<li>2 个 Autonomous Database （自主数据仓库或自主事务处理），每个 Autonomous Database 都有 1 个 OCPU 和 20 GB 存储资源；</li>
+<li>2 个 Compute VM，每个 Compute VM 有 <sup>1</sup>&frasl;<sub>8</sub> OCPU 和 1 GB 内存；</li>
+<li>2 个 Block Volumes，总共 100 GB，最多 5 个免费备份；</li>
+<li>10 GB Object Storage、10 GB Archive Storage 和每月 50000 个 API 请求；</li>
+<li>1 个 Load Balancer，10 Mbps 带宽；</li>
+<li>每月 10 TB 的出站数据传输；</li>
+<li>5 亿个摄取数据点和 10 亿个服务监测数据点；</li>
+
+<li><p>每月传递 100 万个通知的选项和每月 1000 封电子邮件。</p>
+
+<h2 id="主要步骤">主要步骤</h2></li>
+</ul>
+
+<ol>
+<li>注册oracle cloud账号</li>
+<li>建立第一个服务器并记录信息</li>
+<li>下载安装cli命令行管理工具</li>
+<li>配置cli账号信息，添加api key</li>
+<li>使用cli命令自动化脚建立服务器</li>
+</ol>
+
+<h3 id="1-注册oracle-cloud账号">1. 注册oracle cloud账号</h3>
+
+<p>首先进入 <a href="https://www.oracle.com/cn/cloud/free/">oracle官网</a>,<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_start_free.webp" alt="oracle_start_free" />
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_mail.webp" alt="oracle_register_mail" />
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_address.webp" alt="oracle_register_address" />
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_phone.webp" alt="oracle_register_phone" />
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_creditcard.webp" alt="oracle_register_creditcard" />
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_complete.webp" alt="oracle_register_complete" />
+按提示一步一步填写自己的内容，推荐使用gmail邮箱。我这里使用的是美国的一个地址，没有可以网上生成，这里由于我注册过了，所以拒绝，如果没注册过就能过。
+等待自动跳转到主页注册就完成了。注册过后查看邮箱，会有邮件
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_check_mail.webp" alt="oracle_check_mail" />
+提示正在review，一天过后再收到邮件就是成功了。
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_register_success.webp" alt="oracle_register_success" /></p>
+
+<h3 id="2-建立第一个服务器并记录信息">2. 建立第一个服务器并记录信息</h3>
+
+<p>推荐使用chrome谷歌浏览器打开邮件里面的链接。进入控制台
+从 <img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_control_menu.webp" alt="oracle_control_menu" />进入</p>
+
+<p>创建第一个永久免费服务器信息
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_compute_free.webp" alt="oracle_compute_free" />
+右键网页打开chrome控制台，提交
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_write_info.webp" alt="oracle_write_info" />
+在网络请求中找到instances请求并查看headers详情
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_instance_headers.webp" alt="oracle_instance_headers" />
+找到如下信息并记录
+- availabilityDomain  #跟地区相关，我是韩国
+- compartmentId    # 账号相关
+- subnetId  #子网络
+- shape   #服务器类型，永久免费为VM.Standard.E2.1.Micro，可以不变
+- ssh_authorized_keys #这个是服务器的公钥文件
+- imageId #这时系统类型</p>
+
+<p>另外需要用户id信息，首先进入用户页面
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_user_id.webp" alt="oracle_user_id" />
+右上角点击进入查看tenancy id。
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_tenancy_id.webp" alt="oracle_user_id" /></p>
+
+<p>用小本本记录下这些信息，后面要用。</p>
+
+<h3 id="3-下载安装cli命令行管理工具">3. 下载安装cli命令行管理工具</h3>
+
+<p>直接上命令</p>
+
+<pre><code class="language-bash">
+bash -c &quot;$(curl –L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)&quot;
+
+
+</code></pre>
+
+<p>一路回车就好了，结束使用下面命令查看安装是否成功</p>
+
+<pre><code class="language-bash">oci -v
+
+</code></pre>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/09/oci_install_success.webp" alt="oci_install_success" /></p>
+
+<h3 id="4-配置cli账号信息-添加api-key">4. 配置cli账号信息，添加api key</h3>
+
+<pre><code class="language-bash">oci setup config
+
+</code></pre>
+
+<p><img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_oci_config.webp" alt="oracle_oci_config" />
+接下来需要把公共秘钥传到控制台，回到浏览器，同样进入用户界面查看
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_add_apikey.webp" alt="oracle_add_apikey" /></p>
+
+<p>添加好后就可以来看看oci命令行工具行不行了。</p>
+
+<pre><code class="language-bash">oci iam availability-domain list
+</code></pre>
+
+<p>查看配置文件是否正确
+<img src="https://www.bobobk.com/wp-content/uploads/2019/09/oracle_oci_config_succe.webp" alt="oracle_oci_config_succe" />
+如果没有报错说明配置成功。</p>
+
+<h3 id="5-使用cli命令自动化脚建立服务器">5. 使用cli命令自动化脚建立服务器</h3>
+
+<p>前面已经配置好了cli，这里就可以使用命令来尝试建立云计算服务器了。</p>
+
+<pre><code class="language-bash">
+oci compute instance launch --availability-domain JCbl:AP-SEOUL-1-AD-1 --display-name seoul1 --image-id ocid1.image.oc1.ap-seoul-1.aaaaaaaa4e3nhzytej7iwr4qh6aov3d5yxswfek7wzjyd2tpaqtlwt3kmqta --subnet-id ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa...  --shape VM.Standard.E2.1.Micro --assign-public-ip true --metadata '{&quot;ssh_authorized_keys&quot;: &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+Sk1M9GX6AOoI1RtK33zaltsuSIGofdtI0sT9YqULEP0zSvrHPh8TEWY7XQdz1TbWcXLG7V0YNZgzUMEr6khI4zRygCU8N5OYX/M3VH36FddD0Jr6HiEkHTECVYdxxvJ7Lq8iCe5VP9IfomphjWTVZfml+jX0deR6gHY3MVblEnwLdhxT61aLOUe8Q1P3m6SWjukpSl9Wk/rf96YQIyw23+lWILWw9TkEhJOXwwV89nvlM11jN4fjh1yl1ax+yRl4BsMfRUrfT8CZ+OhR8qZILKPhsY8ehOZs8TbbWU8G55y/PJS8WjhhP3I0BpETazMZWuY41 zhang&quot;}' --compartment-id ocid1.tenancy.oc1...
+
+
+``
+这里几个参数多是前面用小本本记录下来的信息
+- availability-domain 
+- display-name #云服务器名称，随意
+- image-id   前面有记录，我这是centos7的
+- subnet-id 前面有记录
+- shape  永久免费就是这一款VM.Standard.E2.1.Micro
+- assign-public-ip true #是否需要公网ip，当然是true
+- metadata  #这里就是添加了一个免登录秘钥，改成你自己的就行
+- compartment-id  #前面有记录
+
+运行命令，如果一会儿有输出的话那么就没问题了，接下来就可以定时执行命令创建云服务器了。
+![oracle_auto_500](https://www.bobobk.com/wp-content/uploads/2019/09/oracle_auto_500.webp)
+使用crontab定时执行，第二天再来查看是否创建成功就可以了。
+首先把命令写成oci.sh的bash脚本
+</code></pre>
+
+<p>bash
+export NVM_DIR=&ldquo;$HOME/.nvm&rdquo;
+[ -s &ldquo;$NVM_DIR/nvm.sh&rdquo; ] &amp;&amp; . &ldquo;$NVM_DIR/nvm.sh&rdquo;  # This loads nvm
+[ -s &ldquo;$NVM_DIR/bash_completion&rdquo; ] &amp;&amp; . &ldquo;$NVM_DIR/bash_completion&rdquo;  # This loads nvm bash_completion
+alias ic=&ldquo;ibmcloud&rdquo;</p>
+
+<p>export PATH=/home/name/bin:$PATH</p>
+
+<p>[[ -e &ldquo;/home/name/lib/oracle-cli/lib/python2.7/site-packages/oci_cli/bin/oci_autocomplete.sh&rdquo; ]] &amp;&amp; source &ldquo;/home/name/lib/oracle-cli/lib/python2.7/site-packages/oci_cli/bin/oci_autocomplete.sh&rdquo;</p>
+
+<p>oci compute instance launch &ndash;availability-domain JCbl:AP-SEOUL-1-AD-1 &ndash;display-name seoul1 &ndash;image-id ocid1.image.oc1.ap-seoul-1.aaaaaaaa4e3nhzytej7iwr4qh6aov3d5yxswfek7wzjyd2tpaqtlwt3kmqta &ndash;subnet-id ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa&hellip;  &ndash;shape VM.Standard.E2.1.Micro &ndash;assign-public-ip true &ndash;metadata &lsquo;{&ldquo;ssh_authorized_keys&rdquo;: &ldquo;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+Sk1M9GX6AOoI1RtK33zaltsuSIGofdtI0sT9YqULEP0zSvrHPh8TEWY7XQdz1TbWcXLG7V0YNZgzUMEr6khI4zRygCU8N5OYX/M3VH36FddD0Jr6HiEkHTECVYdxxvJ7Lq8iCe5VP9IfomphjWTVZfml+jX0deR6gHY3MVblEnwLdhxT61aLOUe8Q1P3m6SWjukpSl9Wk/rf96YQIyw23+lWILWw9TkEhJOXwwV89nvlM11jN4fjh1yl1ax+yRl4BsMfRUrfT8CZ+OhR8qZILKPhsY8ehOZs8TbbWU8G55y/PJS8WjhhP3I0BpETazMZWuY41 zhang&rdquo;}&rsquo; &ndash;compartment-id ocid1.tenancy.oc1&hellip;</p>
+
+<pre><code>
+</code></pre>
+
+<p>bash
+crontab -e
+#
+#*/2 * * * *  /bin/bash /home/name/oci.sh
+#根据需要更改
+#我这里是没两分钟执行一次。，让他自动刷可用的机器
+```</p>
+
+<h2 id="总结">总结</h2>
+
+<p>到这就全部结束了，本文从注册oracle cloud(甲骨文云)开始，到尝试建立vm云服务器，最后从oci命令行工具和rest api中选择了oci来自动创建永久免费服务器，最后使用linux中的crontab定时任务来重复执行创建流程，达到全自动化挂机。最终达到可以在大陆用户热门地区比如韩国和日本创建终身免费服务器的目的。如有问题，可邮件联系博主（如果仔细看过的话应该找得到邮箱，嘿嘿）。</p>
+
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://www.bobobk.com">春江暮客</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://www.bobobk.com/612.html">https://www.bobobk.com/612.html</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/555.html">博客从wordpress无缝迁移到hugo全静态网站</a></li>
+        
+        <li><a href="/471.html">scrapy爬取表情包使用flask搭建搜索网站</a></li>
+        
+        <li><a href="/467.html">使用百度云加速和cloudflare共存的作死经历</a></li>
+        
+        <li><a href="/459.html">定制修改上传自己的docker镜像</a></li>
+        
+        <li><a href="/456.html">生产环境利用gunicorn部署Flask的python web服务</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.bobobk.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/612.html" title="撸免费的oracle服务器并使用脚本自动化部署云服务器">撸免费的oracle服务器并使用脚本自动化部署云服务器</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/555.html" title="博客从wordpress无缝迁移到hugo全静态网站">博客从wordpress无缝迁移到hugo全静态网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/471.html" title="scrapy爬取表情包使用flask搭建搜索网站">scrapy爬取表情包使用flask搭建搜索网站</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/467.html" title="使用百度云加速和cloudflare共存的作死经历">使用百度云加速和cloudflare共存的作死经历</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/459.html" title="定制修改上传自己的docker镜像">定制修改上传自己的docker镜像</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/456.html" title="生产环境利用gunicorn部署Flask的python web服务">生产环境利用gunicorn部署Flask的python web服务</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/444.html" title="阿里云域名启用DNSSEC域名解析防止DNS劫持">阿里云域名启用DNSSEC域名解析防止DNS劫持</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/434.html" title="利用cloudflare workers免费加速wordpress博客">利用cloudflare workers免费加速wordpress博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/425.html" title="谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决">谷歌 AdSense提示收益受损风险需要修正一些 ads.txt 问题的解决</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/422.html" title="nginx反向代理tcp/udp请求实现映射远端服务器">nginx反向代理tcp/udp请求实现映射远端服务器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%8A%80%E6%9C%AF/">技术(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://www.bobobk.com/categories/%E6%9D%82%E8%B0%88/">杂谈(39)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://www.bobobk.com/tags/assense/">assense</a>
+    
+    <a href="https://www.bobobk.com/tags/cdn/">cdn</a>
+    
+    <a href="https://www.bobobk.com/tags/cloudflare/">cloudflare</a>
+    
+    <a href="https://www.bobobk.com/tags/cuda/">cuda</a>
+    
+    <a href="https://www.bobobk.com/tags/download/">download</a>
+    
+    <a href="https://www.bobobk.com/tags/faceswap/">faceswap</a>
+    
+    <a href="https://www.bobobk.com/tags/generator/">generator</a>
+    
+    <a href="https://www.bobobk.com/tags/kaggle/">kaggle</a>
+    
+    <a href="https://www.bobobk.com/tags/networkx/">networkx</a>
+    
+    <a href="https://www.bobobk.com/tags/nginx/">nginx</a>
+    
+    <a href="https://www.bobobk.com/tags/pillow/">pillow</a>
+    
+    <a href="https://www.bobobk.com/tags/print/">print</a>
+    
+    <a href="https://www.bobobk.com/tags/pyecharts/">pyecharts</a>
+    
+    <a href="https://www.bobobk.com/tags/python3/">python3</a>
+    
+    <a href="https://www.bobobk.com/tags/requests/">requests</a>
+    
+    <a href="https://www.bobobk.com/tags/scrapy/">scrapy</a>
+    
+    <a href="https://www.bobobk.com/tags/seaborn/">seaborn</a>
+    
+    <a href="https://www.bobobk.com/tags/tensorflow/">tensorflow</a>
+    
+    <a href="https://www.bobobk.com/tags/turtle/">turtle</a>
+    
+    <a href="https://www.bobobk.com/tags/webp/">webp</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.bobobk.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://www.bobobk.com">春江暮客 By 春江暮客</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118758668-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+</body>
+</html>
