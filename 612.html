@@ -100,7 +100,7 @@
                         <div class="post-content">
                             
 
-<p>前两天甲骨文oracle cloud 开放注册账号能永久免费使用2个1c1g的云服务器,数据库以及其他的服务，看到这个消息自然马上就注册了一个，并选择了韩国服务器作为主地区，以后创立的免费服务器就在韩国了，对于上海来说访问速度很快。由于韩国服务器很快就被撸爆了，一创建就提示out of host capicity,看文档发现有api和cli两种程序员友好的方式可以用来管理，因此就把使用cli命令行自动化创建服务器的过程记录下来，方便其他要使用脚本创建到可用的用户。</p>
+<p>前两天甲骨文oracle cloud 开放注册账号能永久免费使用2个1c1g的云服务器,数据库以及其他的服务，看到这个消息自然马上就注册了一个，并选择了韩国服务器作为主地区，以后创立的免费服务器就在韩国了，对于上海来说访问速度很快。由于韩国服务器很快就被撸爆了，一创建就提示out of host capicity,那么有什么自动的办法可以刷到服务器呢？一种最笨的windows下的按键精灵，看文档发现有api和oci-cli两种程序员友好的方式可以用来管理，因此就把使用oci命令行自动化创建服务器的过程记录下来，方便其他要使用脚本创建到可用的用户。</p>
 
 <h2 id="必要条件">必要条件：</h2>
 
@@ -128,9 +128,9 @@
 <ol>
 <li>注册oracle cloud账号</li>
 <li>建立第一个服务器并记录信息</li>
-<li>下载安装cli命令行管理工具</li>
-<li>配置cli账号信息，添加api key</li>
-<li>使用cli命令自动化脚建立服务器</li>
+<li>下载安装oci-cli命令行管理工具</li>
+<li>配置oci-cli账号信息，添加api key</li>
+<li>使用cli-cli命令自动化脚建立服务器</li>
 </ol>
 
 <h3 id="1-注册oracle-cloud账号">1. 注册oracle cloud账号</h3>
@@ -179,7 +179,7 @@
 
 <p>用小本本记录下这些信息，后面要用。</p>
 
-<h3 id="3-下载安装cli命令行管理工具">3. 下载安装cli命令行管理工具</h3>
+<h3 id="3-下载安装oci命令行管理工具">3. 下载安装oci命令行管理工具</h3>
 
 <p>直接上命令</p>
 
@@ -231,7 +231,7 @@ oci compute instance launch --availability-domain JCbl:AP-SEOUL-1-AD-1 --display
 
 <ul>
 <li>availability-domain</li>
-<li>display-name #云服务器名称，随意</li>
+<li>display-name #云服务器名称，随意,最好不要加这个参数，不然只能创建一个，第二个时名字一样了</li>
 <li>image-id   前面有记录，我这是centos7的</li>
 <li>subnet-id 前面有记录</li>
 <li>shape  永久免费就是这一款VM.Standard.E2.1.Micro</li>
@@ -254,7 +254,7 @@ export PATH=/home/name/bin:$PATH
 
 [[ -e &quot;/home/name/lib/oracle-cli/lib/python2.7/site-packages/oci_cli/bin/oci_autocomplete.sh&quot; ]] &amp;&amp; source &quot;/home/name/lib/oracle-cli/lib/python2.7/site-packages/oci_cli/bin/oci_autocomplete.sh&quot;
 
-oci compute instance launch --availability-domain JCbl:AP-SEOUL-1-AD-1 --display-name seoul1 --image-id ocid1.image.oc1.ap-seoul-1.aaaaaaaa4e3nhzytej7iwr4qh6aov3d5yxswfek7wzjyd2tpaqtlwt3kmqta --subnet-id ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa...  --shape VM.Standard.E2.1.Micro --assign-public-ip true --metadata '{&quot;ssh_authorized_keys&quot;: &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+Sk1M9GX6AOoI1RtK33zaltsuSIGofdtI0sT9YqULEP0zSvrHPh8TEWY7XQdz1TbWcXLG7V0YNZgzUMEr6khI4zRygCU8N5OYX/M3VH36FddD0Jr6HiEkHTECVYdxxvJ7Lq8iCe5VP9IfomphjWTVZfml+jX0deR6gHY3MVblEnwLdhxT61aLOUe8Q1P3m6SWjukpSl9Wk/rf96YQIyw23+lWILWw9TkEhJOXwwV89nvlM11jN4fjh1yl1ax+yRl4BsMfRUrfT8CZ+OhR8qZILKPhsY8ehOZs8TbbWU8G55y/PJS8WjhhP3I0BpETazMZWuY41 zhang&quot;}' --compartment-id ocid1.tenancy.oc1...
+oci compute instance launch --availability-domain JCbl:AP-SEOUL-1-AD-1  --image-id ocid1.image.oc1.ap-seoul-1.aaaaaaaa4e3nhzytej7iwr4qh6aov3d5yxswfek7wzjyd2tpaqtlwt3kmqta --subnet-id ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa...  --shape VM.Standard.E2.1.Micro --assign-public-ip true --metadata '{&quot;ssh_authorized_keys&quot;: &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+Sk1M9GX6AOoI1RtK33zaltsuSIGofdtI0sT9YqULEP0zSvrHPh8TEWY7XQdz1TbWcXLG7V0YNZgzUMEr6khI4zRygCU8N5OYX/M3VH36FddD0Jr6HiEkHTECVYdxxvJ7Lq8iCe5VP9IfomphjWTVZfml+jX0deR6gHY3MVblEnwLdhxT61aLOUe8Q1P3m6SWjukpSl9Wk/rf96YQIyw23+lWILWw9TkEhJOXwwV89nvlM11jN4fjh1yl1ax+yRl4BsMfRUrfT8CZ+OhR8qZILKPhsY8ehOZs8TbbWU8G55y/PJS8WjhhP3I0BpETazMZWuY41 zhang&quot;}' --compartment-id ocid1.tenancy.oc1...
 
 
 </code></pre>
